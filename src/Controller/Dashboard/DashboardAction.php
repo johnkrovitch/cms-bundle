@@ -1,0 +1,102 @@
+<?php
+
+namespace JK\CmsBundle\Controller\Dashboard;
+
+use JK\CmsBundle\Repository\CommentRepository;
+use JK\CmsBundle\Repository\ArticleRepository;
+use DateTime;
+use JK\NotificationBundle\Repository\NotificationRepository;
+use LAG\AdminBundle\Event\Events;
+use LAG\AdminBundle\Event\Events\MenuEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Twig\Environment;
+
+class DashboardAction
+{
+    /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
+
+    /**
+     * @var CommentRepository
+     */
+    private $commentRepository;
+
+    /**
+     * @var Environment
+     */
+    private $twig;
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
+
+    /**
+     * @var ArticleRepository
+     */
+    private $articleRepository;
+
+    /**
+     * @var NotificationRepository
+     */
+    private $notificationRepository;
+
+    /**
+     * DashboardAction constructor.
+     *
+     * @param TokenStorageInterface    $tokenStorage
+     * @param CommentRepository        $commentRepository
+     * @param ArticleRepository        $articleRepository
+     * @param NotificationRepository   $notificationRepository
+     * @param Environment              $twig
+     * @param EventDispatcherInterface $eventDispatcher
+     */
+    public function __construct(
+        TokenStorageInterface $tokenStorage,
+        CommentRepository $commentRepository,
+        ArticleRepository $articleRepository,
+        NotificationRepository $notificationRepository,
+        Environment $twig,
+        EventDispatcherInterface $eventDispatcher
+    ) {
+        $this->tokenStorage = $tokenStorage;
+        $this->commentRepository = $commentRepository;
+        $this->twig = $twig;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->articleRepository = $articleRepository;
+        $this->notificationRepository = $notificationRepository;
+    }
+
+    public function __invoke(): Response
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+        $this->eventDispatcher->dispatch(Events::MENU, new MenuEvent());
+
+        $newCommentCount = $this
+            ->commentRepository
+            ->findNewCommentCount($user->getCommentLastViewDate())
+        ;
+        $lastMonth = new DateTime('first day of last month');
+
+        $lastArticles = $this
+            ->articleRepository
+            ->findBy([], [
+                'updatedAt' => 'desc',
+                'id' => 'desc',
+            ], 5)
+        ;
+        $lastComments = $this->commentRepository->findByDate($lastMonth);
+        $notifications = $this->notificationRepository->findUnread($user->getId());
+
+        return new Response($this->twig->render('@JKCms/Dashboard/dashboard.html.twig', [
+            'newCommentCount' => $newCommentCount,
+            'lastArticles' => $lastArticles,
+            'lastComments' => $lastComments,
+            'notifications' => $notifications,
+        ]));
+    }
+}

@@ -1,0 +1,27 @@
+{# Overrides the default CRUD template for the "edit" action #}
+{% extends '@LAGAdmin/CRUD/edit.html.twig' %}
+
+{% block form_widgets %}
+    <div class="row">
+        <div class="col-12">
+            {{ form_row(form.title) }}
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-6">
+            {{ form_row(form.category) }}
+            {{ form_row(form.publicationDate) }}
+            {{ form_row(form.publicationStatus) }}
+        </div>
+        <div class="col-6">
+            {{ form_row(form.thumbnail) }}
+            {{ form_row(form.tags) }}
+            {{ form_row(form.isCommentable) }}
+            <small class="form-text text-muted">
+                {{ form.isCommentable.vars.help | trans }}
+            </small>
+
+        </div>
+    </div>
+{% endblock %}

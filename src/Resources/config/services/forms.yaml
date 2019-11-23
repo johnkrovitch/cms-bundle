@@ -1,0 +1,83 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    ### Form Types ###
+    App\JK\MediaBundle\Form\Type\JQueryUploadType:
+        class: App\JK\MediaBundle\Form\Type\JQueryUploadType
+        arguments:
+            - '@oneup_uploader.templating.uploader_helper'
+            - '@App\JK\MediaBundle\Form\Transformer\MediaUploadTransformer'
+        tags:
+            - {name: form.type}
+
+    JK\CmsBundle\Form\Type\RecaptchaType:
+        class: JK\CmsBundle\Form\Type\RecaptchaType
+        arguments:
+            - '%google.recaptcha.site_key%'
+        tags:
+            - {name: form.type}
+
+    JK\CmsBundle\Form\Type\TagCollectionType:
+        class: JK\CmsBundle\Form\Type\TagCollectionType
+        arguments:
+            - '@JK\CmsBundle\Form\Transformer\TagCollectionTransformer'
+        tags:
+            - {name: form.type}
+
+    JK\CmsBundle\Form\Type\TinyMceType:
+        class: JK\CmsBundle\Form\Type\TinyMceType
+        arguments:
+            - '@App\Service\Assets\ScriptRegistry'
+            - '@router'
+            - '@translator'
+            - '@assets.packages'
+        tags:
+            - {name: form.type}
+
+    JK\CmsBundle\Form\Type\AddCommentType:
+        class: JK\CmsBundle\Form\Type\AddCommentType
+        arguments:
+            - '%kernel.environment%'
+        tags:
+            - {name: form.type}
+
+    JK\CmsBundle\Form\Type\CategoryType:
+        class: JK\CmsBundle\Form\Type\CategoryType
+        arguments:
+            - '@App\JK\MediaBundle\Form\Transformer\JQueryUploadTransformer'
+        tags:
+            - {name: form.type}
+
+    JK\CmsBundle\Form\Type\ArticleType:
+        class: JK\CmsBundle\Form\Type\ArticleType
+        arguments:
+            - '@Symfony\Component\Routing\RouterInterface'
+        tags:
+            - {name: form.type}
+
+    JK\CmsBundle\Form\Type\CommentType:
+        arguments:
+            - '@LAG\AdminBundle\Admin\Helper\AdminHelperInterface'
+        tags:
+            - {name: form.type}
+
+    ### Form Transformers ###
+    JK\CmsBundle\Form\Transformer\TagCollectionTransformer:
+        class: JK\CmsBundle\Form\Transformer\TagCollectionTransformer
+        arguments:
+            - '@JK\CmsBundle\Repository\TagRepository'
+
+    ### Form Validators ###
+    JK\CmsBundle\Form\Validator\RecaptchaValidator:
+        class: JK\CmsBundle\Form\Validator\RecaptchaValidator
+        arguments:
+            - '%google.recaptcha.secret%'
+            - '@request_stack'
+
+    JK\CmsBundle\Form\Extension\AssetsExtension:
+        tags:
+            - {name: form.type_extension}
+        arguments:
+            - '@App\Service\Assets\ScriptRegistry'

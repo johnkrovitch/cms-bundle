@@ -1,0 +1,24 @@
+<h2>Quoi de nouveau ce mois-ci</h2>
+
+{% if last_articles | length > 0 %}
+    {{ last_articles | length }} articles :
+
+    {% for article in last_articles %}
+        <a href="{{ path('cms.article.edit', {
+            id: article.id
+        }) }}">{{ article.title }}</a>
+        {% if not loop.last %}, {% endif %}
+    {% endfor %}.
+{% endif %}
+
+{% if last_comments | length > 0 %}
+    {{ last_comments | length }} commentaires :
+
+    {% for comment in last_comments %}
+        <a href="{{ path('cms.comment.edit', {
+            id: comment.id
+        }) }}">{{ comment.content | truncate(25) }}</a>
+
+        {% if not loop.last %}, {% endif %}
+    {% endfor %}.
+{% endif %}

@@ -1,0 +1,4 @@
+services:
+    JK\CmsBundle\Factory\CommentFactory: ~
+
+    JK\CmsBundle\Factory\CommentFactoryInterface: '@JK\CmsBundle\Factory\CommentFactory'

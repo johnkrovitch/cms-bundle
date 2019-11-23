@@ -1,0 +1,48 @@
+{
+    "name": "johnkrovitch/cms-bundle",
+    "description": "CMS Bundle for Symfony",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "johnkrovitch",
+            "email": "arnaudfrezet@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.2",
+        "ext-json": "*",
+        "johnkrovitch/media-bundle": "^0.1.0",
+        "johnkrovitch/notification-bundle": "^0.1.0",
+        "lag/adminbundle": "dev-feature/helper",
+        "liip/imagine-bundle": "^2.2",
+        "ps/image-optimizer": "^2.0",
+        "symfony/mailer": "^5.0",
+        "symfony/validator": "^3.0 || ^4.0"
+    },
+    "require-dev": {
+        "symfony/flex": "^1.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "JK\\CmsBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JK\\CmsBundle\\Tests\\": "tests/CmsBundle/"
+        }
+    },
+    "config": {
+        "bin-dir": "bin",
+        "component-dir": "components",
+        "sort-packages": true
+    },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        }
+    }
+}

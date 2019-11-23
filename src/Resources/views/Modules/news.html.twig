@@ -1,0 +1,23 @@
+<div class="col-md-12 item article-widget">
+    <h2>
+        <a href="{{ path('lecomptoir.article.list_by_category', {
+            'categorySlug': 'breves-de-comptoir'
+        }) }}"
+           title="{{ 'cms.modules.news.more_link' | trans }}">{{ 'lecomptoir.news.title' | trans }}</a>
+    </h2>
+
+    <ul>
+        {% for data in articles %}
+            {% set article = data[0] %}
+            <li>
+                <a href="{{ cms_article_path(article) }}"
+                   title="{{ 'lecomptoir.news.see' | trans({'%article%': article.title}) }}">
+                    <i class="fa fa-angle-double-right "></i>
+                    {{ article.title | truncate(20, true, '...') }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="/category/breves-de-comptoir" title="Voir toutes les brèves de comptoir" class="more-link">Voir plus de
+        brèves...</a>
+</div>

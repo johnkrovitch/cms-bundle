@@ -1,0 +1,7 @@
+services:
+    JK\CmsBundle\Rss\Factory\ArticleItemFactory:
+        class: JK\CmsBundle\Rss\Factory\ArticleItemFactory
+        arguments:
+            - '@router'
+
+    JK\CmsBundle\Rss\Factory\ArticleItemFactoryInterface: '@JK\CmsBundle\Rss\Factory\ArticleItemFactory'

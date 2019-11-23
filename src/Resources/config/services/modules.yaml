@@ -1,0 +1,22 @@
+services:
+    ### Managers ###
+    JK\CmsBundle\Module\Manager\ModuleManager:
+        class: JK\CmsBundle\Module\Manager\ModuleManager
+        arguments:
+            - ['@JK\CmsBundle\Module\Core\NewsModule']
+
+    ### Modules ###
+    JK\CmsBundle\Module\Core\NewsModule:
+        class: JK\CmsBundle\Module\Core\NewsModule
+        arguments:
+            - '@JK\CmsBundle\Repository\ArticleRepository'
+        tags:
+            - {name: cms.module}
+
+    ### Events ###
+    JK\CmsBundle\Module\Event\Subscriber\ModuleEventSubscriber:
+        class: JK\CmsBundle\Module\Event\Subscriber\ModuleEventSubscriber
+        arguments:
+            - '@JK\CmsBundle\Module\Manager\ModuleManager'
+        tags:
+            - {name: kernel.event_subscriber}

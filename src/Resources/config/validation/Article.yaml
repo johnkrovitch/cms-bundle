@@ -1,0 +1,4 @@
+JK\CmsBundle\Entity\Article:
+    properties:
+        title:
+            - Publication: ~
