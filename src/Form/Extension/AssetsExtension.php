@@ -2,8 +2,8 @@
 
 namespace JK\CmsBundle\Form\Extension;
 
-use App\Service\Assets\ScriptRegistry;
 use Exception;
+use JK\CmsBundle\Assets\ScriptRegistry;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormInterface;
@@ -44,9 +44,6 @@ class AssetsExtension extends AbstractTypeExtension
      */
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
-
-        dump('trce');
-
         if (!array_key_exists('scripts', $view->vars) || !is_array($view->vars['scripts'])) {
             return;
         }
