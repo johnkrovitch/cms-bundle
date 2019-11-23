@@ -1,0 +1,35 @@
+<div class="col-6">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">
+                <h5>
+                    <i class="fa fa-newspaper-o fa-2x"></i>
+                    {{ 'cms.dashboard.latest_articles' | trans }}
+                </h5>
+            </div>
+            <table class="table">
+                {% for article in lastArticles %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('cms.article.edit', {
+                                id: article.id
+                            }) }}">
+                                {{ article.title }}
+                            </a>
+                        </td>
+                        <td>{{ article.updatedAt | localizeddate('full', 'none', app.request.locale) }}</td>
+                        <td>
+                            {% if article.category %}
+                                <a href="{{ path('cms.category.edit', {
+                                    id: article.category.id
+                                }) }}">
+                                    {{ article.category.name }}
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>

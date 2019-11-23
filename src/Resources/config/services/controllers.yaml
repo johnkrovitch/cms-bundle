@@ -1,0 +1,33 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+
+    JK\CmsBundle\Controller\Dashboard\DashboardAction:
+        class: JK\CmsBundle\Controller\Dashboard\DashboardAction
+        tags:
+            - 'controller.service_arguments'
+
+    JK\CmsBundle\Controller\Article\CreateArticleAction:
+        class: JK\CmsBundle\Controller\Article\CreateArticleAction
+        tags:
+            - 'controller.service_arguments'
+        arguments:
+            - '@LAG\AdminBundle\Factory\AdminFactory'
+            - '@LAG\AdminBundle\Factory\DataProviderFactory'
+            - '@translator'
+            - '@router'
+
+    JK\CmsBundle\Controller\Notification\MarkAsRead:
+        class: JK\CmsBundle\Controller\Notification\MarkAsRead
+        tags:
+            - 'controller.service_arguments'
+        arguments:
+            $manager: '@App\JK\NotificationBundle\Manager\NotificationManagerInterface'
+            $router: '@Symfony\Component\Routing\RouterInterface'
+
+
+    JK\CmsBundle\Controller\Tag\CreateAjax:
+        tags:
+            - 'controller.service_arguments'

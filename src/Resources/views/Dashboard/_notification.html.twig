@@ -1,0 +1,37 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <i class="fa fa-bell fa-fw"></i>
+        {{ 'cms.notifications.dashboard_title' | trans }}
+    </div>
+
+    <div class="panel-body">
+        <div class="list-group">
+            {% for notification in notifications %}
+                <li class="list-group-item"
+                   href="#">
+                    <a href="">
+                        <i class="fa fa-comment fa-fw"></i>
+                    {{ notification.title }}
+                    </a>
+                    <a href="{{ path('cms.notification.mark_as_read', {
+                        id: notification.id
+                    }) }}"
+                       class="pull-right ml-1"
+                       title="{{ 'cms.notifications.marked_as_read' | trans }}"
+                       data-notifications="remove">
+                        <i class="fa fa-check-circle"></i>
+                    </a>
+                    <span class="pull-right text-muted small">
+                        <em>{{ cms_date_diff(notification.updatedAt) }}</em>
+                    </span>
+                </li>
+            {% else %}
+                {{ 'cms.notifications.all_read' | trans }}
+            {% endfor %}
+        </div>
+        <a href="#"
+           class="btn btn-default btn-block">
+            {{ 'cms.notifications.view_all' | trans }}
+        </a>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+{% extends "@JKCms/base.html.twig" %}
+
+{% block content %}
+    {# main wrapper #}
+    <div id="dashboard">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">{{ 'cms.dashboard.title' | trans }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                        {% include "@JKCms/Dashboard/Dashboard/_latest_articles.html.twig" %}
+                        {% include "@JKCms/Dashboard/Dashboard/_latest_comments.html.twig" %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                {% include "@JKCms/Dashboard/_timeline.html.twig" %}
+            </div>
+            <div class="col-lg-4">
+                {% include "@JKCms/Dashboard/_notification.html.twig" %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

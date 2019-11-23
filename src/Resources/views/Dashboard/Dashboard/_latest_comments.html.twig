@@ -1,0 +1,33 @@
+<div class="col-6">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">
+                <h5>
+                    <i class="fa fa-comments fa-2x"></i>
+                    {{ 'cms.dashboard.latest_articles' | trans }}
+                </h5>
+            </div>
+            <table class="table">
+                {% for comment in lastComments %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('cms.comment.edit', {
+                                id: comment.id
+                            }) }}">
+                                {{ comment.content | truncate }}
+                            </a>
+                        </td>
+                        <td>{{ comment.updatedAt | localizeddate('full', 'none', app.request.locale) }}</td>
+                        <td>
+                            <a href="{{ path('cms.article.edit', {
+                                id: comment.article.id
+                            }) }}">
+                                {{ comment.article.title }}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>

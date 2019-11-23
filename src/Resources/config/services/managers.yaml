@@ -1,0 +1,15 @@
+services:
+    JK\CmsBundle\Manager\CommentManager:
+        arguments:
+            $repository: '@JK\CmsBundle\Repository\CommentRepository'
+            $factory: '@JK\CmsBundle\Factory\CommentFactoryInterface'
+    JK\CmsBundle\Manager\CommentManagerInterface: '@JK\CmsBundle\Manager\CommentManager'
+
+    JK\CmsBundle\Module\Manager\ModuleManager: ~
+    JK\CmsBundle\Module\Manager\ModuleManagerInterface: '@JK\CmsBundle\Module\Manager\ModuleManager'
+
+    JK\CmsBundle\Manager\ArticleManager:
+        arguments:
+            $repository: '@JK\CmsBundle\Repository\ArticleRepository'
+
+    JK\CmsBundle\Manager\ArticleManagerInterface: '@JK\CmsBundle\Manager\ArticleManager'

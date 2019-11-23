@@ -1,0 +1,8 @@
+services:
+    JK\CmsBundle\Form\Handler\AddCommentHandler:
+        arguments:
+            $contactEmail: '%email.contact_email%'
+            $manager: '@JK\CmsBundle\Manager\CommentManagerInterface'
+            $translator: '@Symfony\Contracts\Translation\TranslatorInterface'
+            $mailer: '@Symfony\Component\Mailer\MailerInterface'
+            $helper: '@JK\CmsBundle\DependencyInjection\Helper\ConfigurationHelper'

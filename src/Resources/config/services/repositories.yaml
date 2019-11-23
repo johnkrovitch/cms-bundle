@@ -1,0 +1,43 @@
+services:
+    _defaults:
+        autoconfigure: true
+
+    App\JK\MediaBundle\Repository\MediaRepository:
+        arguments:
+            - '@doctrine'
+
+    JK\CmsBundle\Repository\CommentRepository:
+        arguments:
+            - '@doctrine'
+
+    JK\CmsBundle\Repository\ArticleRepository:
+        arguments:
+            - '@doctrine'
+
+    JK\CmsBundle\Repository\CategoryRepository:
+        arguments:
+            - '@doctrine'
+
+    JK\CmsBundle\Repository\ContentRepository:
+        arguments:
+            - '@doctrine'
+
+    JK\CmsBundle\Repository\ModuleRepository:
+        arguments:
+            - '@doctrine'
+
+    JK\CmsBundle\Repository\PageRepository:
+        arguments:
+            - '@doctrine'
+
+    JK\CmsBundle\Repository\ParametersRepository:
+        arguments:
+            - '@doctrine'
+
+    JK\CmsBundle\Repository\TagRepository:
+        arguments:
+            - '@doctrine'
+
+    JK\CmsBundle\Repository\UserRepository:
+        arguments:
+            - '@doctrine'

@@ -1,0 +1,4 @@
+services:
+    JK\CmsBundle\DependencyInjection\Helper\ConfigurationHelper:
+        arguments:
+            $config: ''

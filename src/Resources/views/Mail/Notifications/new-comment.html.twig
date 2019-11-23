@@ -1,0 +1,26 @@
+{% extends base %}
+
+{% block title %}{{ subject }}{% endblock %}
+
+{% block content %}
+    {{ 'cms.new_comment.message' | trans({
+        ':article_title': comment.article.title,
+        ':content': comment.content,
+        ':author_name': comment.authorName
+    }, 'mailing') | raw }}
+
+    {% set seeCommentUrl = path('lecomptoir.article.show', comment.article.getUrlParameters()) %}
+
+    <a href="{{ host() }}{{ seeCommentUrl }}#comment-{{ comment.id }}"
+       title="{{ 'cms.new_comment.see_comment' | trans({}, 'mailing') }}">
+        {{ 'cms.new_comment.see_comment' | trans({}, 'mailing') }}
+    </a>
+    <br/>
+
+    {% set unsubscribeUrl = path('lecomptoir.article.unsubscribe', {slug: comment.article.slug, email: comment.authorEmail}) %}
+
+    <a href="{{ unsubscribeUrl }}" title="{{ 'cms.new_comment.unsubscribe' | trans({}, 'mailing') }}">
+        {{ 'cms.new_comment.unsubscribe' | trans({}, 'mailing') }}
+    </a>
+
+{% endblock %}

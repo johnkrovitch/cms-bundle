@@ -1,0 +1,6 @@
+services:
+    JK\CmsBundle\Command\OptimizeAssetsCommand:
+        class: JK\CmsBundle\Command\OptimizeAssetsCommand
+        tags:
+            - {name: console.command, command: cms:assets:optimize}
+

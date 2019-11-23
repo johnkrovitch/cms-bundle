@@ -1,0 +1,18 @@
+cms.homepage:
+    path: /
+    controller: JK\CmsBundle\Controller\Dashboard\DashboardAction
+
+cms.dashboard:
+    path: /dashboard
+    controller: JK\CmsBundle\Controller\Dashboard\DashboardAction
+
+cms.logout:
+    path: /logout
+
+cms.notification.mark_as_read:
+    path: /notification/{id}/mark-as-read
+    controller: JK\CmsBundle\Controller\Notification\MarkAsRead
+
+cms.tag.create_ajax:
+    path: /api/tags/create
+    controller: JK\CmsBundle\Controller\Tag\CreateAjax

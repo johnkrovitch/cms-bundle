@@ -1,0 +1,31 @@
+<div class="col-6">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">
+                <h5>
+                    <i class="fa fa-comments fa-2x"></i>
+                    {{ title | trans }}
+                </h5>
+            </div>
+            <table class="table">
+                {% for item in items %}
+                    <tr>
+                        <td>
+                            <a href="{{ editUrl }}">
+                                {{ item.content | truncate }}
+                            </a>
+                        </td>
+                        <td>{{ item.updatedAt | localizeddate('full', 'none', app.request.locale) }}</td>
+                        <td>
+                            <a href="{{ path('cms.article.edit', {
+                                id: comment.article.id
+                            }) }}">
+                                {{ comment.article.title }}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+cms:
+    new_comment:
+        subject: "[:application] Un nouveau commentaire a été publié sur l'article :article"
+        message: >
+            Bonjour,<br/><br/>
+
+            un nouveau commentaire a été publié pour l'article ":article_title".<br/><br/>
+
+            :author_name a dit :<br/>
+            ":content"<br/><br/><br/>
+        see_comment: Voir le commentaire
+        unsubscribe: Se désinscrire des notifications pour cet article
