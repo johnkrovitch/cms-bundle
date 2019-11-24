@@ -15,7 +15,7 @@
         "ext-json": "*",
         "johnkrovitch/media-bundle": "^0.1",
         "johnkrovitch/notification-bundle": "^0.1",
-        "lag/adminbundle": "dev-feature/helper",
+        "lag/adminbundle": "^0.5",
         "liip/imagine-bundle": "^2.2",
         "ps/image-optimizer": "^2.0",
         "symfony/mailer": "^3.0 || ^4.0"
