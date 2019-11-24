@@ -13,12 +13,12 @@
     "require": {
         "php": "^7.2",
         "ext-json": "*",
-        "johnkrovitch/media-bundle": "^0.1",
-        "johnkrovitch/notification-bundle": "^0.1",
+        "johnkrovitch/media-bundle": "^0.3",
+        "johnkrovitch/notification-bundle": "^0.2",
         "lag/adminbundle": "^0.5",
         "liip/imagine-bundle": "^2.2",
         "ps/image-optimizer": "^2.0",
-        "symfony/mailer": "^3.0 || ^4.0"
+        "symfony/mailer": "^3.0 || ^4.0 || ^5.0"
     },
     "require-dev": {
     },
