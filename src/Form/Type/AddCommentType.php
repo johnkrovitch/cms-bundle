@@ -24,6 +24,7 @@ class AddCommentType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        // TODO use translation system
         $builder
             ->add('authorName', TextType::class, [
                 'label' => 'Votre Nom',
