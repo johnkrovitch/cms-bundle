@@ -34,15 +34,12 @@ class TestKernel extends Kernel
             new DoctrineBundle(),
             new TwigBundle(),
             new SensioFrameworkExtraBundle(),
-//            new MonologBundle(),
-            //new JMS\SerializerBundle\JMSSerializerBundle($this),
-            //new FOS\RestBundle\FOSRestBundle(),
+
             // My Bundle to test
             new LAGAdminBundle(),
             new JKCmsBundle(),
             new JKNotificationBundle(),
             new JKMediaBundle(),
-            new OneupUploaderBundle(),
             new LiipImagineBundle(),
         ];
 

@@ -82,13 +82,6 @@ doctrine:
         auto_mapping: true
         mappings: []
 
-oneup_uploader:
-    mappings:
-        media_gallery:
-            frontend: blueimp
-            storage:
-                directory: '%kernel.root_dir%/../web/uploads/gallery'
-
 services:
     translator.logging.inner:
         synthetic: true
