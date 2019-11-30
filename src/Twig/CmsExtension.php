@@ -8,14 +8,14 @@ use JK\CmsBundle\Entity\Article;
 use JK\MediaBundle\Entity\MediaInterface;
 use LAG\AdminBundle\Configuration\ApplicationConfiguration;
 use LAG\AdminBundle\Configuration\ApplicationConfigurationStorage;
-use Symfony\Bundle\TwigBundle\DependencyInjection\TwigExtension;
 use Symfony\Component\Routing\RouterInterface;
+use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 /**
  * Add helper methods to get media path and directory.
  */
-class CmsExtension extends TwigExtension
+class CmsExtension extends AbstractExtension
 {
     /**
      * @var AssetsHelper
@@ -38,11 +38,6 @@ class CmsExtension extends TwigExtension
 
     /**
      * CmsExtension constructor.
-     *
-     * @param AssetsHelper                    $assetsHelper
-     * @param ScriptRegistry                  $scriptRegistry
-     * @param ApplicationConfigurationStorage $applicationConfigurationStorage
-     * @param RouterInterface                 $router
      */
     public function __construct(
         AssetsHelper $assetsHelper,
@@ -76,10 +71,9 @@ class CmsExtension extends TwigExtension
     /**
      * Return the path to an media according to its type.
      *
-     * @param MediaInterface $media
-     * @param bool           $absolute
-     * @param bool           $cache
-     * @param string|null    $mediaFilter
+     * @param bool        $absolute
+     * @param bool        $cache
+     * @param string|null $mediaFilter
      *
      * @return string
      */
@@ -108,8 +102,6 @@ class CmsExtension extends TwigExtension
 
     /**
      * Return a string representing the media size in the most readable unit.
-     *
-     * @param MediaInterface $media
      *
      * @return string
      */

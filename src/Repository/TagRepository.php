@@ -3,7 +3,7 @@
 namespace JK\CmsBundle\Repository;
 
 use JK\CmsBundle\Entity\Tag;
-use JK\CmsBundle\Repository\AbstractRepository;
+use JK\Repository\AbstractRepository;
 
 class TagRepository extends AbstractRepository
 {

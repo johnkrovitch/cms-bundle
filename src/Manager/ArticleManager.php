@@ -18,8 +18,6 @@ class ArticleManager extends AbstractManager implements ArticleManagerInterface
     }
 
     /**
-     * @param int $id
-     *
      * @return Article|mixed
      */
     public function get(int $id): Article
@@ -31,9 +29,6 @@ class ArticleManager extends AbstractManager implements ArticleManagerInterface
     }
 
     /**
-     * @param array      $criteria
-     * @param array|null $orderBy
-     *
      * @return Article|mixed
      */
     public function getOneBy(array $criteria, array $orderBy = null): Article

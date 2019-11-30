@@ -2,12 +2,11 @@
 
 namespace JK\CmsBundle\Entity;
 
-use JK\CmsBundle\Entity\Article;
-use App\JK\MediaBundle\Entity\MediaInterface;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JK\MediaBundle\Entity\MediaInterface;
 
 /**
  * Category.
@@ -131,7 +130,7 @@ class Category
      *
      * @var MediaInterface
      *
-     * @ORM\ManyToOne(targetEntity="App\JK\MediaBundle\Entity\Media")
+     * @ORM\ManyToOne(targetEntity="JK\MediaBundle\Entity\Media")
      * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     protected $thumbnail;
@@ -208,9 +207,6 @@ class Category
         $this->articles = $articles;
     }
 
-    /**
-     * @param Article $article
-     */
     public function addArticle(Article $article)
     {
         $this->articles->add($article);
@@ -315,8 +311,6 @@ class Category
     /**
      * Created at cannot be set. But in some case (like imports...), it is required to set created at. Use this method
      * in this case.
-     *
-     * @param DateTime $createdAt
      */
     public function forceCreatedAt(DateTime $createdAt)
     {

@@ -3,6 +3,7 @@
 namespace JK\CmsBundle\Form\Type;
 
 use JK\CmsBundle\Entity\Article;
+use JK\MediaBundle\Form\Type\TinyMceMediaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -11,10 +12,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class PageType extends AbstractType
 {
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -40,7 +37,7 @@ class PageType extends AbstractType
                 'label' => 'cms.page.edit.publication_status',
             ])
             ->add('publicationDate', DateTimeType::class)
-            ->add('content', TinyMceType::class)
+            ->add('content', TinyMceMediaType::class)
         ;
     }
 

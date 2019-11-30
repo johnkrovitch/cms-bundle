@@ -2,10 +2,10 @@
 
 namespace JK\CmsBundle\Form\Type;
 
+use Doctrine\Common\Collections\Collection;
 use JK\CmsBundle\Entity\Article;
 use JK\CmsBundle\Entity\Tag;
-use App\JK\MediaBundle\Form\Type\MediaType;
-use Doctrine\Common\Collections\Collection;
+use JK\MediaBundle\Form\Type\MediaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
@@ -32,10 +32,6 @@ class ArticleType extends AbstractType
         $this->router = $router;
     }
 
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -65,7 +61,7 @@ class ArticleType extends AbstractType
                 'required' => false,
                 'tinymce' => [
                     'height' => 1000,
-                ]
+                ],
             ])
             ->add('thumbnail', MediaType::class, [
                 'label' => 'cms.article.thumbnail',
@@ -91,7 +87,7 @@ class ArticleType extends AbstractType
                 'attr' => [
                     'class' => 'select2',
                     'multiple' => 'multiple',
-                    'data-url' => $this->router->generate('cms.tag.create_ajax')
+                    'data-url' => $this->router->generate('cms.tag.create_ajax'),
                 ],
                 'class' => Tag::class,
                 'choice_label' => 'name',
@@ -122,9 +118,6 @@ class ArticleType extends AbstractType
         ;
     }
 
-    /**
-     * @param OptionsResolver $resolver
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $selector = uniqid('tinymce-');

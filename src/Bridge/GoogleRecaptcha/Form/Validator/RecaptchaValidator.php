@@ -1,6 +1,6 @@
 <?php
 
-namespace JK\CmsBundle\Form\Validator;
+namespace JK\CmsBundle\Bridge\GoogleRecaptcha\Form\Validator;
 
 use ReCaptcha\ReCaptcha;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,9 +31,6 @@ class RecaptchaValidator extends ConstraintValidator
 
     /**
      * RecaptchaValidator constructor.
-     *
-     * @param string       $googleRecaptchaSecret
-     * @param RequestStack $requestStack
      */
     public function __construct(string $googleRecaptchaSecret, RequestStack $requestStack)
     {

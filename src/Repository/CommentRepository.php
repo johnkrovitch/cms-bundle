@@ -2,17 +2,14 @@
 
 namespace JK\CmsBundle\Repository;
 
-use JK\CmsBundle\Entity\Comment;
 use DateTime;
+use JK\CmsBundle\Entity\Comment;
+use JK\Repository\AbstractRepository;
 
 class CommentRepository extends AbstractRepository
 {
     /**
      * Return all comments created after $date.
-     *
-     * @param DateTime $date
-     *
-     * @param int      $limit
      *
      * @return array
      */
@@ -30,8 +27,6 @@ class CommentRepository extends AbstractRepository
 
     /**
      * Find all Comments from an Article that should be notified in case of new Comment.
-     *
-     * @param Comment $comment
      *
      * @return Comment[]
      */
@@ -74,8 +69,6 @@ class CommentRepository extends AbstractRepository
 
     /**
      * Return the number of new Comment after a given date. If no Date is provided, return the number of all Comments.
-     *
-     * @param DateTime|null $dateTime
      *
      * @return int
      */

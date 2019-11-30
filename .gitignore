@@ -1,8 +1,9 @@
+.phpunit.result.cache
 composer.lock
 symfony.lock
 /bin/
-config
 /vendor/
+.php_cs.cache
 
 ###> symfony/framework-bundle ###
 /.env.local

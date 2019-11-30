@@ -16,18 +16,12 @@ class TagCollectionType extends AbstractType
 
     /**
      * TagCollectionEmbedType constructor.
-     *
-     * @param TagCollectionTransformer $transformer
      */
     public function __construct(TagCollectionTransformer $transformer)
     {
         $this->transformer = $transformer;
     }
 
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

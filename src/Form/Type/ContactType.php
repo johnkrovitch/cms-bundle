@@ -2,6 +2,7 @@
 
 namespace JK\CmsBundle\Form\Type;
 
+use JK\CmsBundle\Bridge\GoogleRecaptcha\Form\Type\RecaptchaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -13,10 +14,6 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class ContactType extends AbstractType
 {
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

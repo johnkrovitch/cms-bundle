@@ -123,9 +123,6 @@ class Tag
         return $this->articles;
     }
 
-    /**
-     * @param Article $article
-     */
     public function addArticle(Article $article)
     {
         $this
@@ -143,8 +140,6 @@ class Tag
     }
 
     /**
-     * @param Article $article
-     *
      * @return bool
      */
     public function hasArticle(Article $article)
@@ -188,8 +183,6 @@ class Tag
     /**
      * Created at cannot be set. But in some case (like imports...), it is required to set created at. Use this method
      * in this case.
-     *
-     * @param DateTime $createdAt
      */
     public function forceCreatedAt(DateTime $createdAt)
     {

@@ -2,8 +2,8 @@
 
 namespace JK\CmsBundle\Form\Validator;
 
-use JK\CmsBundle\Entity\Comment;
 use Exception;
+use JK\CmsBundle\Entity\Comment;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;

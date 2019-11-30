@@ -2,8 +2,8 @@
 
 namespace JK\CmsBundle\Controller\Tag;
 
-use App\Exception\Exception;
 use JK\CmsBundle\Entity\Tag;
+use JK\CmsBundle\Exception\Exception;
 use JK\CmsBundle\Repository\TagRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,10 +22,6 @@ class CreateAjax
     }
 
     /**
-     * @param Request $request
-     *
-     * @return Response
-     *
      * @throws Exception
      */
     public function __invoke(Request $request): Response
@@ -39,7 +35,6 @@ class CreateAjax
         $tag->setName(ucfirst($value));
 
         $this->repository->save($tag);
-
 
         return new JsonResponse([
             'id' => $tag->getId(),

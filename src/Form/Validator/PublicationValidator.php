@@ -14,9 +14,6 @@ class PublicationValidator implements ConstraintValidatorInterface
      */
     protected $context;
 
-    /**
-     * @param ExecutionContextInterface $context
-     */
     public function initialize(ExecutionContextInterface $context)
     {
         $this->context = $context;
@@ -25,8 +22,7 @@ class PublicationValidator implements ConstraintValidatorInterface
     /**
      * Add a new violation if a Publication is published but have no publication date.
      *
-     * @param            $publication
-     * @param Constraint $constraint
+     * @param $publication
      */
     public function validate($publication, Constraint $constraint)
     {

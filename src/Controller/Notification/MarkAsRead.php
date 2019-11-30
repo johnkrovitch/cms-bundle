@@ -2,7 +2,7 @@
 
 namespace JK\CmsBundle\Controller\Notification;
 
-use App\JK\NotificationBundle\Manager\NotificationManagerInterface;
+use JK\NotificationBundle\Manager\NotificationManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;

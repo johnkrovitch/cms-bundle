@@ -5,8 +5,10 @@ namespace JK\CmsBundle\Assets\Uploader;
 use Exception;
 use JK\CmsBundle\Entity\Article;
 use JK\MediaBundle\Entity\MediaInterface;
+use JK\MediaBundle\Form\Type\MediaType;
 use JK\MediaBundle\Repository\MediaRepository;
-use JK\MediaBundle\Upload\Uploader\UploaderInterface;
+use JK\MediaBundle\Repository\MediaRepositoryInterface;
+use LAG\Component\StringUtils\StringUtils;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class Uploader
@@ -29,14 +31,13 @@ class Uploader
     /**
      * Uploader constructor.
      *
-     * @param string          $uploadDirectory
-     * @param string          $cacheDirectory
-     * @param MediaRepository $mediaRepository
+     * @param string $uploadDirectory
+     * @param string $cacheDirectory
      */
     public function __construct(
         $uploadDirectory,
         $cacheDirectory,
-        MediaRepository $mediaRepository
+        MediaRepositoryInterface $mediaRepository
     ) {
         $this->uploadDirectory = $uploadDirectory;
         $this->mediaRepository = $mediaRepository;
@@ -44,9 +45,6 @@ class Uploader
     }
 
     /**
-     * @param array        $data
-     * @param Article|null $article
-     *
      * @return MediaInterface
      *
      * @throws Exception
@@ -55,7 +53,7 @@ class Uploader
     {
         $media = null;
 
-        if (AddImageType::UPLOAD_FROM_COMPUTER === $data['uploadType']) {
+        if (MediaType::UPLOAD_FROM_COMPUTER === $data['uploadType']) {
             if ($data instanceof UploadedFile) {
                 // upload done in php
                 $media = $this->uploadFile($data);
@@ -63,8 +61,8 @@ class Uploader
                 // upload done in ajax
                 $media = $data['upload'];
             }
-        } elseif (AddImageType::UPLOAD_FROM_URL === $data['uploadType']) {
-        } elseif (AddImageType::CHOOSE_FROM_COLLECTION === $data['uploadType']) {
+        } elseif (MediaType::UPLOAD_FROM_URL === $data['uploadType']) {
+        } elseif (MediaType::CHOOSE_FROM_COLLECTION === $data['uploadType']) {
             // find from the repository with the selected id
             $media = $this
                 ->mediaRepository
@@ -121,8 +119,7 @@ class Uploader
     /**
      * Generate an unique default file name.
      *
-     * @param string       $extension
-     * @param Article|null $article
+     * @param string $extension
      *
      * @return string
      */

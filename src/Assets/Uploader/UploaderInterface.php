@@ -8,8 +8,7 @@ use JK\MediaBundle\Entity\MediaInterface;
 interface UploaderInterface
 {
     /**
-     * @param              $data
-     * @param Article|null $article
+     * @param $data
      *
      * @return MediaInterface
      */

@@ -3,7 +3,7 @@
 namespace JK\CmsBundle\Repository;
 
 use JK\CmsBundle\Entity\Parameters;
-use JK\CmsBundle\Repository\AbstractRepository;
+use JK\Repository\AbstractRepository;
 
 class ParametersRepository extends AbstractRepository
 {

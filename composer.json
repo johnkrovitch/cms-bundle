@@ -13,14 +13,22 @@
     "require": {
         "php": "^7.2",
         "ext-json": "*",
+        "eko/feedbundle": "^2.0",
+        "google/recaptcha": "^1.2",
         "johnkrovitch/media-bundle": "^0.3",
         "johnkrovitch/notification-bundle": "^0.2",
         "lag/adminbundle": "^0.5",
         "liip/imagine-bundle": "^2.2",
+        "nesbot/carbon": "^2.27",
         "ps/image-optimizer": "^2.0",
-        "symfony/mailer": "^3.0 || ^4.0 || ^5.0"
+        "symfony/framework-bundle": "^3.0|^4.0|^5.0",
+        "symfony/mailer": "^3.0|^4.0|^5.0",
+        "symfony/routing": "^3.0|^4.0|^5.0",
+        "symfony/twig-bundle": "^3.0|^4.0|^5.0"
     },
     "require-dev": {
+        "phpstan/phpstan-shim": "^0.11.19",
+        "phpunit/phpunit": "^8.0"
     },
     "autoload": {
         "psr-4": {

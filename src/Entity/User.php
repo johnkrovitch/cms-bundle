@@ -643,9 +643,6 @@ class User implements UserInterface
         $this->lastName = $lastName;
     }
 
-    /**
-     * @param string $confirmationToken
-     */
     public function setConfirmationToken(string $confirmationToken)
     {
         $this->confirmationToken = $confirmationToken;

@@ -2,9 +2,9 @@
 
 namespace JK\CmsBundle\Controller\Dashboard;
 
-use JK\CmsBundle\Repository\CommentRepository;
-use JK\CmsBundle\Repository\ArticleRepository;
 use DateTime;
+use JK\CmsBundle\Repository\ArticleRepository;
+use JK\CmsBundle\Repository\CommentRepository;
 use JK\NotificationBundle\Repository\NotificationRepository;
 use LAG\AdminBundle\Event\Events;
 use LAG\AdminBundle\Event\Events\MenuEvent;
@@ -47,13 +47,6 @@ class DashboardAction
 
     /**
      * DashboardAction constructor.
-     *
-     * @param TokenStorageInterface    $tokenStorage
-     * @param CommentRepository        $commentRepository
-     * @param ArticleRepository        $articleRepository
-     * @param NotificationRepository   $notificationRepository
-     * @param Environment              $twig
-     * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
         TokenStorageInterface $tokenStorage,

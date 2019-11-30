@@ -18,8 +18,6 @@ class AssetsExtension extends AbstractTypeExtension
 
     /**
      * AssetsExtension constructor.
-     *
-     * @param ScriptRegistry $scriptRegistry
      */
     public function __construct(ScriptRegistry $scriptRegistry)
     {
@@ -36,10 +34,6 @@ class AssetsExtension extends AbstractTypeExtension
     /**
      * Register the configured scripts using the FormView variables.
      *
-     * @param FormView      $view
-     * @param FormInterface $form
-     * @param array         $options
-     *
      * @throws Exception
      */
     public function finishView(FormView $view, FormInterface $form, array $options)
@@ -49,9 +43,7 @@ class AssetsExtension extends AbstractTypeExtension
         }
         foreach ($view->vars['scripts'] as $location => $scripts) {
             if (!is_array($scripts)) {
-                throw new Exception(
-                    'Assets configuration for location '.$location.' should be an array in form '.$form->getName()
-                );
+                throw new Exception('Assets configuration for location '.$location.' should be an array in form '.$form->getName());
             }
 
             foreach ($scripts as $name => $script) {

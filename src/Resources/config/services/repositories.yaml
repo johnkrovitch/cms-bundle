@@ -2,7 +2,7 @@ services:
     _defaults:
         autoconfigure: true
 
-    App\JK\MediaBundle\Repository\MediaRepository:
+    JK\MediaBundle\Repository\MediaRepository:
         arguments:
             - '@doctrine'
 
@@ -15,10 +15,6 @@ services:
             - '@doctrine'
 
     JK\CmsBundle\Repository\CategoryRepository:
-        arguments:
-            - '@doctrine'
-
-    JK\CmsBundle\Repository\ContentRepository:
         arguments:
             - '@doctrine'
 

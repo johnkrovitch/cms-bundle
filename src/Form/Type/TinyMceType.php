@@ -2,7 +2,7 @@
 
 namespace JK\CmsBundle\Form\Type;
 
-use App\Service\Assets\ScriptRegistry;
+use JK\CmsBundle\Assets\ScriptRegistry;
 use JK\CmsBundle\Exception\Exception;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\Form\AbstractType;
@@ -71,11 +71,6 @@ class TinyMceType extends AbstractType
 
     /**
      * TinyMceType constructor.
-     *
-     * @param ScriptRegistry      $scriptRegistry
-     * @param RouterInterface     $router
-     * @param TranslatorInterface $translator
-     * @param Packages            $packages
      */
     public function __construct(
         ScriptRegistry $scriptRegistry,
@@ -99,10 +94,6 @@ class TinyMceType extends AbstractType
 
     /**
      * Add the required javascript to make tinymce working.
-     *
-     * @param FormView      $view
-     * @param FormInterface $form
-     * @param array         $options
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
@@ -125,9 +116,6 @@ class TinyMceType extends AbstractType
         $view->vars['id'] = str_replace('#', '', $options['tinymce']['selector']);
     }
 
-    /**
-     * @param OptionsResolver $resolver
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver

@@ -8,6 +8,8 @@ services:
         class: JK\CmsBundle\Controller\Dashboard\DashboardAction
         tags:
             - 'controller.service_arguments'
+        arguments:
+            $tokenStorage: '@security.token_storage'
 
     JK\CmsBundle\Controller\Article\CreateArticleAction:
         class: JK\CmsBundle\Controller\Article\CreateArticleAction
@@ -24,7 +26,7 @@ services:
         tags:
             - 'controller.service_arguments'
         arguments:
-            $manager: '@App\JK\NotificationBundle\Manager\NotificationManagerInterface'
+            $manager: '@JK\NotificationBundle\Manager\NotificationManagerInterface'
             $router: '@Symfony\Component\Routing\RouterInterface'
 
 

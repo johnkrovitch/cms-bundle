@@ -1,0 +1,5 @@
+services:
+    JK\CmsBundle\Assets\ScriptRegistry:
+        arguments:
+            $environment: '@Twig\Environment'
+            $template: '%jk_cms.scripts.template%'
