@@ -2,8 +2,9 @@
 
 namespace JK\CmsBundle\Repository;
 
-use JK\CmsBundle\Entity\Page;
 use DateTime;
+use JK\CmsBundle\Entity\Page;
+use JK\Repository\AbstractRepository;
 
 class PageRepository extends AbstractRepository
 {
@@ -11,8 +12,6 @@ class PageRepository extends AbstractRepository
      * Return a published page by its slug.
      *
      * @param $pageSlug
-     *
-     * @return Page|null
      */
     public function findPublished($pageSlug): ?Page
     {

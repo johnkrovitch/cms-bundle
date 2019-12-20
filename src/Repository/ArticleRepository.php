@@ -2,11 +2,11 @@
 
 namespace JK\CmsBundle\Repository;
 
-use JK\CmsBundle\Entity\Article;
-use JK\CmsBundle\Repository\AbstractRepository;
 use DateTime;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Internal\Hydration\IterableResult;
+use JK\CmsBundle\Entity\Article;
+use JK\Repository\AbstractRepository;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -110,8 +110,6 @@ class ArticleRepository extends AbstractRepository
     /**
      * Find articles created after $date.
      *
-     * @param DateTime $date
-     *
      * @return array
      */
     public function findByDate(DateTime $date)
@@ -156,9 +154,8 @@ class ArticleRepository extends AbstractRepository
     }
 
     /**
-     * @param array $terms
-     * @param bool  $usePagination
-     * @param int   $page
+     * @param bool $usePagination
+     * @param int  $page
      *
      * @return Pagerfanta|Article[]
      */

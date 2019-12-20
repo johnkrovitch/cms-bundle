@@ -39,11 +39,7 @@ class AssetsHelper
     /**
      * AssetsHelper constructor.
      *
-     * @param string          $kernelEnvironment
-     * @param array           $assetsMapping
-     * @param RouterInterface $router
-     * @param CacheManager    $assetsManager
-     * @param string          $rootDirectory
+     * @param string $rootDirectory
      */
     public function __construct(
         string $kernelEnvironment,
@@ -68,10 +64,9 @@ class AssetsHelper
     /**
      * Return the web path to a Media. If $cache is true, it returns the web path to the cached version.
      *
-     * @param MediaInterface $media
-     * @param bool           $absolute
-     * @param bool           $cache
-     * @param string|null    $mediaFilter
+     * @param bool        $absolute
+     * @param bool        $cache
+     * @param string|null $mediaFilter
      *
      * @return string
      *
@@ -135,9 +130,6 @@ class AssetsHelper
 
     /**
      * Upload a file into a media directory according to the mapping. Update the media entity with the new file data.
-     *
-     * @param MediaInterface $media
-     * @param UploadedFile   $file
      */
     public function uploadAsset(MediaInterface $media, UploadedFile $file)
     {

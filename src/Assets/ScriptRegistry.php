@@ -2,7 +2,6 @@
 
 namespace JK\CmsBundle\Assets;
 
-
 use JK\CmsBundle\Exception\Exception;
 use Twig\Environment;
 
@@ -31,27 +30,26 @@ class ScriptRegistry
      *
      * @var string
      */
-    protected $defaultTemplate;
+    protected $template;
 
     /**
      * Used to render scripts template.
      *
      * @var Environment
      */
-    protected $twig;
+    protected $environment;
 
     /**
      * ScriptRegistry constructor.
      *
-     * @param Environment $twig
-     * @param string           $defaultTemplate
+     * @param string $template
      */
     public function __construct(
-        Environment $twig,
-        $defaultTemplate = '@JKCms/Assets/script.template.html.twig'
+        Environment $environment,
+        $template = ''
     ) {
-        $this->defaultTemplate = $defaultTemplate;
-        $this->twig = $twig;
+        $this->template = $template;
+        $this->environment = $environment;
     }
 
     /**
@@ -73,7 +71,7 @@ class ScriptRegistry
 
         if (null === $template) {
             // if no template is provided, we use the default script template
-            $asset['template'] = $this->defaultTemplate;
+            $asset['template'] = $this->template;
             $asset['context'] = [
                 'script' => $script,
             ];
@@ -136,7 +134,7 @@ class ScriptRegistry
     private function renderScript($script)
     {
         return $this
-            ->twig
+            ->environment
             ->render($script['template'], $script['context'])
         ;
     }

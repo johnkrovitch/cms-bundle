@@ -2,19 +2,12 @@
 
 namespace JK\CmsBundle\DependencyInjection\Helper;
 
-use LAG\AdminBundle\Configuration\ApplicationConfiguration;
-
 class ConfigurationHelper
 {
     /**
      * @var array
      */
     private $config;
-
-    /**
-     * @var ApplicationConfiguration
-     */
-    private $application;
 
     public function __construct(array $config)
     {
@@ -29,5 +22,10 @@ class ConfigurationHelper
     public function getApplicationName(): string
     {
         return $this->config['application']['name'];
+    }
+
+    public function getConfig(): array
+    {
+        return $this->config;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace JK\CmsBundle\Form\Type;
 
+use JK\CmsBundle\Bridge\GoogleRecaptcha\Form\Type\RecaptchaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -24,6 +25,7 @@ class AddCommentType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        // TODO use translation system
         $builder
             ->add('authorName', TextType::class, [
                 'label' => 'Votre Nom',

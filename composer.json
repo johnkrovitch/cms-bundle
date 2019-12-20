@@ -13,16 +13,24 @@
     "require": {
         "php": "^7.2",
         "ext-json": "*",
-        "johnkrovitch/media-bundle": "^0.1.0",
-        "johnkrovitch/notification-bundle": "^0.1.0",
-        "lag/adminbundle": "dev-feature/helper",
+        "eko/feedbundle": "^2.0",
+        "google/recaptcha": "^1.2",
+        "johnkrovitch/media-bundle": "^0.4",
+        "johnkrovitch/notification-bundle": "^0.2.1",
+        "johnkrovitch/orm-pack": "^0.2",
+        "lag/adminbundle": "^0.6",
         "liip/imagine-bundle": "^2.2",
+        "nesbot/carbon": "^2.27",
         "ps/image-optimizer": "^2.0",
-        "symfony/mailer": "^5.0",
-        "symfony/validator": "^3.0 || ^4.0"
+        "symfony/framework-bundle": "^3.0|^4.0|^5.0",
+        "symfony/mailer": "^3.0|^4.0|^5.0",
+        "symfony/routing": "^3.0|^4.0|^5.0",
+        "symfony/twig-bundle": "^3.0|^4.0|^5.0"
     },
     "require-dev": {
-        "symfony/flex": "^1.4"
+        "phpstan/phpstan-shim": "^0.11.19",
+        "phpunit/phpunit": "^8.0",
+        "symfony/webpack-encore-bundle": "^1.7"
     },
     "autoload": {
         "psr-4": {

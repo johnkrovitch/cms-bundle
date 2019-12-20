@@ -23,9 +23,6 @@ class Publish
 
     /**
      * AdminAction constructor.
-     *
-     * @param AdminFactory      $adminFactory
-     * @param Environment $twig
      */
     public function __construct(AdminFactory $adminFactory, Environment $twig)
     {
@@ -34,8 +31,6 @@ class Publish
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response|RedirectResponse
      */
     public function __invoke(Request $request)

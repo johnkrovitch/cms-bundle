@@ -36,11 +36,6 @@ class CreateArticleAction
 
     /**
      * AdminAction constructor.
-     *
-     * @param AdminFactory        $adminFactory
-     * @param DataProviderFactory $dataProviderFactory
-     * @param TranslatorInterface $translator
-     * @param RouterInterface     $router
      */
     public function __construct(
         AdminFactory $adminFactory,
@@ -57,8 +52,6 @@ class CreateArticleAction
     /**
      * When creating a new article, issues with media library and TinyMce can appear as the Article entity has no
      * primary key. So we save it with a default title to avoid issues.
-     *
-     * @param Request $request
      *
      * @return RedirectResponse
      *

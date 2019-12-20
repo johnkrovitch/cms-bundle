@@ -2,9 +2,9 @@
 
 namespace JK\CmsBundle\Form\Transformer;
 
+use Doctrine\Common\Collections\Collection;
 use JK\CmsBundle\Entity\Tag;
 use JK\CmsBundle\Repository\TagRepository;
-use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
@@ -17,8 +17,6 @@ class TagCollectionTransformer implements DataTransformerInterface
 
     /**
      * TagCollectionTransformer constructor.
-     *
-     * @param TagRepository $tagRepository
      */
     public function __construct(TagRepository $tagRepository)
     {
@@ -33,9 +31,7 @@ class TagCollectionTransformer implements DataTransformerInterface
     public function transform($tags)
     {
         if (!is_array($tags) && !$tags instanceof Collection) {
-            throw new TransformationFailedException(
-                'Only an array or a Collection can be transformed, given '.gettype($tags)
-            );
+            throw new TransformationFailedException('Only an array or a Collection can be transformed, given '.gettype($tags));
         }
         $content = [];
 
@@ -58,9 +54,7 @@ class TagCollectionTransformer implements DataTransformerInterface
         }
 
         if (!is_string($tagsString)) {
-            throw new TransformationFailedException(
-                'Only a string containing Tag names can be reversed, '.gettype($tagsString).' given'
-            );
+            throw new TransformationFailedException('Only a string containing Tag names can be reversed, '.gettype($tagsString).' given');
         }
         $names = explode(',', $tagsString);
         $tags = [];

@@ -15,8 +15,6 @@ class ArticleItemFactory implements ArticleItemFactoryInterface
 
     /**
      * ArticleItemFactory constructor.
-     *
-     * @param RouterInterface $router
      */
     public function __construct(RouterInterface $router)
     {
@@ -27,8 +25,6 @@ class ArticleItemFactory implements ArticleItemFactoryInterface
      * Create a feed item from an array of articles.
      *
      * @param Article[] $articles
-     *
-     * @return array
      */
     public function create(array $articles): array
     {

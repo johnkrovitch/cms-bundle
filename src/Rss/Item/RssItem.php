@@ -80,7 +80,6 @@ class RssItem implements ItemInterface
     /**
      * This method returns item publication date.
      *
-     *
      * @return DateTime
      */
     public function getFeedItemPubDate()

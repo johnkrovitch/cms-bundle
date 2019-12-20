@@ -2,8 +2,8 @@
 
 namespace JK\CmsBundle\Form\Handler;
 
-use JK\CmsBundle\Entity\Article;
 use JK\CmsBundle\DependencyInjection\Helper\ConfigurationHelper;
+use JK\CmsBundle\Entity\Article;
 use JK\CmsBundle\Entity\Comment;
 use JK\CmsBundle\Manager\CommentManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;

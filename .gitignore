@@ -1,8 +1,12 @@
+.phpunit.result.cache
 composer.lock
 symfony.lock
+yarn.lock
 /bin/
-config
 /vendor/
+.php_cs.cache
+/templates
+node_modules
 
 ###> symfony/framework-bundle ###
 /.env.local

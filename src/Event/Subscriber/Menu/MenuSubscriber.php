@@ -5,7 +5,6 @@ namespace JK\CmsBundle\Event\Subscriber\Menu;
 use LAG\AdminBundle\Event\Events;
 use LAG\AdminBundle\Event\Menu\MenuConfigurationEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Yaml\Yaml;
 
 class MenuSubscriber implements EventSubscriberInterface
 {

@@ -4,18 +4,9 @@ services:
         autoconfigure: true
 
     ### Form Types ###
-    App\JK\MediaBundle\Form\Type\JQueryUploadType:
-        class: App\JK\MediaBundle\Form\Type\JQueryUploadType
+    JK\CmsBundle\Bridge\GoogleRecaptcha\Form\Type\RecaptchaType:
         arguments:
-            - '@oneup_uploader.templating.uploader_helper'
-            - '@App\JK\MediaBundle\Form\Transformer\MediaUploadTransformer'
-        tags:
-            - {name: form.type}
-
-    JK\CmsBundle\Form\Type\RecaptchaType:
-        class: JK\CmsBundle\Form\Type\RecaptchaType
-        arguments:
-            - '%google.recaptcha.site_key%'
+            - '%jk_cms.recaptcha.site_key%'
         tags:
             - {name: form.type}
 
@@ -29,7 +20,7 @@ services:
     JK\CmsBundle\Form\Type\TinyMceType:
         class: JK\CmsBundle\Form\Type\TinyMceType
         arguments:
-            - '@App\Service\Assets\ScriptRegistry'
+            - '@JK\CmsBundle\Assets\ScriptRegistry'
             - '@router'
             - '@translator'
             - '@assets.packages'
@@ -46,7 +37,7 @@ services:
     JK\CmsBundle\Form\Type\CategoryType:
         class: JK\CmsBundle\Form\Type\CategoryType
         arguments:
-            - '@App\JK\MediaBundle\Form\Transformer\JQueryUploadTransformer'
+            - '@JK\MediaBundle\Form\Transformer\JQueryUploadTransformer'
         tags:
             - {name: form.type}
 
@@ -70,14 +61,14 @@ services:
             - '@JK\CmsBundle\Repository\TagRepository'
 
     ### Form Validators ###
-    JK\CmsBundle\Form\Validator\RecaptchaValidator:
-        class: JK\CmsBundle\Form\Validator\RecaptchaValidator
+    JK\CmsBundle\Bridge\GoogleRecaptcha\Form\Validator\RecaptchaValidator:
+        class: JK\CmsBundle\Bridge\GoogleRecaptcha\Form\Validator\RecaptchaValidator
         arguments:
-            - '%google.recaptcha.secret%'
+            - '%jk_cms.recaptcha.site_key%'
             - '@request_stack'
 
     JK\CmsBundle\Form\Extension\AssetsExtension:
         tags:
             - {name: form.type_extension}
         arguments:
-            - '@App\Service\Assets\ScriptRegistry'
+            - '@JK\CmsBundle\Assets\ScriptRegistry'

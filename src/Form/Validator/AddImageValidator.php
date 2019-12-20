@@ -2,6 +2,7 @@
 
 namespace JK\CmsBundle\Form\Validator;
 
+use JK\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -24,12 +25,11 @@ class AddImageValidator implements ConstraintValidatorInterface
     }
 
     /**
-     * @param mixed      $data
-     * @param Constraint $constraint
+     * @param mixed $data
      */
     public function validate($data, Constraint $constraint)
     {
-        if (AddImageType::UPLOAD_FROM_COMPUTER === $data['uploadType']) {
+        if (MediaType::UPLOAD_FROM_COMPUTER === $data['uploadType']) {
             if (!$data['upload']) {
                 $this
                     ->context
@@ -38,7 +38,7 @@ class AddImageValidator implements ConstraintValidatorInterface
                     ->addViolation()
                 ;
             }
-        } elseif (AddImageType::UPLOAD_FROM_URL == $data['uploadType']) {
+        } elseif (MediaType::UPLOAD_FROM_URL == $data['uploadType']) {
             if (!$data['url']) {
                 $this
                     ->context
@@ -47,7 +47,7 @@ class AddImageValidator implements ConstraintValidatorInterface
                     ->addViolation()
                 ;
             }
-        } elseif (AddImageType::CHOOSE_FROM_COLLECTION == $data['uploadType']) {
+        } elseif (MediaType::CHOOSE_FROM_COLLECTION == $data['uploadType']) {
             if (!$data['gallery']) {
                 $this
                     ->context

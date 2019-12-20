@@ -15,4 +15,4 @@ services:
         tags:
             - {name: twig.extension}
         arguments:
-            - '%locale%'
+            - '%kernel.default_locale%'

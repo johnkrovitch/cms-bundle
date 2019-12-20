@@ -2,13 +2,13 @@
 
 namespace JK\CmsBundle\Entity;
 
-use App\JK\MediaBundle\Entity\MediaInterface;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JK\CmsBundle\Form\Constraint as Assert;
+use JK\MediaBundle\Entity\MediaInterface;
 
 /**
  * Category.
@@ -146,7 +146,7 @@ class Article
     /**
      * @var MediaInterface
      *
-     * @ORM\ManyToOne(targetEntity="App\JK\MediaBundle\Entity\Media", cascade={"persist"}, fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="JK\MediaBundle\Entity\Media", cascade={"persist"}, fetch="EAGER")
      * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     protected $thumbnail;
@@ -181,8 +181,6 @@ class Article
     /**
      * Created at cannot be set. But in some case (like imports...), it is required to set created at. Use this method
      * in this case.
-     *
-     * @param DateTime $createdAt
      */
     public function forceCreatedAt(DateTime $createdAt)
     {
@@ -380,9 +378,6 @@ class Article
         $this->comments = $comments;
     }
 
-    /**
-     * @param Comment $comment
-     */
     public function addComment(Comment $comment)
     {
         $this->comments->add($comment);
@@ -463,9 +458,6 @@ class Article
         return $categories;
     }
 
-    /**
-     * @param Tag $tag
-     */
     public function addTag(Tag $tag)
     {
         $this->tags->add($tag);
@@ -473,8 +465,6 @@ class Article
     }
 
     /**
-     * @param Tag $tag
-     *
      * @return bool
      */
     public function hasTag(Tag $tag)

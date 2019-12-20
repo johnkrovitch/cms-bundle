@@ -30,9 +30,6 @@ class ModuleRepository
         return $modules;
     }
 
-    /**
-     * @param ModuleInterface $module
-     */
     public function addModule(ModuleInterface $module)
     {
         if (array_key_exists($module->getName(), $this->modules)) {
