@@ -43,6 +43,10 @@ class JKCmsExtension extends Extension implements PrependExtensionInterface
             return;
         }
         $config = $configs[0];
+
+        if (null === $config) {
+            $config = [];
+        }
         $container->setParameter('jk_cms.config', $config);
 
         if (key_exists('admin', $config)) {
