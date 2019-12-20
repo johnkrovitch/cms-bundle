@@ -7,7 +7,7 @@ use JK\CmsBundle\Repository\ArticleRepository;
 use JK\CmsBundle\Repository\CommentRepository;
 use JK\NotificationBundle\Repository\NotificationRepository;
 use LAG\AdminBundle\Event\Events;
-use LAG\AdminBundle\Event\Events\MenuEvent;
+use LAG\AdminBundle\Event\Events\BuildMenuEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -67,7 +67,7 @@ class DashboardAction
     public function __invoke(): Response
     {
         $user = $this->tokenStorage->getToken()->getUser();
-        $this->eventDispatcher->dispatch(Events::MENU, new MenuEvent());
+        $this->eventDispatcher->dispatch(Events::MENU, new BuildMenuEvent());
 
         $newCommentCount = $this
             ->commentRepository

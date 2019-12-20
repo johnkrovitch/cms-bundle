@@ -4,6 +4,7 @@ namespace JK\CmsBundle\Form\Type;
 
 use JK\CmsBundle\Assets\ScriptRegistry;
 use JK\CmsBundle\Exception\Exception;
+use JK\CmsBundle\Property\Access\NullablePropertyAccessor;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -100,18 +101,20 @@ class TinyMceType extends AbstractType
         // Register the cms tinymce here build to avoid merging it with the main cms build
         $this
             ->scriptRegistry
-            ->register('footer', 'build/tinymce/cms.tinymce.js')
+            ->register('footer', '/bundles/jkcms/assets/cms.tinymce.js')
         ;
+
+        $this->setCssClass($view);
 
         $view->vars['attr']['data-tinymce'] = json_encode($options['tinymce']);
         $view->vars['attr']['class'] .= ' tinymce-textarea';
 
-        $view->vars['attr']['data-add-image-url'] = $this->router->generate('cms.media.add_image_modal');
-        $view->vars['attr']['data-edit-image-url'] = $this->router->generate('cms.media.edit_image_modal');
-        $view->vars['attr']['data-add-gallery-url'] = $this->router->generate('cms.media.add_gallery_modal');
+        $view->vars['attr']['data-add-image-url'] = $this->router->generate('media.add_image_modal');
+        $view->vars['attr']['data-edit-image-url'] = $this->router->generate('media.edit_image_modal');
+        $view->vars['attr']['data-add-gallery-url'] = $this->router->generate('media.gallery_modal');
 
-        $view->vars['attr']['data-add-image-translation'] = $this->translator->trans('cms.gallery.add_image');
-        $view->vars['attr']['data-gallery-translation'] = $this->translator->trans('cms.gallery.add_gallery');
+        $view->vars['attr']['data-add-image-translation'] = $this->translator->trans('media.image.add');
+        $view->vars['attr']['data-gallery-translation'] = $this->translator->trans('media.gallery.add');
 
         $view->vars['id'] = str_replace('#', '', $options['tinymce']['selector']);
     }
@@ -171,5 +174,22 @@ class TinyMceType extends AbstractType
                 return $resolver->resolve($value);
             })
         ;
+    }
+
+    private function setCssClass(FormView $view): void
+    {
+        $accessor = NullablePropertyAccessor::create();
+
+        $cssClass = [
+            'tinymce',
+            'tinymce-textarea',
+        ];
+        $definedClass = [];
+
+        if ($accessor->getValue($view->vars, '[attr][class]')) {
+            $definedClass = explode(' ', $accessor->getValue($view->vars, '[attr][class]'));
+        }
+        $cssClass = array_merge($cssClass, $definedClass);
+        $accessor->setValue($view->vars, '[attr][class]', implode(' ', $cssClass));
     }
 }

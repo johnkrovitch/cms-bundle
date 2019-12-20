@@ -49,18 +49,7 @@ class JKCmsExtension extends Extension implements PrependExtensionInterface
             $admin = $config['admin'];
             $container
                 ->prependExtensionConfig('lag_admin', [
-                    'application' => [
-                        'title' => $admin['title'],
-                        'description' => $admin['description'],
-                        'max_per_page' => $admin['max_per_page'],
-                        'routing_name_pattern' => $admin['routing_name_pattern'],
-                        'routing_url_pattern' => $admin['routing_url_pattern'],
-                        'date_format' => $admin['date_format'],
-                        'base_template' => $admin['base_template'],
-                        'translation' => $admin['translation'],
-                        'translation_pattern' => $admin['translation_pattern'],
-                        'homepage_route' => $admin['homepage_route'],
-                    ],
+                    'application' => $admin,
                 ])
             ;
         }

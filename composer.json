@@ -15,9 +15,10 @@
         "ext-json": "*",
         "eko/feedbundle": "^2.0",
         "google/recaptcha": "^1.2",
-        "johnkrovitch/media-bundle": "^0.3",
-        "johnkrovitch/notification-bundle": "^0.2",
-        "lag/adminbundle": "^0.5",
+        "johnkrovitch/media-bundle": "^0.4",
+        "johnkrovitch/notification-bundle": "^0.2.1",
+        "johnkrovitch/orm-pack": "^0.2",
+        "lag/adminbundle": "^0.6",
         "liip/imagine-bundle": "^2.2",
         "nesbot/carbon": "^2.27",
         "ps/image-optimizer": "^2.0",
@@ -28,7 +29,8 @@
     },
     "require-dev": {
         "phpstan/phpstan-shim": "^0.11.19",
-        "phpunit/phpunit": "^8.0"
+        "phpunit/phpunit": "^8.0",
+        "symfony/webpack-encore-bundle": "^1.7"
     },
     "autoload": {
         "psr-4": {

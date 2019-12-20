@@ -1,0 +1,17 @@
+{
+  "entrypoints": {
+    "cms": {
+      "css": [
+        "/bundles/jkcms/assets/cms.css"
+      ],
+      "js": [
+        "/bundles/jkcms/assets/cms.js"
+      ]
+    },
+    "cms.tinymce": {
+      "js": [
+        "/bundles/jkcms/assets/cms.tinymce.js"
+      ]
+    }
+  }
+}
