@@ -35,7 +35,6 @@ class JKCmsExtension extends Extension implements PrependExtensionInterface
         if (key_exists('recaptcha', $config) && key_exists('site_key', $config['recaptcha'])) {
             $siteKey = $config['recaptcha']['site_key'];
         }
-//        dump($accessor->getValue($config, '[application][front_base]'));
         $container->setParameter('jk_cms.recaptcha.site_key', $siteKey);
         $container->setParameter('jk_cms.front_base', $accessor->getValue($config, '[application][front_base]'));
 

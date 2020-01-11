@@ -15,7 +15,7 @@
         "ext-json": "*",
         "eko/feedbundle": "^2.0",
         "google/recaptcha": "^1.2",
-        "johnkrovitch/media-bundle": "^0.4",
+        "johnkrovitch/media-bundle": "^1.0",
         "johnkrovitch/notification-bundle": "^0.2.1",
         "johnkrovitch/orm-pack": "^0.2",
         "lag/adminbundle": "^0.6",
