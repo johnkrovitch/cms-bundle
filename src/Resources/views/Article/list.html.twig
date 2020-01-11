@@ -1,0 +1,65 @@
+{% extends '@JKCms/base.html.twig' %}
+
+{% block content %}
+    <div class="col-lg-9 col-sm-9 col-sm-9 page filter-article">
+        <h2>{{ title | capitalize }}</h2>
+        {% set articles = pager.currentPageResults %}
+
+        <div class="row">
+            {% for article in articles %}
+                {% set categoryUrl = path('lecomptoir.article.list_by_category', {categorySlug: article.category.slug}) %}
+                {% set categoryLinkTitle = 'lecomptoir.article.go_to_category' | trans({'%category%': article.category.name}) %}
+                {% set articleUrl = path('lecomptoir.article.show', article.urlParameters) %}
+                {% set articleLinkTitle = 'lecomptoir.article.go_to_read' | trans({'%article%': article.title}) %}
+
+                <div class="col-md-12 article-item">
+                    {# Category ribbon #}
+                    <h2 class="ribbon">
+                        <a href="{{ categoryUrl }}" title="{{ categoryLinkTitle }}">
+                            {{ article.category.name }}
+                        </a>
+                    </h2>
+
+                    {# Article thumbnail #}
+                    {% if article.thumbnail %}
+                        <a href="{{ articleUrl }}" title="{{ articleLinkTitle }}">
+                            <img src="{{ media_path(article.thumbnail) }}"
+                                 alt="{{ articleLinkTitle }}"
+                                 title="{{ articleLinkTitle }}"/>
+                        </a>
+                    {% endif %}
+
+                    {# Article publication date#}
+                    <span class="title-date">{{ article.publicationDate | localizeddate('full', 'none') }}</span>
+
+                    {# Article title #}
+                    <h3>
+                        <a href="{{ articleUrl }}" title="{{ articleLinkTitle }}">{{ article.title }}</a>
+                    </h3>
+                    {# Article truncated content #}
+                    <p>{{ article.content | striptags | truncate(500) | raw }}
+                        <a href="{{ articleUrl }}" title="{{ articleLinkTitle }}" class="more-link">
+                            {{ 'lecomptoir.interface.more_link' | trans }}
+                            <i class="fa fa-plus-circle"></i>
+                        </a>
+                    </p>
+                </div>
+
+            {% else %}
+                <div class="col-md-12">
+                    {{ 'lecomptoir.article.no_result' | trans }}
+                </div>
+            {% endfor %}
+        </div>
+
+        {% if articles | length > 0 %}
+            <div class="pager">
+
+                {% if pager.haveToPaginate %}
+                    {{ pagerfanta(pager, 'default_translated', {page: pager.currentPage}) }}
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+

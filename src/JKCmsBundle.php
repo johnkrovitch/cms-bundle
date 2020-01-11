@@ -2,6 +2,7 @@
 
 namespace JK\CmsBundle;
 
+use JK\CmsBundle\DependencyInjection\CompilerPass\InstallerCompilerPass;
 use JK\CmsBundle\DependencyInjection\CompilerPass\ModuleCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -15,5 +16,6 @@ class JKCmsBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new ModuleCompilerPass());
+        $container->addCompilerPass(new InstallerCompilerPass());
     }
 }

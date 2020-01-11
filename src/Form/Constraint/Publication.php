@@ -10,19 +10,15 @@ use Symfony\Component\Validator\Constraint;
  */
 class Publication extends Constraint
 {
-    /**
-     * @return string
-     */
     public function validatedBy()
     {
         return PublicationValidator::class;
     }
 
-    /**
-     * @return string
-     */
     public function getTargets()
     {
-        return self::CLASS_CONSTRAINT;
+        return [
+            self::CLASS_CONSTRAINT,
+        ];
     }
 }

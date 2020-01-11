@@ -1,4 +1,3 @@
 JK\CmsBundle\Entity\Article:
-    properties:
-        title:
-            - Publication: ~
+    constraints:
+        - JK\CmsBundle\Form\Constraint\Publication: ~

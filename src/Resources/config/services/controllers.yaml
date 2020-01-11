@@ -11,16 +11,6 @@ services:
         arguments:
             $tokenStorage: '@security.token_storage'
 
-    JK\CmsBundle\Controller\Article\CreateArticleAction:
-        class: JK\CmsBundle\Controller\Article\CreateArticleAction
-        tags:
-            - 'controller.service_arguments'
-        arguments:
-            - '@LAG\AdminBundle\Factory\AdminFactory'
-            - '@LAG\AdminBundle\Factory\DataProviderFactory'
-            - '@translator'
-            - '@router'
-
     JK\CmsBundle\Controller\Notification\MarkAsRead:
         class: JK\CmsBundle\Controller\Notification\MarkAsRead
         tags:
@@ -33,3 +23,23 @@ services:
     JK\CmsBundle\Controller\Tag\CreateAjax:
         tags:
             - 'controller.service_arguments'
+
+    # Articles
+    JK\CmsBundle\Controller\Article\ShowAction:
+        tags:
+            - 'controller.service_arguments'
+
+    JK\CmsBundle\Controller\Article\ListAction:
+        tags:
+            - 'controller.service_arguments'
+
+    JK\CmsBundle\Controller\Article\CreateAction:
+        class: JK\CmsBundle\Controller\Article\CreateAction
+        tags:
+            - 'controller.service_arguments'
+        arguments:
+            - '@LAG\AdminBundle\Factory\AdminFactory'
+            - '@LAG\AdminBundle\Factory\DataProviderFactory'
+            - '@translator'
+            - '@router'
+

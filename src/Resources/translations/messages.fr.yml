@@ -1,0 +1,235 @@
+cms:
+    article:
+        # Actions
+        save_errors: Une erreur a été rencontrée
+        saved: L'article a été sauvegardé
+        preview: Prévisualiser l'article
+        list: Articles
+        create: Ajouter un article
+        edit: Editer un article
+        delete: Supprimer
+        deleted: L'article a été supprimé
+        see: Voir
+        return: Retour
+        publish: Publier l'article
+        # Fields
+        id: Id
+        title: Titre
+        title_help: Titre de l'article. Ce titre s'affichera sur la page d'accueil et dans la page de l'article.
+        title_placeholder: Saisissez le titre de l'article...
+        category: Catégorie
+        category_help: Catégorie dans laquelle sera publié l'article
+        author: Auteur
+        author_help: Auteur de l'article
+        content: Corps de l'article
+        content_help: Contenu de l'article. Le style et la mise en page peuventt être légerement différents lors de l'affichage de l'article
+        publication_status: Statut de publication
+        publication_status_help: Seul les articles publiés seront vus sur le site par les lecteurs
+        publication_date: Date de publication
+        publication_date_help: Date de publication à laquelle l'article sera publié
+        created_at: Date de création
+        created_at_help: Date à laquelle l'article à été créé
+        updated.at: Mis à jour le
+        updated_at_help: Date de la dernière modification de l'article
+        is_commentable: Autoriser les commentaires
+        is_commentable_help: Si cette cache case est décochée, les commentaires seront désactivés pour cet article
+        canonical: Url
+        canonical_help: Url de la page sur le site
+        thumbnail: Minitature de l'article
+        thumbnail_help: Minitature affichée sur la page d'accueil ou dans les catégories
+        remove_thumbnail: Supprimer la miniature
+        restore_thumbnail: Restaurer la miniature
+        thumbnailFile: Minitature de l'article
+        thumbnailFile_help: Minitature affichée sur la page d'accueil ou dans les catégories
+        tags: Tags
+        tags_help: Les tags servent à classer les articles et indiquer les mots-clés d'un article
+        _actions: ''
+        default_title: Un nouvel article...
+        add_thumbnail: Ajouter une miniature à l'article
+
+    category:
+        list: Catégories
+        edit: Editer une catégorie
+        delete: Supprimer
+        deleted: La catégorie a été supprimé
+        create: Ajouter une catégorie
+        saved: La catégorie a été sauvegardé
+        return: Retour
+        batch.delete: Supprimer
+        id: '#'
+        name: Nom
+        name_help: Nom de la catégorie. Ce nom sera affiché aux lecteurs du site
+        created_at: Crée le
+        updated_at: Mis à jour le
+        articles: Nombre d'articles
+        display_in_homepage: Sur la page d'accueil ?
+        _actions: ''
+        description: Description
+        title: Titre
+        author: Author
+        publication_status: Publication
+        publication_date: Publié le
+        slug: Slug
+        slug_help: Slug unique de la catégorie. Ne doit pas contenir d'espaces ou de majuscules
+        description_help: Description de la catégorie
+        display_in_homepage_help: Si la case est coché, la catégorie sera affiché sur la page d'accueil
+        thumbnail: Miniature de la catégorie
+        thumbnail_help: Affichée en page d'accueil, la miniature est redimensionnée automatiquement
+
+    comment:
+        create: Ajouter un commentaire
+        list: Commentaires
+        edit: Editer
+        delete: Supprimer
+        delete_success: Le commentaire a été supprimé
+        content: Contenu
+        id: '#'
+        article: Article
+        author_name: Auteur
+        author_nmail: Email
+        created_at: Créé le
+        updated_at: Mis à jour le
+        _actions: ''
+        unsubscribe_success: Vous avez été désinscrit avec succès !
+        new_comment_count: Nouveaux commentaires publiés
+        see_new_comment: Voir les nouveaux commentaires
+        author_email: Email de l'auteur
+
+    dashboard:
+        title: Dashboard
+        latest_articles: Derniers Articles
+        latest_comments: Commentaires
+
+    main:
+        cancel: Annuler
+        return: Retour
+        align_left: Aligné à gauche
+        align_right: Aligné à droite
+        align_center: Centré
+        align_none: Aucun alignement
+        fit_to_width: Prendre toute la largeur
+        save: Sauvegarder
+        loading_in_progress: Chargement en cours...
+
+    notifications:
+        dashboard_title: Notifications
+        view_all: Voir toutes les notifications
+        marked_as_read: Marquée comme lue
+        all_read: Toutes les notifications ont été lues
+
+    partner:
+        create: Ajouter un partenaire
+        list: Partenaires
+        delete: Supprimer
+        edit: Editer
+        saved: Le partenaire a été sauvegardé
+        deleted: Le partenaire a été supprimé
+        return: Retour
+
+        id: '#'
+        name: Nom
+        baseline: Phrase d'accroche
+        slug: Slug
+        description: Description
+        _actions: ''
+        website: Site internet
+        twitter: Twitter
+        facebook: Facebook
+        instagram: Instragram
+        createdAt: Crée le
+        updatedAt: Mis à jour le
+        published: Publié ?
+
+    page:
+        edit:
+            form_title: Edition d'une page
+            title: Titre
+            title_help: Titre affiché sur la page en front
+            slug: Slug
+            slug_help: Url de la page dans le front
+            publication_status: Statut de publication
+            content: Contenu
+            content_help: Contenu de la page
+        list: Pages
+        create: Créer une page libre
+        delete: Supprimer une page
+        saved: La page a été sauvegardée
+        return: Retour
+        id: '#'
+        title: Titre
+        content: Contenu
+        updatedAt: Mis à jour le
+        publicationDate: Publié le
+        slug: Slug
+        _actions: ''
+
+    publication:
+        draft: Brouillon
+        validation: En attente de validation
+        published: Publié
+
+    menu:
+        edit: Editer
+        delete: Supprimer
+        articles: Articles
+        categories: Catégories
+        comments: Commentaires
+        tags: Tags
+        media: Média
+        pages: Pages
+        parameters: Configuration
+        users: Utilisateurs
+
+    media:
+        list: Medias
+        edit: Edition du média
+        create: Ajouter un média
+        saved: Le média a été sauvegardée
+        delete: Supprimer
+        deleted: Le média a été supprimé
+        filename: Nom du fichier
+        delete_success: Le média a été supprimé avec succès !
+        extension: Extension du fichier
+        size: Taille du fichier
+        type: Type du média
+        type_help: Le type du média va changer le répertoire où est stockée l'image
+        category_thumbnail: Miniature d'une Catégorie
+        article_thumbnail: Miniature d'un Article
+        upload_from_url: Uploader depuis d'une url
+        upload_from_computer: Uploader depuis votre ordinateur
+        choose_from_collection: Choisir dans la médiathèque
+        open_gallery: Ouvrir la médiathèque
+        choose: Choisir
+        insert_tinymce: Insérer l'image à l'article
+        edit_properties: Editer les propriétés du média
+        height: Hauteur
+        width: Largeur
+        alignment: Alignement
+        keep_proportion: Conserver les proportions
+    tag:
+        list: Tags
+        edit: Editer
+        create: Ajouter un tag
+        saved: Le tag a été sauvegardée
+        delete: Supprimer
+        deleted: Le tag a été supprimé
+        id: '#'
+        name: Nom
+        createdAt: Créé le
+        updatedAt: Mis à jour le
+        _actions: ''
+    import:
+        list: Imports
+        create: Importez vos données
+    gallery:
+        add_gallery: Ajouter une galerie d'image
+        add_gallery_info: >
+            Cliquer sur une ou plusieurs images (jusqu'à 3) pour les ajouter à votre galerie. Ensuite cliquer sur
+            "Ajouter une galerie d'image". Vous pouvez ajouter des images à la gallerie en cliquant sur "Ajouter une image"
+        add_image: Ajouter une image
+        upload_media: Ajouter une image
+    modules:
+        news.more_link: Voir toutes les brèves de comptoir
+
+logout: Déconnexion
+login: Connexion

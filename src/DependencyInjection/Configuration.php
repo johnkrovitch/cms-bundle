@@ -18,6 +18,7 @@ class Configuration implements ConfigurationInterface
                         ->addDefaultsIfNotSet()
                         ->children()
                             ->scalarNode('name')->defaultValue('JK CmsBundle')->end()
+                            ->scalarNode('front_base')->defaultValue('base.html.twig')->end()
                             ->arrayNode('comments')
                                 ->children()
                                     ->scalarNode('show_route')->end()

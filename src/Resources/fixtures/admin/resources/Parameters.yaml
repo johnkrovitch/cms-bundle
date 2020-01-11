@@ -1,0 +1,10 @@
+lag_admin:
+    admins:
+        parameters:
+            entity: JK\CmsBundle\Entity\Parameters
+            form: JK\CmsBundle\Form\Type\ParametersType
+            actions:
+                list: ~
+                create: ~
+                edit: ~
+                delete: ~

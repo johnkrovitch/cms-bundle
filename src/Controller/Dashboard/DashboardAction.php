@@ -11,6 +11,8 @@ use LAG\AdminBundle\Event\Events\BuildMenuEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Twig\Environment;
 
 class DashboardAction
@@ -67,6 +69,10 @@ class DashboardAction
     public function __invoke(): Response
     {
         $user = $this->tokenStorage->getToken()->getUser();
+
+        if (!$user instanceof UserInterface) {
+            throw new AccessDeniedException();
+        }
         $this->eventDispatcher->dispatch(Events::MENU, new BuildMenuEvent());
 
         $newCommentCount = $this

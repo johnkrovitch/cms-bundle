@@ -1,0 +1,88 @@
+{% extends cms_front_base %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block content %}
+    <div class="main-content col-lg-9 col-sm-9 col-sm-9 article">
+
+        {% block article_header %}
+            <div class="article-header">
+                <div class="article-title">
+                    <span class="title-date">{{ article.publicationDate | localizeddate('full', 'none') }}</span>
+
+                    {% if article.category %}
+                        <a href="{{ path('lecomptoir.article.list_by_category', {
+                            categorySlug: article.category.slug
+                        }) }}"
+                           title="{{ article.category.slug }}">
+                            <span class="ribbon category-ribbon">{{ article.category.name }}</span></a>
+                    {% endif %}
+
+                    <h2>{{ article.title }}</h2>
+                </div>
+            </div>
+        {% endblock %}
+
+        {% block article_content %}
+            <div class="article-content">
+                {{ article.content | raw }}
+            </div>
+        {% endblock %}
+
+        {% block article_footer %}
+            <div class="article-footer">
+                <ul>
+                    {% if article.category %}
+                        <li id="category-link">
+                            <strong>{{ 'lecomptoir.interface.categories' | trans }} :</strong>
+                            <a href="{{ path('lecomptoir.article.list_by_category', {categorySlug: article.category.slug}) }}">
+                                {{ article.category.name }}
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% if article.tags | length > 0 %}
+                        <li>
+                            <strong>{{ 'lecomptoir.tags' | trans }} :</strong>
+                            <ul class="inline">
+                                {% for tag in article.tags %}
+                                    <li class="tag">
+                                        <a href="{{ path('lecomptoir.article.list_by_tag', {tagSlug: tag.slug}) }}">{{ tag.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endif %}
+                </ul>
+
+
+            {# Article comments (if allowed) #}
+            {% if article.commentable %}
+                <div class="article-comments">
+                    <h3>Commentaires</h3>
+
+                    {% for comment in article.comments %}
+                        <div class="comment">
+                            <p class="title" id="comment-{{ comment.id }}">Par {{ comment.authorName }},
+                                le {{ comment.createdAt | localizeddate('full', 'none') }}
+                                à  {{ comment.createdAt | localizeddate('none', 'short') }}
+                            </p>
+                            <p class="">{{ comment.content | truncate(500, '...') }}</p>
+                        </div>
+                    {% endfor %}
+
+                    <h3>N'hésitez pas à commenter cet article !</h3>
+
+                    {# Add comment form #}
+                    <form action="" method="post">
+                        {{ form_row(commentForm) }}
+
+                        <input type="submit" value="Poster un commentaire" class="btn btn-info comments-btn"/>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+        {% endblock %}
+    </div>
+{% endblock %}
+
