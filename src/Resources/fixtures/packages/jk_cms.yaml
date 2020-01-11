@@ -1,0 +1,36 @@
+imports:
+    - {resource: ../admin/resources/*}
+
+jk_cms:
+    application:
+        name: Le Comptoir de L'Écureuil
+        comments:
+            show_route: lecomptoir.article.show-comment
+            show_route_parameters:
+                year: article.year
+                month: article.month
+                slug: article.slug
+                commentId: id
+
+    admin:
+        title: Cms Backoffice
+        description: Edit your articles and pages !
+        max_per_page: 25
+        routing_name_pattern: cms.{admin}.{action}
+        routing_url_pattern: /{admin}/{action}
+        date_format: d/m/Y
+        base_template: '@JKCms/base.html.twig'
+        translation:
+            pattern: cms.{admin}.{key}
+        homepage_route: cms.homepage
+
+    email:
+        base_template: emails/base.html.twig
+
+parameters:
+    cms.assets.mapping:
+        article_content: uploads/articles/content
+        article_thumbnail: uploads/articles/thumbnails
+        category_thumbnail: uploads/categories/thumbnails
+        media_gallery: uploads/gallery
+        media_thumbnail: uploads/gallery

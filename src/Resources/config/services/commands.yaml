@@ -4,3 +4,17 @@ services:
         tags:
             - {name: console.command, command: cms:assets:optimize}
 
+    JK\CmsBundle\Command\User\UserCreateCommand:
+        arguments:
+            $kernelEnvironment: '%kernel.environment%'
+            $encoder: '@security.password_encoder'
+            $validator: '@validator'
+            $repository: '@JK\CmsBundle\Repository\UserRepository'
+        tags:
+            - {name: console.command, command: cms:user:create}
+
+    JK\CmsBundle\Command\Installation\InstallCommand:
+        arguments:
+            $registry: '@JK\CmsBundle\Install\InstallerRegistry\Registry'
+        tags:
+            - {name: console.command, command: cms:install}

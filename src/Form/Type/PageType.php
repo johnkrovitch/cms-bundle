@@ -3,12 +3,12 @@
 namespace JK\CmsBundle\Form\Type;
 
 use JK\CmsBundle\Entity\Article;
-use JK\MediaBundle\Form\Type\TinyMceMediaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PageType extends AbstractType
 {
@@ -17,14 +17,17 @@ class PageType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'label' => 'cms.page.edit.title',
+                'required' => true,
                 'attr' => [
                     'data-help' => 'cms.page.edit.title_help',
                 ],
             ])
             ->add('slug', TextType::class, [
                 'label' => 'cms.page.edit.slug',
+                'disabled' => true,
                 'attr' => [
                     'data-help' => 'cms.page.edit.slug_help',
+                    'readonly' => true,
                 ],
             ])
             ->add('publicationStatus', ChoiceType::class, [
@@ -37,7 +40,16 @@ class PageType extends AbstractType
                 'label' => 'cms.page.edit.publication_status',
             ])
             ->add('publicationDate', DateTimeType::class)
-            ->add('content', TinyMceMediaType::class)
+            ->add('content', TinyMceType::class)
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver
+            ->setDefaults([
+                'label' => false,
+            ])
         ;
     }
 

@@ -1,0 +1,12 @@
+# Include this file in your front application routing
+# cms_front:
+#     resource: '@JKCmsBundle/Resources/config/routing/front_routing.yaml'
+
+# Articles
+cms.front.article.list:
+    path: /articles
+    controller: JK\CmsBundle\Controller\Article\ListAction
+
+cms.front.article.show:
+    path: /article/{slug}
+    controller: JK\CmsBundle\Controller\Article\ShowAction

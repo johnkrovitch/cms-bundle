@@ -1,0 +1,24 @@
+lag_admin:
+    admins:
+        comment:
+            entity: JK\CmsBundle\Entity\Comment
+            form: JK\CmsBundle\Form\Type\CommentType
+            actions:
+                list:
+                    title: cms.comment.list
+                    fields:
+                        id: ~
+                        content: {type: string, options: {length: 150}}
+                        article: ~
+                        authorName: ~
+                        authorEmail: ~
+                        createdAt: {type: date, options: {format: 'd/m/Y à h:i'}}
+                        updatedAt: {type: date, options: {format: 'd/m/Y à h:i'}}
+                        _actions: ~
+                    # Comments creation in back-office is not allowed
+                    menus: false
+                    order:
+                        updatedAt: desc
+                create: ~
+                edit: ~
+                delete: ~

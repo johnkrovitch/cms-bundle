@@ -8,6 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class JKCmsExtension extends Extension implements PrependExtensionInterface
 {
@@ -18,18 +19,25 @@ class JKCmsExtension extends Extension implements PrependExtensionInterface
         ]));
         $loader->load('services.yaml');
 
+        $accessor = PropertyAccess::createPropertyAccessorBuilder()
+            ->disableExceptionOnInvalidIndex()
+            ->getPropertyAccessor()
+        ;
+
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('jk_cms.scripts.template', $config['scripts']['template']);
-        $container->setParameter('jk_cms.contact_email', $config['email']['contact_email']);
+        $container->setParameter('jk_cms.scripts.template', $accessor->getValue($config, '[scripts][template]'));
+        $container->setParameter('jk_cms.contact_email', $accessor->getValue($config, '[email][contact_email]'));
 
         $siteKey = '';
 
         if (key_exists('recaptcha', $config) && key_exists('site_key', $config['recaptcha'])) {
             $siteKey = $config['recaptcha']['site_key'];
         }
+//        dump($accessor->getValue($config, '[application][front_base]'));
         $container->setParameter('jk_cms.recaptcha.site_key', $siteKey);
+        $container->setParameter('jk_cms.front_base', $accessor->getValue($config, '[application][front_base]'));
 
         $helperDefinition = $container->getDefinition(ConfigurationHelper::class);
         $helperDefinition->setArgument(0, $config);
@@ -42,6 +50,7 @@ class JKCmsExtension extends Extension implements PrependExtensionInterface
         if (0 === count($configs)) {
             return;
         }
+        $this->load($configs, $container);
         $config = $configs[0];
 
         if (null === $config) {
@@ -57,6 +66,12 @@ class JKCmsExtension extends Extension implements PrependExtensionInterface
                 ])
             ;
         }
+
+        $container->prependExtensionConfig('twig', [
+            'globals' => [
+                'cms_front_base' => $container->getParameter('jk_cms.front_base'),
+            ],
+        ]);
     }
 
     public function getAlias()

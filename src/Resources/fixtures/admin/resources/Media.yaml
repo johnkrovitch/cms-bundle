@@ -1,0 +1,14 @@
+lag_admin:
+    admins:
+        media:
+            controller: JKCmsBundle:Media
+            entity: JK\MediaBundle\Entity\Media
+            form: JK\MediaBundle\Form\Type\MediaType
+            actions:
+                list:
+                    pager: false
+                    order:
+                        updatedAt: desc
+                edit: ~
+                create: ~
+                delete: ~

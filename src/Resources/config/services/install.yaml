@@ -1,0 +1,6 @@
+services:
+    JK\CmsBundle\Install\InstallerRegistry\Registry: ~
+
+    JK\CmsBundle\Install\Installer\AdminResourceInstaller:
+        arguments:
+            $projectDirectory: '%kernel.project_dir%'

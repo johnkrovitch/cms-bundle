@@ -4,6 +4,7 @@ namespace JK\CmsBundle\Form\Type;
 
 use Doctrine\Common\Collections\Collection;
 use JK\CmsBundle\Entity\Article;
+use JK\CmsBundle\Entity\Category;
 use JK\CmsBundle\Entity\Tag;
 use JK\MediaBundle\Form\Type\MediaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -14,8 +15,11 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * Article form type.
@@ -27,9 +31,15 @@ class ArticleType extends AbstractType
      */
     private $router;
 
-    public function __construct(RouterInterface $router)
+    /**
+     * @var Security
+     */
+    private $security;
+
+    public function __construct(RouterInterface $router, Security $security)
     {
         $this->router = $router;
+        $this->security = $security;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -45,7 +55,7 @@ class ArticleType extends AbstractType
                 'label' => 'cms.article.title',
             ])
             ->add('category', EntityType::class, [
-                'class' => 'JK\CmsBundle\Entity\Category',
+                'class' => Category::class,
                 'label' => 'cms.article.category',
                 'help' => 'cms.article.category_help',
             ])
@@ -101,6 +111,17 @@ class ArticleType extends AbstractType
                 'label' => 'cms.article.is_commentable',
                 'required' => false,
             ])
+            ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+                $article = $event->getData();
+
+                if (!$article instanceof Article) {
+                    return;
+                }
+                // User should not be null as we are under the cms firewall, the user is fully authenticated
+                $user = $this->security->getUser();
+
+                $article->setAuthor($user);
+            })
         ;
 
         $builder

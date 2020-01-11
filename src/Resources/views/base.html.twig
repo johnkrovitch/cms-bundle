@@ -23,3 +23,8 @@
     {% include '@JKCms/Assets/modal.html.twig' %}
     {% include '@JKMedia/Assets/modal.html.twig' %}
 {% endblock %}
+
+{% block brand %}
+    {{ parent() }}
+    <span class="version">cms v1.0</span>
+{% endblock %}
