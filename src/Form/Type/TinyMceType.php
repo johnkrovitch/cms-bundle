@@ -2,9 +2,9 @@
 
 namespace JK\CmsBundle\Form\Type;
 
-use JK\CmsBundle\Assets\ScriptRegistry;
 use JK\CmsBundle\Exception\Exception;
 use JK\CmsBundle\Property\Access\NullablePropertyAccessor;
+use LAG\AdminBundle\Assets\Registry\ScriptRegistryInterface;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -51,7 +51,7 @@ class TinyMceType extends AbstractType
     ];
 
     /**
-     * @var ScriptRegistry
+     * @var ScriptRegistryInterface
      */
     private $scriptRegistry;
 
@@ -74,7 +74,7 @@ class TinyMceType extends AbstractType
      * TinyMceType constructor.
      */
     public function __construct(
-        ScriptRegistry $scriptRegistry,
+        ScriptRegistryInterface $scriptRegistry,
         RouterInterface $router,
         TranslatorInterface $translator,
         Packages $packages
@@ -98,6 +98,7 @@ class TinyMceType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
+        dump('trace');
         // Register the cms tinymce here build to avoid merging it with the main cms build
         $this
             ->scriptRegistry
@@ -124,6 +125,9 @@ class TinyMceType extends AbstractType
         $resolver
             ->setDefaults([
                 'tinymce' => [],
+                'attr' => [
+                    'rows' => 25,
+                ],
             ])
             ->setAllowedTypes('tinymce', 'array')
             ->setNormalizer('tinymce', function (Options $options, $value) {
@@ -142,7 +146,8 @@ class TinyMceType extends AbstractType
                         'theme' => 'modern',
                         'skin' => 'lightgray',
                         'imagetools_toolbar' => 'rotateleft rotateright | flipv fliph | editimage imageoptions',
-                        'content_css' => $this->packages->getUrl('build/cms.tinymce.content.css'),
+                        //'content_css' => $this->packages->getUrl('build/cms.tinymce.content.css'),
+                        'content_css' => '',
                         'body_class' => 'mceForceColors container',
                         'browser_spellcheck' => true,
                         'plugins' => self::ALLOWED_PLUGINS,

@@ -3,8 +3,8 @@
 namespace JK\CmsBundle\Twig;
 
 use JK\CmsBundle\Assets\AssetsHelper;
-use JK\CmsBundle\Assets\ScriptRegistry;
 use JK\CmsBundle\Entity\Article;
+use LAG\AdminBundle\Assets\Registry\ScriptRegistryInterface;
 use LAG\AdminBundle\Configuration\ApplicationConfiguration;
 use LAG\AdminBundle\Configuration\ApplicationConfigurationStorage;
 use Symfony\Component\Routing\RouterInterface;
@@ -22,7 +22,7 @@ class CmsExtension extends AbstractExtension
     private $assetsHelper;
 
     /**
-     * @var ScriptRegistry
+     * @var ScriptRegistryInterface
      */
     private $scriptRegistry;
 
@@ -40,7 +40,7 @@ class CmsExtension extends AbstractExtension
      */
     public function __construct(
         AssetsHelper $assetsHelper,
-        ScriptRegistry $scriptRegistry,
+        ScriptRegistryInterface $scriptRegistry,
         ApplicationConfigurationStorage $applicationConfigurationStorage,
         RouterInterface $router
     ) {
@@ -58,25 +58,9 @@ class CmsExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('cms_dump_scripts', [$this, 'cmsDumpScripts']),
             new TwigFunction('cms_config', [$this, 'cmsConfig']),
             new TwigFunction('cms_article_path', [$this, 'cmsArticlePath']),
         ];
-    }
-
-    /**
-     * Dump the scripts according to the location (head or footer).
-     *
-     * @param string $location
-     *
-     * @return string
-     */
-    public function cmsDumpScripts($location)
-    {
-        return $this
-            ->scriptRegistry
-            ->dumpScripts($location)
-        ;
     }
 
     /**

@@ -1,6 +1,7 @@
 {
   "assets/cms.css": "/bundles/jkcms/assets/cms.css",
   "assets/cms.js": "/bundles/jkcms/assets/cms.js",
+  "assets/cms.front.css": "/bundles/jkcms/assets/cms.front.css",
   "assets/cms.tinymce.js": "/bundles/jkcms/assets/cms.tinymce.js",
   "assets/langs/af_ZA.js": "/bundles/jkcms/assets/langs/af_ZA.js",
   "assets/langs/ar.js": "/bundles/jkcms/assets/langs/ar.js",

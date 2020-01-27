@@ -1,0 +1,16 @@
+menu:
+    entity: JK\CmsBundle\Entity\Menu
+    form: JK\CmsBundle\Form\Type\MenuType
+    actions:
+        list:
+            title: cms.menu.list
+            order:
+                id: desc
+            fields:
+                id:
+                    label: '#'
+                name: ~
+                items: ~
+        create: ~
+        edit: ~
+        delete: ~

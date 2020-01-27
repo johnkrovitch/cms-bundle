@@ -1,0 +1,27 @@
+.news-module {
+  padding: 15px;
+  // Lower the font size to improve readability of the news
+  font-size: 80%;
+
+  li a {
+    color: white;
+    font-size: 108%;
+  }
+
+  h2 a {
+    color: white;
+  }
+
+  .more-link {
+    float: right;
+  }
+
+  ul {
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+
+  ul li {
+    list-style: none;
+  }
+}

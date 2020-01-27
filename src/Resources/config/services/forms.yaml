@@ -20,7 +20,7 @@ services:
     JK\CmsBundle\Form\Type\TinyMceType:
         class: JK\CmsBundle\Form\Type\TinyMceType
         arguments:
-            - '@JK\CmsBundle\Assets\ScriptRegistry'
+            - '@LAG\AdminBundle\Assets\Registry\ScriptRegistryInterface'
             - '@router'
             - '@translator'
             - '@assets.packages'
@@ -66,9 +66,3 @@ services:
         arguments:
             - '%jk_cms.recaptcha.site_key%'
             - '@request_stack'
-
-    JK\CmsBundle\Form\Extension\AssetsExtension:
-        tags:
-            - {name: form.type_extension}
-        arguments:
-            - '@JK\CmsBundle\Assets\ScriptRegistry'

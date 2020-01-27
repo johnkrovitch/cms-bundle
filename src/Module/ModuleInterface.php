@@ -2,18 +2,25 @@
 
 namespace JK\CmsBundle\Module;
 
-use JK\CmsBundle\Module\Render\ModuleView;
-use Symfony\Component\HttpFoundation\Request;
-
 interface ModuleInterface
 {
+    /**
+     * Return the module name.
+     */
     public function getName(): string;
 
-    public function load(Request $request): void;
+    /**
+     * Load data required by the module to work.
+     */
+    public function load(): void;
 
-    public function getZones(): array;
+    /**
+     * Return true if the module is enabled and should be loaded and rendered.
+     */
+    public function isEnabled(): bool;
 
-    public function supports(Request $request): bool;
-
-    public function render(): ModuleView;
+    /**
+     * Return true if the module has been loaded, to avoid loading twice.
+     */
+    public function isLoaded(): bool;
 }

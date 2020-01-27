@@ -1,51 +1,49 @@
-lag_admin:
-    admins:
-        page:
-            entity: JK\CmsBundle\Entity\Page
-            form: JK\CmsBundle\Form\Type\PageType
-            actions:
-                list:
-                    menus:
-                        top:
-                            items:
-                                create:
-                                    admin: page
-                                    action: create
-                                    icon: fa fa-plus
-                    fields:
-                        id: ~
-                        title:
-                            type: link
-                            options:
-                                length: 40
+page:
+    entity: JK\CmsBundle\Entity\Page
+    form: JK\CmsBundle\Form\Type\PageType
+    actions:
+        list:
+            menus:
+                top:
+                    items:
+                        create:
+                            admin: page
+                            action: create
+                            icon: fa fa-plus
+            fields:
+                id: ~
+                title:
+                    type: link
+                    options:
+                        length: 40
+                        route: cms.page.edit
+                        parameters: {id: ~}
+                content:
+                    options:
+                         length: 150
+                updatedAt:
+                    type: date
+                    options:
+                        format: 'd/m/Y h:i:s'
+                publicationDate:
+                    type: date
+                    options:
+                        format: d/m/Y
+                _actions:
+                    type: action_collection
+                    options:
+                        actions:
+                            edit:
+                                title: lag.admin.edit
                                 route: cms.page.edit
                                 parameters: {id: ~}
-                        content:
-                            options:
-                                 length: 150
-                        updatedAt:
-                            type: date
-                            options:
-                                format: 'd/m/Y h:i:s'
-                        publicationDate:
-                            type: date
-                            options:
-                                format: d/m/Y
-                        _actions:
-                            type: action_collection
-                            options:
-                                actions:
-                                    edit:
-                                        title: lag.admin.edit
-                                        route: cms.page.edit
-                                        parameters: {id: ~}
-                                        icon: pencil
-                                    delete:
-                                        title: lag.admin.delete
-                                        route: cms.page.delete
-                                        parameters: {id: ~}
-                                        icon: remove
-                create: ~
-                edit:
-                    title: cms.page.edit.form_title
-                delete: ~
+                                icon: pencil
+                            delete:
+                                title: lag.admin.delete
+                                route: cms.page.delete
+                                parameters: {id: ~}
+                                icon: remove
+        create: ~
+        edit:
+            title: cms.page.edit.form_title
+        delete: ~

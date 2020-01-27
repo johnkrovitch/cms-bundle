@@ -5,9 +5,6 @@ services:
             $factory: '@JK\CmsBundle\Factory\CommentFactoryInterface'
     JK\CmsBundle\Manager\CommentManagerInterface: '@JK\CmsBundle\Manager\CommentManager'
 
-    JK\CmsBundle\Module\Manager\ModuleManager: ~
-    JK\CmsBundle\Module\Manager\ModuleManagerInterface: '@JK\CmsBundle\Module\Manager\ModuleManager'
-
     JK\CmsBundle\Manager\ArticleManager:
         arguments:
             $repository: '@JK\CmsBundle\Repository\ArticleRepository'

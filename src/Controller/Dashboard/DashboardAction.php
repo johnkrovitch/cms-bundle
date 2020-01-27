@@ -73,7 +73,7 @@ class DashboardAction
         if (!$user instanceof UserInterface) {
             throw new AccessDeniedException();
         }
-        $this->eventDispatcher->dispatch(Events::MENU, new BuildMenuEvent());
+        //$this->eventDispatcher->dispatch(Events::MENU, new BuildMenuEvent());
 
         $newCommentCount = $this
             ->commentRepository

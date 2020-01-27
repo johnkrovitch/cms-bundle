@@ -3,7 +3,7 @@
         <div class="card-body">
             <div class="card-title">
                 <h5>
-                    <i class="fa fa-comments fa-2x"></i>
+                    <i class="fa fa-comments"></i>
                     {{ 'cms.dashboard.latest_articles' | trans }}
                 </h5>
             </div>
@@ -25,6 +25,10 @@
                                 {{ comment.article.title }}
                             </a>
                         </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td>{{ 'cms.comment.no_result' | trans }}</td>
                     </tr>
                 {% endfor %}
             </table>

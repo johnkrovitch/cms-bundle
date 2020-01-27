@@ -1,0 +1,43 @@
+{% extends '@LAGAdmin/CRUD/list.html.twig' %}
+
+{% set groups = admin.entities %}
+
+{% block content %}
+    <div class="card-deck">
+        {% for group in groups %}
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">
+                    <h2>{{ group.label }}</h2>
+                </div>
+                <p class="card-text form-text text-muted">{{ group.description }}</p>
+                <div class="card-text">
+                    <a href="{{ admin_url(admin, 'edit', group) }}"
+                       class="btn btn-secondary">
+                        {{ 'cms.parameters.edit' | trans }}
+
+                    </a>
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th>{{ 'cms.parameters.name' | trans }}</th>
+                                <th>{{ 'cms.parameters.description' | trans }}</th>
+                                <th>{{ 'cms.parameters.value' | trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for parameter in group.parameters %}
+                            <tr>
+                                <td>{{ parameter.label | trans }}</td>
+                                <td>{{ parameter.description | trans }}</td>
+                                <td>{{ parameter.value }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

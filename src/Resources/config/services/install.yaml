@@ -4,3 +4,8 @@ services:
     JK\CmsBundle\Install\Installer\AdminResourceInstaller:
         arguments:
             $projectDirectory: '%kernel.project_dir%'
+
+    JK\CmsBundle\Install\Installer\ParametersInstaller:
+        arguments:
+            $groupRepository: '@JK\CmsBundle\Repository\ParameterGroupRepository'
+            $parametersRepository: '@JK\CmsBundle\Repository\ParametersRepository'

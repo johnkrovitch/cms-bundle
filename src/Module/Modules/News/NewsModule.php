@@ -1,21 +1,21 @@
 <?php
 
-namespace JK\CmsBundle\Module\Core;
+namespace JK\CmsBundle\Module\Modules\News;
 
 use JK\CmsBundle\Module\AbstractModule;
 use JK\CmsBundle\Module\Render\ModuleView;
+use JK\CmsBundle\Module\RenderModuleInterface;
 use JK\CmsBundle\Module\Zone\Zone;
 use JK\CmsBundle\Repository\ArticleRepository;
-use Symfony\Component\HttpFoundation\Request;
 
-class NewsModule extends AbstractModule
+class NewsModule extends AbstractModule implements RenderModuleInterface
 {
     /**
      * @var ArticleRepository
      */
     private $articleRepository;
 
-    private $articles;
+    private $articles = [];
 
     public function __construct(ArticleRepository $articleRepository)
     {
@@ -25,11 +25,6 @@ class NewsModule extends AbstractModule
     public function getName(): string
     {
         return 'news';
-    }
-
-    public function load(Request $request): void
-    {
-        $this->articles = $this->articleRepository->findByCategory('breves-de-comptoir', 5);
     }
 
     public function render(): ModuleView
@@ -44,5 +39,16 @@ class NewsModule extends AbstractModule
         return [
             Zone::LEFT_COLUMN,
         ];
+    }
+
+    public function load(): void
+    {
+        $this->articles = $this->articleRepository->findByCategory('breves-de-comptoir', 5);
+        $this->loaded = true;
+    }
+
+    public function isEnabled(): bool
+    {
+        return true;
     }
 }

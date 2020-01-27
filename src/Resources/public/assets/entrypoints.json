@@ -12,6 +12,11 @@
       "js": [
         "/bundles/jkcms/assets/cms.tinymce.js"
       ]
+    },
+    "cms.front": {
+      "css": [
+        "/bundles/jkcms/assets/cms.front.css"
+      ]
     }
   }
 }

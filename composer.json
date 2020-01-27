@@ -14,11 +14,12 @@
         "php": "^7.2",
         "ext-json": "*",
         "eko/feedbundle": "^2.0",
+        "erusev/parsedown": "^1.7",
         "google/recaptcha": "^1.2",
         "johnkrovitch/media-bundle": "^1.0",
-        "johnkrovitch/notification-bundle": "^0.2.1",
-        "johnkrovitch/orm-pack": "^0.2",
-        "lag/adminbundle": "^0.6",
+        "johnkrovitch/notification-bundle": ">=0.3",
+        "johnkrovitch/orm-pack": "^1.0",
+        "lag/adminbundle": "^0.6.4",
         "liip/imagine-bundle": "^2.2",
         "nesbot/carbon": "^2.27",
         "ps/image-optimizer": "^2.0",
@@ -26,7 +27,9 @@
         "symfony/framework-bundle": "^3.4.36|^4.4.2|^5.0",
         "symfony/mailer": "^3.0|^4.0|^5.0",
         "symfony/routing": "^3.0|^4.0|^5.0",
-        "symfony/twig-bundle": "^3.0|^4.0|^5.0"
+        "symfony/twig-bundle": "^3.0|^4.0|^5.0",
+        "twig/inky-extra": "^3.0",
+        "twig/markdown-extra": "^3.0"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12",

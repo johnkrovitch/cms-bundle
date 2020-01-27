@@ -1,10 +1,11 @@
-lag_admin:
-    admins:
-        parameters:
-            entity: JK\CmsBundle\Entity\Parameters
-            form: JK\CmsBundle\Form\Type\ParametersType
-            actions:
-                list: ~
-                create: ~
-                edit: ~
-                delete: ~
+parameters:
+    entity: JK\CmsBundle\Entity\ParameterGroup
+    form: JK\CmsBundle\Form\Type\ParameterGroupType
+    actions:
+        list:
+            repository_method: findAllWithParameters
+            template: '@JKCms/ParameterGroup/list.html.twig'
+        create: ~
+        edit: ~
+        delete: ~
+

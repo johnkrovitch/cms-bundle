@@ -1,0 +1,6 @@
+front:
+    default_theme: default
+
+    themes:
+        default:
+            base: '@JKCms\Themes\default\base.html.twig'

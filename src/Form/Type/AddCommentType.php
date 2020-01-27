@@ -3,6 +3,7 @@
 namespace JK\CmsBundle\Form\Type;
 
 use JK\CmsBundle\Bridge\GoogleRecaptcha\Form\Type\RecaptchaType;
+use JK\CmsBundle\Form\Constraint\AddComment;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -59,6 +60,7 @@ class AddCommentType extends AbstractType
             ])
         ;
 
+        // Do not add recaptcha in dev to ease development
         if ('dev' !== $this->kernelEnvironment) {
             $builder->add('recaptcha', RecaptchaType::class, [
                 'label' => false,
@@ -72,6 +74,9 @@ class AddCommentType extends AbstractType
         $resolver
             ->setDefaults([
                 'label' => false,
+                'constraints' => [
+                    new AddComment(),
+                ],
             ])
         ;
     }

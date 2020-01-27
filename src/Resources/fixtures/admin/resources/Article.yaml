@@ -1,76 +1,73 @@
-lag_admin:
-    admins:
-        article:
-            entity: JK\CmsBundle\Entity\Article
-            form: JK\CmsBundle\Form\Type\ArticleType
-            controller: JKCmsBundle:Article
-            actions:
-                list:
-                    title: cms.article.list
-                    order:
-                        id: desc
-                    fields:
-                        id: ~
-                        title:
-                            type: link
-                            options:
-                                length: 40
-                                route: cms.article.edit
-                                parameters: {id: ~}
-                        category:
-                            type: link
-                            options:
-                                admin: category
-                                action: edit
-                                parameters:
-                                    id: category.id
-                        author:
-                            type: link
-                            options:
-                                admin: user
-                                action: edit
-                                parameters:
-                                    id: 'author.id'
-                        publicationStatus:
-                            type: mapped
-                            options:
-                                map:
-                                    0: cms.publication.draft
-                                    1: cms.publication.validation
-                                    2: cms.publication.published
-                        publicationDate: ~
-                        updatedAt: ~
-                        _delete:
-                            type: link
-                            options:
-                                admin: article
-                                action: delete
-                                parameters:
-                                    id: ~
-                                class: btn btn-danger large
-                                icon: times
+article:
+    entity: JK\CmsBundle\Entity\Article
+    form: JK\CmsBundle\Form\Type\ArticleType
+    actions:
+        list:
+            title: cms.article.list
+            order:
+                id: desc
+            fields:
+                id: ~
+                title:
+                    type: link
+                    options:
+                        length: 40
+                        route: cms.article.edit
+                        parameters: {id: ~}
+                category:
+                    type: link
+                    options:
+                        admin: category
+                        action: edit
+                        parameters:
+                            id: category.id
+                author:
+                    type: link
+                    options:
+                        admin: user
+                        action: edit
+                        parameters:
+                            id: 'author.id'
+                publicationStatus:
+                    type: mapped
+                    options:
+                        map:
+                            0: cms.publication.draft
+                            1: cms.publication.validation
+                            2: cms.publication.published
+                publicationDate: ~
+                updatedAt: ~
+                _delete:
+                    type: link
+                    options:
+                        admin: article
+                        action: delete
+                        parameters:
+                            id: ~
+                        class: btn btn-danger large
+                        icon: times
 
-                # Use a custom create action to avoid issues with media library and TinyMce when creating a new Article
-                create:
-                    route_defaults:
-                        _controller: JK\CmsBundle\Controller\Article\CreateArticleAction
+        # Use a custom create action to avoid issues with media library and TinyMce when creating a new Article
+        create:
+            route_defaults:
+                _controller: JK\CmsBundle\Controller\Article\CreateAction
 
-                edit:
-                    template: '@JKCms/Article/edit.html.twig'
-                    menus:
-                        top:
-                            items:
-                                preview:
-                                    text: cms.article.preview
-                                    route: app.article.preview
-                                    parameters: {id: ~}
-                                    icon: fa fa-eye
-                                    link_attr:
-                                        target: _blank
-                                publish:
-                                    text: cms.article.publish
-                                    route: app.article.preview
-                                    parameters: {id: ~}
-                                    icon: fa fa-eye
+        edit:
+            template: '@JKCms/Article/edit.html.twig'
+            menus:
+                top:
+                    items:
+                        preview:
+                            text: cms.article.preview
+                            route: app.article.preview
+                            parameters: {id: ~}
+                            icon: fa fa-eye
+                            link_attr:
+                                target: _blank
+                        publish:
+                            text: cms.article.publish
+                            route: app.article.preview
+                            parameters: {id: ~}
+                            icon: fa fa-eye
 
-                delete: ~
+        delete: ~

@@ -2,40 +2,40 @@
 
 namespace JK\CmsBundle\Module\Manager;
 
-use JK\CmsBundle\Module\ModuleInterface;
+use JK\CmsBundle\Exception\Exception;
+use JK\CmsBundle\Module\Registry\ModuleRegistryInterface;
 use JK\CmsBundle\Module\Render\ModuleView;
-use LogicException;
-use Symfony\Component\HttpFoundation\Request;
+use JK\CmsBundle\Module\RenderModuleInterface;
 
 class ModuleManager implements ModuleManagerInterface
 {
     /**
-     * @var ModuleInterface[]
+     * @var ModuleRegistryInterface
      */
-    private $modules;
+    private $registry;
 
-    public function __construct(array $modules = [])
+    public function __construct(ModuleRegistryInterface $registry)
     {
-        foreach ($modules as $module) {
-            if (!$module instanceof ModuleInterface) {
-                throw new LogicException('The module should be an instance of '.ModuleInterface::class);
-            }
-            $this->modules[$module->getName()] = $module;
-        }
+        $this->registry = $registry;
     }
 
-    public function load(Request $request): void
+    public function load(): void
     {
-        foreach ($this->modules as $module) {
-            if (!$module->supports($request)) {
-                continue;
-            }
-            $module->load($request);
-        }
+        $this->registry->load();
     }
 
     public function render(string $moduleName): ModuleView
     {
-        return $this->modules[$moduleName]->render();
+        $module = $this->registry->get($moduleName);
+
+        if (!$module instanceof RenderModuleInterface) {
+            throw new Exception(sprintf('The module "%s" can not rendered. It must implements %s', $moduleName, RenderModuleInterface::class));
+        }
+
+        if (!$module->isLoaded()) {
+            $module->load();
+        }
+
+        return $module->render();
     }
 }

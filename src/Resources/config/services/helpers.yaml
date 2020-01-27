@@ -10,8 +10,3 @@ services:
             $router: '@Symfony\Component\Routing\RouterInterface'
             $assetsManager: '@Liip\ImagineBundle\Imagine\Cache\CacheManager'
             $rootDirectory: '%kernel.root_dir%'
-
-    JK\CmsBundle\Assets\ScriptRegistry:
-        arguments:
-            $environment: '@Twig\Environment'
-            $template: '%jk_cms.scripts.template%'

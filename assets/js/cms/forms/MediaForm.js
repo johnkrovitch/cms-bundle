@@ -67,9 +67,10 @@ export default class MediaForm {
                 }
             }
         });
-
+    
         let progress = this.element.querySelector('.progress');
-
+        let _this = this;
+        
         this.thumbnailInput.addEventListener('change', function () {
             let xhr = new XMLHttpRequest();
             let data = new FormData();
@@ -86,6 +87,10 @@ export default class MediaForm {
 
             xhr.addEventListener('load', function() {
                 progress.classList.add('d-none');
+                console.log(JSON.parse(this.responseText), this);
+                let data = JSON.parse(this.responseText);
+                _this.setMedia(data.id, data.path, data.name);
+                _this.toggle(true);
                 alert('Upload terminé !');
             });
 
