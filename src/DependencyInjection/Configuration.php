@@ -124,6 +124,7 @@ class Configuration implements ConfigurationInterface
             ->arrayNode('recaptcha')
                 ->children()
                    ->scalarNode('site_key')->end()
+                   ->scalarNode('secret')->end()
                 ->end()
             ->end()
         ;
