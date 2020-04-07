@@ -64,5 +64,5 @@ services:
     JK\CmsBundle\Bridge\GoogleRecaptcha\Form\Validator\RecaptchaValidator:
         class: JK\CmsBundle\Bridge\GoogleRecaptcha\Form\Validator\RecaptchaValidator
         arguments:
-            - '%jk_cms.recaptcha.site_key%'
+            - '%jk_cms.recaptcha.secret%'
             - '@request_stack'

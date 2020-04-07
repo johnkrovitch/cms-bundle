@@ -31,10 +31,16 @@ class JKCmsExtension extends Extension implements PrependExtensionInterface
         $container->setParameter('jk_cms.contact_email', $accessor->getValue($config, '[email][contact_email]'));
 
         $siteKey = '';
+        $siteSecret = '';
 
         if (key_exists('recaptcha', $config) && key_exists('site_key', $config['recaptcha'])) {
             $siteKey = $config['recaptcha']['site_key'];
         }
+
+        if (key_exists('recaptcha', $config) && key_exists('secret', $config['recaptcha'])) {
+            $siteSecret = $config['recaptcha']['secret'];
+        }
+        $container->setParameter('jk_cms.recaptcha.secret', $siteSecret);
         $container->setParameter('jk_cms.recaptcha.site_key', $siteKey);
         $container->setParameter('jk_cms.front_base', $accessor->getValue($config, '[application][front_base]'));
 
