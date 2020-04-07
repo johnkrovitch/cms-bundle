@@ -17,6 +17,7 @@ class MenuSubscriber implements EventSubscriberInterface
 
     public function addMenu(MenuConfigurationEvent $event): void
     {
+        return;
         $menus = $event->getMenuConfigurations();
 
         $menus['left'] = [
@@ -49,6 +50,11 @@ class MenuSubscriber implements EventSubscriberInterface
                 [
                     'text' => 'cms.menu.pages',
                     'admin' => 'page',
+                    'action' => 'list',
+                ],
+                [
+                    'text' => 'cms.menu.menus',
+                    'admin' => 'menu',
                     'action' => 'list',
                 ],
                 [

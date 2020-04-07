@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+
+{% block head %}
+    <head>
+        {% block meta %}
+            <meta charset="UTF-8">
+            <meta name="viewport"
+                  content="width=device-width, initial-scale=1">
+            <meta name="robots"
+                  content="noindex,nofollow">
+        {% endblock %}
+
+        {% block links %}
+            <link rel="profile"
+                  href="http://gmpg.org/xfn/11">
+            <link rel="dns-prefetch"
+                  href="//fonts.googleapis.com">
+            <link rel="dns-prefetch"
+                  href="//s.w.org">
+        {% endblock %}
+
+        <title>{% block title %}{{ cms_parameter('front_title') }}{% endblock %}</title>
+
+        {% block head_scripts %}{% include '@JKCms/Themes/default/base/assets.html.twig' %}{% endblock %}
+        {% block cms_stylesheets %}
+            <link rel="stylesheet" href="{{ asset('/bundles/jkcms/assets/cms.front.css') }}" />
+        {% endblock %}
+        {% block stylesheets %}{% endblock %}
+    </head>
+{% endblock %}
+
+<body class="home blog">
+<div id="parallax-bg">
+</div>
+<div id="page"
+     class="hfeed site">
+
+    {% block header %}{% include '@JKCms/Themes/default/base/header.html.twig' %}{% endblock %}
+
+    <div id="content"
+         class="site-content">
+        <div class="inner-wrap">
+            <div id="primary"
+                 class="content-area">
+                <main id="main"
+                      class="site-main"
+                      role="main">
+                    {% block content %}{% endblock %}
+                </main>
+            </div>
+
+            <div id="secondary"
+                 class="widget-area"
+                 role="complementary">
+                <aside id="search"
+                       class="widget widget_search">
+                    <form role="search"
+                          method="get"
+                          class="search-form"
+                          action="https://wp-themes.com/">
+                        <label>
+                            <span class="screen-reader-text">Search for:</span>
+                            <input type="search"
+                                   class="search-field"
+                                   placeholder="Search …"
+                                   value=""
+                                   name="s">
+                        </label>
+                        <input type="submit"
+                               class="search-submit"
+                               value="Search">
+                    </form>
+                </aside>
+
+                <aside id="archives"
+                       class="widget">
+                    <h3 class="widget-title">Archives</h3>
+                    <ul>
+                        <li><a href="https://wp-themes.com/?m=200810">October 2008</a></li>
+                        <li><a href="https://wp-themes.com/?m=200809">September 2008</a></li>
+                        <li><a href="https://wp-themes.com/?m=200806">June 2008</a></li>
+                    </ul>
+                </aside>
+
+                <aside id="meta"
+                       class="widget">
+                    <h3 class="widget-title">Meta</h3>
+                    <ul>
+                        <li><a href="https://wp-themes.com/wp/wp-login.php">Log in</a></li>
+                    </ul>
+                </aside>
+
+            </div><!-- #secondary -->
+
+        </div><!-- .inner-wrap -->
+    </div><!-- #content -->
+
+    <footer id="colophon"
+            class="site-footer"
+            role="contentinfo">
+        <div class="site-info">
+            <span>{% block footer_text %}{{ cms_parameter('front_footer') }}{{ date() | date('Y') }}{% endblock %}</span>
+            <br>
+            <a href="">Mentions Légales</a>
+        </div><!-- .site-info -->
+    </footer><!-- #colophon -->
+    <a href="#masthead"
+       id="scroll-up"
+       style="display: none;"><span class="genericon genericon-collapse"></span></a>
+</div><!-- #page -->
+
+{% include '@JKCms/Themes/default/base/javascripts.html.twig' %}
+
+</body>
+</html>

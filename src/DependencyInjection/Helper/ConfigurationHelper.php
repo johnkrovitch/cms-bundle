@@ -24,6 +24,16 @@ class ConfigurationHelper
         return $this->config['application']['name'];
     }
 
+    public function getShowRoute(): string
+    {
+        return $this->config['application']['articles']['show_route'];
+    }
+
+    public function getShowRouteParameters(): array
+    {
+        return $this->config['application']['articles']['show_route_parameters'];
+    }
+
     public function getConfig(): array
     {
         return $this->config;

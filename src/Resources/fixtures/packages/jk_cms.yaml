@@ -1,5 +1,10 @@
-imports:
-    - {resource: ../admin/resources/*}
+parameters:
+    cms.assets.mapping:
+        article_content: uploads/articles/content
+        article_thumbnail: uploads/articles/thumbnails
+        category_thumbnail: uploads/categories/thumbnails
+        media_gallery: uploads/gallery
+        media_thumbnail: uploads/gallery
 
 jk_cms:
     application:
@@ -7,10 +12,10 @@ jk_cms:
         comments:
             show_route: lecomptoir.article.show-comment
             show_route_parameters:
-                year: article.year
-                month: article.month
-                slug: article.slug
-                commentId: id
+            year: article.year
+            month: article.month
+            slug: article.slug
+            commentId: id
 
     admin:
         title: Cms Backoffice
@@ -27,10 +32,48 @@ jk_cms:
     email:
         base_template: emails/base.html.twig
 
-parameters:
-    cms.assets.mapping:
-        article_content: uploads/articles/content
-        article_thumbnail: uploads/articles/thumbnails
-        category_thumbnail: uploads/categories/thumbnails
-        media_gallery: uploads/gallery
-        media_thumbnail: uploads/gallery
+    menus:
+        left:
+            children:
+                article: ~
+                category: ~
+                page: ~
+                tag: ~
+                comment: ~
+                media: ~
+                menu: ~
+                parameters: ~
+                user: ~
+        top: ~
+
+liip_imagine:
+    loaders:
+        default:
+            filesystem:
+                data_root: '%kernel.project_dir%/public/uploads'
+    resolvers:
+        default:
+            web_path: ~
+
+    filter_sets:
+        cache: ~
+        media_thumbnail:
+            quality: 75
+            filters:
+                thumbnail: {size: [120, 90], mode: outbound}
+        media_gallery:
+            filters:
+                thumbnail: {size: [200, 250], mode: outbound}
+        article_thumbnail:
+            filters:
+                thumbnail: {size: [200, 300], mode: outbound}
+        article_content:
+            filters:
+                thumbnail: {size: [200, 250], mode: outbound}
+        category_thumbnail:
+            filters:
+                thumbnail: {size: [200, 300], mode: outbound}
+        category_big:
+            filters:
+                thumbnail: {size: [439, 305], mode: outbound}
+        raw: ~

@@ -3,7 +3,7 @@
         <div class="card-body">
             <div class="card-title">
                 <h5>
-                    <i class="fa fa-newspaper-o fa-2x"></i>
+                    <i class="fa fa-newspaper"></i>
                     {{ 'cms.dashboard.latest_articles' | trans }}
                 </h5>
             </div>
@@ -25,8 +25,14 @@
                                 }) }}">
                                     {{ article.category.name }}
                                 </a>
+                            {% else %}
+                                ~
                             {% endif %}
                         </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td>{{ 'cms.article.no_result' | trans }}</td>
                     </tr>
                 {% endfor %}
             </table>

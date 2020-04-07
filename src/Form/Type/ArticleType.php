@@ -6,7 +6,9 @@ use Doctrine\Common\Collections\Collection;
 use JK\CmsBundle\Entity\Article;
 use JK\CmsBundle\Entity\Category;
 use JK\CmsBundle\Entity\Tag;
+use JK\CmsBundle\Repository\UserRepository;
 use JK\MediaBundle\Form\Type\MediaType;
+use LAG\AdminBundle\Assets\Registry\ScriptRegistryInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
@@ -36,10 +38,26 @@ class ArticleType extends AbstractType
      */
     private $security;
 
-    public function __construct(RouterInterface $router, Security $security)
-    {
+    /**
+     * @var ScriptRegistryInterface
+     */
+    private $scriptRegistry;
+
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
+
+    public function __construct(
+        RouterInterface $router,
+        Security $security,
+        ScriptRegistryInterface $scriptRegistry,
+        UserRepository $userRepository
+    ) {
         $this->router = $router;
         $this->security = $security;
+        $this->scriptRegistry = $scriptRegistry;
+        $this->userRepository = $userRepository;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -66,6 +84,7 @@ class ArticleType extends AbstractType
                     'data-help' => 'cms.article.content_help',
                     'contenteditable' => 'true',
                     'spellcheck' => 'true',
+                    'rows' => 25,
                 ],
                 'label' => 'cms.article.content',
                 'required' => false,
@@ -75,6 +94,7 @@ class ArticleType extends AbstractType
             ])
             ->add('thumbnail', MediaType::class, [
                 'label' => 'cms.article.thumbnail',
+                'help' => 'cms.article.thumbnail_help',
                 'required' => false,
             ])
             ->add('publicationStatus', ChoiceType::class, [
@@ -119,6 +139,7 @@ class ArticleType extends AbstractType
                 }
                 // User should not be null as we are under the cms firewall, the user is fully authenticated
                 $user = $this->security->getUser();
+                $user = $this->userRepository->find($user->getId());
 
                 $article->setAuthor($user);
             })

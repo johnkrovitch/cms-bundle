@@ -2,25 +2,18 @@
 
 namespace JK\CmsBundle\DependencyInjection\CompilerPass;
 
-use JK\CmsBundle\JKCmsBundle;
+use JK\CmsBundle\Module\ModuleInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
 
 class ModuleCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition(JKCmsBundle::class)) {
-            return;
-        }
-        $moduleDefinitions = $container->findTaggedServiceIds(JKCmsBundle::SERVICE_TAG_MODULE);
-        $moduleRepositoryDefinition = $container->findDefinition(JKCmsBundle::SERVICE_ID_MODULE_REPOSITORY);
-
-        foreach ($moduleDefinitions as $id => $moduleDefinition) {
-            $moduleRepositoryDefinition->addMethodCall('addModule', [
-                new Reference($id),
-            ]);
-        }
+        // Register all modules automatically. They will be injected ti the module registry
+        $container
+            ->registerForAutoconfiguration(ModuleInterface::class)
+            ->addTag('cms.module')
+        ;
     }
 }

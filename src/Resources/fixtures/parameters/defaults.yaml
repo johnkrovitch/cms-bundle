@@ -1,0 +1,31 @@
+groups:
+    front:
+        name: front
+        label: Front
+        description: Configure the front of the CMS
+    cms:
+        name: cms
+        label: CMS
+        description: Configure the backoffice of the CMS
+    seo:
+        name: seo
+        label: SEO
+        description: Configure SEO such as metadata
+
+parameters:
+    front.title:
+        name: front_title
+        label: cms.parameters.front.title
+        description: cms.parameters.front.title_description
+        group: front
+        type: string
+        position: 0
+
+    front.banner:
+        name: front_banner
+        label: cms.parameters.front.banner
+        description: cms.parameters.front.banner_description
+        group: front
+        type: media
+        position: 1
+

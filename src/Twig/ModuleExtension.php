@@ -3,11 +3,11 @@
 namespace JK\CmsBundle\Twig;
 
 use JK\CmsBundle\Module\Manager\ModuleManagerInterface;
-use Twig_Environment;
-use Twig_Extension;
-use Twig_SimpleFunction;
+use Twig\Environment;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class ModuleExtension extends Twig_Extension
+class ModuleExtension extends AbstractExtension
 {
     /**
      * @var ModuleManagerInterface
@@ -15,40 +15,30 @@ class ModuleExtension extends Twig_Extension
     private $moduleManager;
 
     /**
-     * @var Twig_Environment
+     * @var Environment
      */
-    private $twig;
+    private $environment;
 
-    public function __construct(ModuleManagerInterface $moduleManager, Twig_Environment $twig)
+    public function __construct(ModuleManagerInterface $moduleManager, Environment $environment)
     {
         $this->moduleManager = $moduleManager;
-        $this->twig = $twig;
+        $this->environment = $environment;
     }
 
-    /**
-     * Return the Twig function mapping.
-     *
-     * @return array
-     */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
-            new Twig_SimpleFunction('cms_render_module', [$this, 'cmsRenderModule']),
+            new TwigFunction('cms_render_module', [$this, 'renderModule']),
         ];
     }
 
-    /**
-     * @param string $name Module name
-     *
-     * @return string
-     */
-    public function cmsRenderModule($name)
+    public function renderModule(string $moduleName): string
     {
         $view = $this
             ->moduleManager
-            ->render($name)
+            ->render($moduleName)
         ;
 
-        return $this->twig->render($view->getTemplate(), $view->getParameters());
+        return $this->environment->render($view->getTemplate(), $view->getParameters());
     }
 }

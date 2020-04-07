@@ -30,6 +30,10 @@ services:
         arguments:
             - '@doctrine'
 
+    JK\CmsBundle\Repository\ParameterGroupRepository:
+        arguments:
+            - '@doctrine'
+
     JK\CmsBundle\Repository\TagRepository:
         arguments:
             - '@doctrine'

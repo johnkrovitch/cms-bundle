@@ -27,6 +27,10 @@ cms:
         publication_status_help: Seul les articles publiés seront vus sur le site par les lecteurs
         publication_date: Date de publication
         publication_date_help: Date de publication à laquelle l'article sera publié
+        # Remove when bug fixed in AdminBundle
+        publication:
+            status: Publié ?
+            date: Date de publication
         created_at: Date de création
         created_at_help: Date à laquelle l'article à été créé
         updated.at: Mis à jour le
@@ -46,6 +50,7 @@ cms:
         _actions: ''
         default_title: Un nouvel article...
         add_thumbnail: Ajouter une miniature à l'article
+        no_result: Vous n'avez pas encore créer d'articles
 
     category:
         list: Catégories
@@ -94,6 +99,7 @@ cms:
         new_comment_count: Nouveaux commentaires publiés
         see_new_comment: Voir les nouveaux commentaires
         author_email: Email de l'auteur
+        no_result: Aucun commentaire n'a été posté
 
     dashboard:
         title: Dashboard
@@ -110,6 +116,60 @@ cms:
         fit_to_width: Prendre toute la largeur
         save: Sauvegarder
         loading_in_progress: Chargement en cours...
+
+    media:
+        list: Medias
+        edit: Edition du média
+        create: Ajouter un média
+        saved: Le média a été sauvegardée
+        delete: Supprimer
+        deleted: Le média a été supprimé
+        filename: Nom du fichier
+        delete_success: Le média a été supprimé avec succès !
+        extension: Extension du fichier
+        size: Taille du fichier
+        type: Type du média
+        type_help: Le type du média va changer le répertoire où est stockée l'image
+        category_thumbnail: Miniature d'une Catégorie
+        article_thumbnail: Miniature d'un Article
+        upload_from_url: Uploader depuis d'une url
+        upload_from_computer: Uploader depuis votre ordinateur
+        choose_from_collection: Choisir dans la médiathèque
+        open_gallery: Ouvrir la médiathèque
+        choose: Choisir
+        insert_tinymce: Insérer l'image à l'article
+        edit_properties: Editer les propriétés du média
+        height: Hauteur
+        width: Largeur
+        alignment: Alignement
+        keep_proportion: Conserver les proportions
+
+    menu:
+        edit: Editer
+        delete: Supprimer
+        articles: Articles
+        categories: Catégories
+        comments: Commentaires
+        tags: Tags
+        media: Média
+        pages: Pages
+        parameters: Configuration
+        users: Utilisateurs
+        menus: Menus
+        return: Retour à la liste des menus
+        create: Créer un nouveau menu
+        name: Nom du menu
+        name_help: Nom du menu affiché dans le backoffice
+        items: Éléments du menu
+        items_help: Éléments du menu. Chaque élement peut contenir d'autres éléments de menu.
+        saved: Le menu a été sauvegardé
+        list: Liste des menus
+
+    menu_item:
+        name: Nom
+        name_help: Nom de l'élément du menu qui sera affiché sur le site
+        position: Position de l'élement
+        position_help: Position de l'élement dans le menu. L'élément avec la plus petite position sera affiché en premier.
 
     notifications:
         dashboard_title: Notifications
@@ -163,49 +223,24 @@ cms:
         slug: Slug
         _actions: ''
 
+    parameters:
+        edit: Modifier les paramètres
+        saved: Les paramètres ont été sauvés
+        name: Nom
+        return: Retour
+        description: Description
+        value: Valeur
+        front:
+            title: Titre du site
+            title_description: Titre affiché dans le front du CMS
+            banner: Bannière principale
+            banner_description: La bannière principale du thème
+
     publication:
         draft: Brouillon
         validation: En attente de validation
         published: Publié
 
-    menu:
-        edit: Editer
-        delete: Supprimer
-        articles: Articles
-        categories: Catégories
-        comments: Commentaires
-        tags: Tags
-        media: Média
-        pages: Pages
-        parameters: Configuration
-        users: Utilisateurs
-
-    media:
-        list: Medias
-        edit: Edition du média
-        create: Ajouter un média
-        saved: Le média a été sauvegardée
-        delete: Supprimer
-        deleted: Le média a été supprimé
-        filename: Nom du fichier
-        delete_success: Le média a été supprimé avec succès !
-        extension: Extension du fichier
-        size: Taille du fichier
-        type: Type du média
-        type_help: Le type du média va changer le répertoire où est stockée l'image
-        category_thumbnail: Miniature d'une Catégorie
-        article_thumbnail: Miniature d'un Article
-        upload_from_url: Uploader depuis d'une url
-        upload_from_computer: Uploader depuis votre ordinateur
-        choose_from_collection: Choisir dans la médiathèque
-        open_gallery: Ouvrir la médiathèque
-        choose: Choisir
-        insert_tinymce: Insérer l'image à l'article
-        edit_properties: Editer les propriétés du média
-        height: Hauteur
-        width: Largeur
-        alignment: Alignement
-        keep_proportion: Conserver les proportions
     tag:
         list: Tags
         edit: Editer

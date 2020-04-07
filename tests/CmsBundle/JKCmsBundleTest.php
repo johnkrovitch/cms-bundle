@@ -23,7 +23,7 @@ class JKCmsBundleTest extends TestCase
         $container = $kernel->getContainer();
 
         foreach ($finder as $file) {
-            $data = Yaml::parseFile($file->getRealPath());
+            $data = Yaml::parseFile($file->getRealPath(), Yaml::PARSE_CUSTOM_TAGS);
             $services = array_merge($services, $data['services']);
         }
 

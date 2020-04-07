@@ -2,29 +2,19 @@
 
 {% block head %}
     <link rel="icon" type="image/png" href="/favicon.png"/>
-    <link rel="stylesheet" href="{{ asset('/bundles/jkcms/assets/cms.css') }}" />
-    <link rel="stylesheet" href="{{ asset('/bundles/jkmedia/assets/media.css') }}" />
 {% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
 
-    {# Inject scripts in head section #}
-    {{ cms_dump_scripts('head') | raw }}
+    <link rel="stylesheet" href="{{ asset('/bundles/jkcms/assets/cms.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/bundles/jkmedia/assets/media.css') }}" />
 {% endblock %}
 
 {% block javascripts %}
     <script src="{{ asset('/bundles/jkcms/assets/cms.js') }}"></script>
     <script src="{{ asset('/bundles/jkmedia/assets/media.js') }}"></script>
 
-    {# Inject scripts in footer section #}
-    {{ cms_dump_scripts('footer') | raw }}
-
     {% include '@JKCms/Assets/modal.html.twig' %}
     {% include '@JKMedia/Assets/modal.html.twig' %}
-{% endblock %}
-
-{% block brand %}
-    {{ parent() }}
-    <span class="version">cms v1.0</span>
 {% endblock %}

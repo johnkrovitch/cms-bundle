@@ -15,6 +15,7 @@ Encore
 
     .addEntry('cms', './assets/js/cms.js')
     .addEntry('cms.tinymce', './assets/js/cms.tinymce.js')
+    .addStyleEntry('cms.front', './assets/scss/cms.front.scss')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     //.splitEntryChunks()

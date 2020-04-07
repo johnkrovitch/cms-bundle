@@ -1,0 +1,19 @@
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+        bind:
+            $projectDirectory: '%kernel.project_dir%'
+            
+    # Commands
+    JK\CmsBundle\Module\Modules\Sync\Command\SyncExportCommand:
+        tags:
+            - {name: console.command}
+
+    JK\CmsBundle\Module\Modules\Sync\Command\SyncImportCommand:
+        tags:
+            - {name: console.command}
+
+    # Managers
+    JK\CmsBundle\Module\Modules\Sync\Manager\SyncManager: ~
+    JK\CmsBundle\Module\Modules\Sync\Manager\SyncManagerInterface: '@JK\CmsBundle\Module\Modules\Sync\Manager\SyncManager'

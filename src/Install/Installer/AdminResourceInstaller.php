@@ -22,8 +22,8 @@ class AdminResourceInstaller implements InstallerInterface
 
     public function install(array $context = []): void
     {
-        $this->copyFiles();
-        $this->updatePackageConfiguration();
+        $this->copyFiles($context['force']);
+        $this->updatePackageConfiguration($context['force']);
     }
 
     public function getName(): string
@@ -36,7 +36,7 @@ class AdminResourceInstaller implements InstallerInterface
         return 'Install admin yaml fixtures to start the cms';
     }
 
-    private function copyFiles(): void
+    private function copyFiles(bool $force = false): void
     {
         $adminResourceDirectory = $this->projectDirectory.'/config/admin/resources';
 
@@ -53,12 +53,7 @@ class AdminResourceInstaller implements InstallerInterface
 
         foreach ($finder as $fileInfo) {
             $targetFile = $adminResourceDirectory.'/'.$fileInfo->getFilename();
-
-            // Do not update existing files
-            if ($fileSystem->exists($targetFile)) {
-                continue;
-            }
-            $fileSystem->copy($fileInfo->getRealPath(), $targetFile);
+            $fileSystem->copy($fileInfo->getRealPath(), $targetFile, $force);
         }
     }
 

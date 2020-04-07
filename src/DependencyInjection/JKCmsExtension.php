@@ -55,6 +55,11 @@ class JKCmsExtension extends Extension implements PrependExtensionInterface
         if (null === $config) {
             $config = [];
         }
+
+        if (!key_exists('menus', $config)) {
+            $config['menus'] = [];
+        }
+
         $container->setParameter('jk_cms.config', $config);
 
         if (key_exists('admin', $config)) {
@@ -62,6 +67,7 @@ class JKCmsExtension extends Extension implements PrependExtensionInterface
             $container
                 ->prependExtensionConfig('lag_admin', [
                     'application' => $admin,
+                    'menus' => $config['menus'],
                 ])
             ;
         }

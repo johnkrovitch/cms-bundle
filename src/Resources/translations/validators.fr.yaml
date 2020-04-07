@@ -1,0 +1,4 @@
+cms:
+    article:
+        violations:
+            publication_date: Une date de publication doit être définie

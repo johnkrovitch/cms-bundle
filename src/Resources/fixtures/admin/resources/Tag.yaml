@@ -1,19 +1,17 @@
-lag_admin:
-    admins:
-        tag:
-            entity: JK\CmsBundle\Entity\Tag
-            form: JK\CmsBundle\Form\Type\TagType
-            actions:
-                list:
-                    title: cms.tag.list
-                    fields:
-                        id: ~
-                        name: ~
-                        createdAt: {type: date, options: {format: 'd/m/Y à h:i'}}
-                        updatedAt: {type: date, options: {format: 'd/m/Y à h:i'}}
-                        _actions: ~
-                    order:
-                        updatedAt: desc
-                create: ~
-                edit: ~
-                delete: ~
+tag:
+    entity: JK\CmsBundle\Entity\Tag
+    form: JK\CmsBundle\Form\Type\TagType
+    actions:
+        list:
+            title: cms.tag.list
+            fields:
+                id: ~
+                name: ~
+                createdAt: {type: date, options: {format: 'd/m/Y à h:i'}}
+                updatedAt: {type: date, options: {format: 'd/m/Y à h:i'}}
+                _actions: ~
+            order:
+                updatedAt: desc
+        create: ~
+        edit: ~
+        delete: ~

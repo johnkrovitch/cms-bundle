@@ -1,37 +1,35 @@
-lag_admin:
-    admins:
-        category:
-            entity: JK\CmsBundle\Entity\Category
-            form: JK\CmsBundle\Form\Type\CategoryType
-            actions:
-                batch: ~
-                create: ~
-                edit: ~
-                delete: ~
-                list:
-                    title: cms.category.list
-                    menus:
-                        top:
-                            items:
-                                create:
-                                    admin: category
-                                    action: create
-                                    icon: fa fa-plus
-                    fields:
-                        id: ~
-                        name:
-                            type: link
-                            options:
-                                route: cms.category.edit
-                                parameters: {id: ~}
-                        createdAt:
-                            type: date
-                        updatedAt:
-                            type: date
-                        articles:
-                            type: count
-                        displayInHomepage:
-                            type: boolean
-                        _delete: ~
-                    order:
-                        updatedAt: desc
+category:
+    entity: JK\CmsBundle\Entity\Category
+    form: JK\CmsBundle\Form\Type\CategoryType
+    actions:
+        batch: ~
+        create: ~
+        edit: ~
+        delete: ~
+        list:
+            title: cms.category.list
+            menus:
+                top:
+                    items:
+                        create:
+                            admin: category
+                            action: create
+                            icon: fa fa-plus
+            fields:
+                id: ~
+                name:
+                    type: link
+                    options:
+                        route: cms.category.edit
+                        parameters: {id: ~}
+                createdAt:
+                    type: date
+                updatedAt:
+                    type: date
+                articles:
+                    type: count
+                displayInHomepage:
+                    type: boolean
+                _delete: ~
+            order:
+                updatedAt: desc

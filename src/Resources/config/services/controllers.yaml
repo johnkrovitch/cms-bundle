@@ -3,7 +3,6 @@ services:
         autowire: true
         autoconfigure: true
 
-
     JK\CmsBundle\Controller\Dashboard\DashboardAction:
         class: JK\CmsBundle\Controller\Dashboard\DashboardAction
         tags:
@@ -43,3 +42,10 @@ services:
             - '@translator'
             - '@router'
 
+    JK\CmsBundle\Controller\ParameterGroup\ListAction:
+        tags:
+            - 'controller.service_arguments'
+
+    JK\CmsBundle\Controller\Article\UnsubscribeAction:
+        tags:
+            - 'controller.service_arguments'

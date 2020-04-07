@@ -1,0 +1,6 @@
+services:
+    JK\CmsBundle\Module\Modules\Parameter\Event\Subscriber\ParameterEventSubscriber:
+        arguments:
+            $repository: '@JK\CmsBundle\Repository\ParametersRepository'
+        tags:
+            - {name: kernel.event_subscriber}

@@ -1,13 +1,13 @@
 services:
     ### Managers ###
     JK\CmsBundle\Module\Manager\ModuleManager:
-        class: JK\CmsBundle\Module\Manager\ModuleManager
         arguments:
-            - ['@JK\CmsBundle\Module\Core\NewsModule']
+            $registry: '@JK\CmsBundle\Module\Registry\ModuleRegistryInterface'
+    JK\CmsBundle\Module\Manager\ModuleManagerInterface: '@JK\CmsBundle\Module\Manager\ModuleManager'
 
     ### Modules ###
-    JK\CmsBundle\Module\Core\NewsModule:
-        class: JK\CmsBundle\Module\Core\NewsModule
+    JK\CmsBundle\Module\Modules\News\NewsModule:
+        class: JK\CmsBundle\Module\Modules\News\NewsModule
         arguments:
             - '@JK\CmsBundle\Repository\ArticleRepository'
         tags:
@@ -20,3 +20,11 @@ services:
             - '@JK\CmsBundle\Module\Manager\ModuleManager'
         tags:
             - {name: kernel.event_subscriber}
+
+    ### Registry ###
+    JK\CmsBundle\Module\Registry\ModuleRegistryInterface: '@JK\CmsBundle\Module\Registry\ModuleRegistry'
+
+    JK\CmsBundle\Module\Registry\ModuleRegistry:
+        arguments:
+            - !tagged_iterator cms.module
+

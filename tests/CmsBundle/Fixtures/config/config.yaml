@@ -93,4 +93,4 @@ parameters:
     request_listener.http_port: 80
     request_listener.https_port: 443
     jk_cms.recaptcha.site_key: test
-
+    lag.admin.resources_path: './src/Resources/fixtures/admin/resources'

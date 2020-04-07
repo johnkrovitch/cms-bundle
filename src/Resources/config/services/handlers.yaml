@@ -6,10 +6,6 @@ services:
     JK\CmsBundle\Form\Handler\AddCommentHandler:
         arguments:
             $contactEmail: '%jk_cms.contact_email%'
-            $manager: '@JK\CmsBundle\Manager\CommentManagerInterface'
-            $translator: '@Symfony\Contracts\Translation\TranslatorInterface'
-            $mailer: '@Symfony\Component\Mailer\MailerInterface'
-            $helper: '@JK\CmsBundle\DependencyInjection\Helper\ConfigurationHelper'
 
     JK\CmsBundle\Filter\Handler\RequestFilterHandlerInterface: '@JK\CmsBundle\Filter\Handler\RequestFilterHandler'
     JK\CmsBundle\Filter\Handler\RequestFilterHandler: ~

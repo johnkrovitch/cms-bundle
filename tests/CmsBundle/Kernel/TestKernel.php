@@ -7,6 +7,7 @@ use JK\CmsBundle\JKCmsBundle;
 use JK\CmsBundle\Tests\DependencyInjection\PublicServicePass;
 use JK\MediaBundle\JKMediaBundle;
 use JK\NotificationBundle\JKNotificationBundle;
+use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use LAG\AdminBundle\LAGAdminBundle;
 use Liip\ImagineBundle\LiipImagineBundle;
 use Oneup\UploaderBundle\OneupUploaderBundle;
@@ -41,6 +42,7 @@ class TestKernel extends Kernel
             new JKNotificationBundle(),
             new JKMediaBundle(),
             new LiipImagineBundle(),
+            new KnpMenuBundle(),
         ];
 
         return $bundles;

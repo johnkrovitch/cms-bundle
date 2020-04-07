@@ -60,6 +60,7 @@ export default class Tinymce {
     }
     
     bind() {
+        console.log('trace');
         document.addEventListener('jk_media.response', (event) => {
             if (!event.hasOwnProperty('htmlContent')) {
                 return;

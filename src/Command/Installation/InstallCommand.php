@@ -28,7 +28,7 @@ class InstallCommand extends Command
     {
         $this
             ->setDescription('Install basic fixtures to start with the Cms')
-            ->addOption('force', 'f', InputOption::VALUE_OPTIONAL, 'Force installer to execute (force copying files...)', false)
+            ->addOption('force', 'f', InputOption::VALUE_NONE, 'Force installer to execute (force copying files...)')
         ;
     }
 
@@ -36,13 +36,13 @@ class InstallCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
         $io->title('Welcome to the Cms installation');
-        $context['force'] = (bool) $input->getOption('force');
+        $context['force'] = true === $input->getOption('force');
 
         $io->note('Running installers...');
         $installers = $this->registry->all();
 
         foreach ($installers as $installer) {
-            $io->note('Run '.$installer->getName().'('.$installer->getDescription().')');
+            $io->note('Run '.$installer->getName().' ('.$installer->getDescription().')');
             $installer->install($context);
         }
     }
