@@ -96,6 +96,7 @@ class ArticleType extends AbstractType
                 'label' => 'cms.article.thumbnail',
                 'help' => 'cms.article.thumbnail_help',
                 'required' => false,
+                'empty_data' => null,
             ])
             ->add('publicationStatus', ChoiceType::class, [
                 'choices' => [
@@ -143,6 +144,18 @@ class ArticleType extends AbstractType
 
                 $article->setAuthor($user);
             })
+            ->addModelTransformer(new CallbackTransformer(function ($value) {
+                return $value;
+            }, function ($value) {
+                if ($value instanceof Article) {
+                    if ($value->getThumbnail() && $value->getThumbnail()->getId() === 0) {
+                        $value->removeThumbnail();
+                    }
+                }
+
+                return $value;
+            }))
+
         ;
 
         $builder

@@ -98,7 +98,6 @@ class TinyMceType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        dump('trace');
         // Register the cms tinymce here build to avoid merging it with the main cms build
         $this
             ->scriptRegistry
@@ -147,7 +146,7 @@ class TinyMceType extends AbstractType
                         'skin' => 'lightgray',
                         'imagetools_toolbar' => 'rotateleft rotateright | flipv fliph | editimage imageoptions',
                         //'content_css' => $this->packages->getUrl('build/cms.tinymce.content.css'),
-                        'content_css' => '',
+                        'content_css' => $this->packages->getUrl('/bundles/jkmedia/assets/media-editor.css'),
                         'body_class' => 'mceForceColors container',
                         'browser_spellcheck' => true,
                         'plugins' => self::ALLOWED_PLUGINS,

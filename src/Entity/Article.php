@@ -510,9 +510,14 @@ class Article
     /**
      * @param MediaInterface $thumbnail
      */
-    public function setThumbnail(MediaInterface $thumbnail = null)
+    public function setThumbnail(?MediaInterface $thumbnail): void
     {
         $this->thumbnail = $thumbnail;
+    }
+
+    public function removeThumbnail(): void
+    {
+        $this->thumbnail = null;
     }
 
     public function getYear(): ?string
