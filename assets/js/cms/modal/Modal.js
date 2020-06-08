@@ -1,5 +1,3 @@
-require('bootstrap');
-
 export default class Modal {
     constructor(options) {
         if (!options) {

@@ -4,7 +4,6 @@ namespace JK\CmsBundle\Form\Type;
 
 use JK\CmsBundle\Entity\Parameters;
 use JK\CmsBundle\Exception\Exception;
-use JK\MediaBundle\Form\Type\MediaEmbedType;
 use JK\MediaBundle\Form\Type\MediaType;
 use LAG\AdminBundle\Utils\FormUtils;
 use Symfony\Component\Form\AbstractType;
@@ -28,7 +27,6 @@ class ParameterType extends AbstractType
                 $type = FormUtils::convertShortFormType($data->getType());
 
                 if ('media' === $type) {
-                    $type = MediaEmbedType::class;
                     $type = MediaType::class;
                 }
 
