@@ -148,7 +148,7 @@ class ArticleType extends AbstractType
                 return $value;
             }, function ($value) {
                 if ($value instanceof Article) {
-                    if ($value->getThumbnail() && $value->getThumbnail()->getId() === 0) {
+                    if ($value->getThumbnail() && 0 === $value->getThumbnail()->getId()) {
                         $value->removeThumbnail();
                     }
                 }
