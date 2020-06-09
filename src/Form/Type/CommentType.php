@@ -26,7 +26,7 @@ class CommentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $admin = $this->helper->getCurrent();
-        $pattern = $admin->getConfiguration()->get('translation_pattern');
+        $pattern = $admin->getConfiguration()->get('translation')['pattern'];
         $adminName = $admin->getName();
 
         $builder
