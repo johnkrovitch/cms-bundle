@@ -29,6 +29,7 @@ framework:
     router:
         resource: routing.yaml
 
+    serializer: ~
 
 security:
     encoders:
@@ -84,9 +85,6 @@ doctrine:
 
 services:
     translator.logging.inner:
-        synthetic: true
-
-    serializer:
         synthetic: true
 
 parameters:
