@@ -7,10 +7,8 @@ menu:
             order:
                 id: desc
             fields:
-                id:
-                    label: '#'
+                id: ~
                 name: ~
-                items: ~
         create: ~
         edit: ~
         delete: ~

@@ -8,13 +8,6 @@ category:
         delete: ~
         list:
             title: cms.category.list
-            menus:
-                top:
-                    items:
-                        create:
-                            admin: category
-                            action: create
-                            icon: fa fa-plus
             fields:
                 id: ~
                 name:
@@ -33,3 +26,11 @@ category:
                 _delete: ~
             order:
                 updatedAt: desc
+            menus:
+                top:
+                    children:
+                        create:
+                            admin: category
+                            action: create
+                            text: cms.category.create
+                            icon: fas fa-plus-circle
