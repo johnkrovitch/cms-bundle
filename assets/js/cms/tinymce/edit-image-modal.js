@@ -42,17 +42,18 @@ export default {
         let widthElement = $(keepRatioCheckbox.data('target-width'));
         let ratio = heightElement.val() / widthElement.val();
 
+        // TODO remove ?
         heightElement.on('change', function () {
             if (keepRatioCheckbox.is(':checked')) {
                 let newWidth = $(this).val() / ratio;
-                widthElement.val(Math.round(newWidth));
+                //widthElement.val(Math.round(newWidth));
             }
         });
 
         widthElement.on('change', function () {
             if (keepRatioCheckbox.is(':checked')) {
                 let newHeight = $(this).val() * ratio;
-                heightElement.val(Math.round(newHeight));
+                //heightElement.val(Math.round(newHeight));
             }
         });
     }

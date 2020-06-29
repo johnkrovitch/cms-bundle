@@ -19,7 +19,7 @@
         "johnkrovitch/media-bundle": "^1.0.3",
         "johnkrovitch/notification-bundle": ">=0.3",
         "johnkrovitch/orm-pack": "^1.0",
-        "lag/adminbundle": "^1.0",
+        "lag/adminbundle": "^1.0.2",
         "liip/imagine-bundle": "^2.2",
         "nesbot/carbon": "^2.27",
         "ps/image-optimizer": "^2.0",
