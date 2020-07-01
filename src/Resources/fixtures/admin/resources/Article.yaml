@@ -46,6 +46,14 @@ article:
                             id: ~
                         class: btn btn-danger large
                         icon: times
+            menus:
+                top:
+                    children:
+                        create:
+                            admin: article
+                            action: create
+                            text: cms.article.create
+                            icon: fas fa-plus-circle
 
         # Use a custom create action to avoid issues with media library and TinyMce when creating a new Article
         create:
@@ -56,18 +64,13 @@ article:
             template: '@JKCms/Article/edit.html.twig'
             menus:
                 top:
-                    items:
+                    children:
                         preview:
                             text: cms.article.preview
                             route: app.article.preview
-                            parameters: {id: ~}
-                            icon: fa fa-eye
-                            link_attr:
+                            routeParameters: {id: ~}
+                            icon: fas fa-search
+                            linkAttributes:
                                 target: _blank
-                        publish:
-                            text: cms.article.publish
-                            route: app.article.preview
-                            parameters: {id: ~}
-                            icon: fa fa-eye
 
         delete: ~

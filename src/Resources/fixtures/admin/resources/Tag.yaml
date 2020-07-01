@@ -12,6 +12,14 @@ tag:
                 _actions: ~
             order:
                 updatedAt: desc
+            menus:
+                top:
+                    children:
+                        create:
+                            admin: tag
+                            action: create
+                            text: cms.tag.create
+                            icon: fas fa-plus-circle
         create: ~
         edit: ~
         delete: ~

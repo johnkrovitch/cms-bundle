@@ -5,11 +5,12 @@ page:
         list:
             menus:
                 top:
-                    items:
+                    children:
                         create:
                             admin: page
                             action: create
-                            icon: fa fa-plus
+                            text: cms.page.create
+                            icon: fas fa-plus-circle
             fields:
                 id: ~
                 title:

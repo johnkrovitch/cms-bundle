@@ -15,15 +15,16 @@ phpunit.run:
 .PHONY: php-cs-fixer.install php-cs-fixer.run php-stan.run
 # php-cs-fixer
 php-cs-fixer.install:
-	curl -L https://cs.symfony.com/download/php-cs-fixer-v2.phar -o php-cs-fixer
-	chmod +x php-cs-fixer
-	mv php-cs-fixer bin
+	@echo "Install binary using composer (globally)"
+	composer global require friendsofphp/php-cs-fixer
+	@echo "Exporting composer binary path"
+	@export PATH="$PATH:$HOME/.composer/vendor/bin"
 
 php-cs-fixer.run:
 	bin/php-cs-fixer fix
 
 php-cs-fixer.ci:
-	bin/php-cs-fixer fix --dry-run --using-cache=no --verbose
+	php-cs-fixer fix --dry-run --using-cache=no --verbose
 
 # PHPStan
 phpstan.run:
