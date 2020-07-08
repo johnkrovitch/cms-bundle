@@ -10,13 +10,4 @@ class SyncModule extends AbstractModule
     {
         return 'sync';
     }
-
-    public function load(): void
-    {
-    }
-
-    public function isEnabled(): bool
-    {
-        return true;
-    }
 }

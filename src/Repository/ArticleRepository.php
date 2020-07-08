@@ -84,12 +84,9 @@ class ArticleRepository extends AbstractRepository
     /**
      * Find all articles in a given category.
      *
-     * @param string $categorySlug
-     * @param int    $count
-     *
      * @return Article[]|IterableResult
      */
-    public function findByCategory($categorySlug, $count = 6)
+    public function findPublishedByCategory(string $categorySlug, int $count = 6)
     {
         return $this
             ->createQueryBuilder('article')

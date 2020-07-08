@@ -12,6 +12,7 @@ cms:
         see: Voir
         return: Retour
         publish: Publier l'article
+        search: Rechercher un article sur le site...
         # Fields
         id: Id
         title: Titre
@@ -100,6 +101,9 @@ cms:
         title: Dashboard
         latest_articles: Derniers Articles
         latest_comments: Commentaires
+
+    front:
+        search: Rechercher sur le site
 
     main:
         cancel: Annuler

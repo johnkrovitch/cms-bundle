@@ -2,10 +2,11 @@
 
 namespace JK\CmsBundle\Module\Event\Subscriber;
 
-use JK\CmsBundle\Event\CmsEvents;
 use JK\CmsBundle\Module\Manager\ModuleManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpKernel\Event\KernelEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
 
 class ModuleEventSubscriber implements EventSubscriberInterface
 {
@@ -14,20 +15,26 @@ class ModuleEventSubscriber implements EventSubscriberInterface
      */
     private $moduleManager;
 
-    public function __construct(ModuleManagerInterface $moduleManager)
+    /**
+     * @var RequestStack
+     */
+    private $requestStack;
+
+    public function __construct(ModuleManagerInterface $moduleManager, RequestStack $requestStack)
     {
         $this->moduleManager = $moduleManager;
+        $this->requestStack = $requestStack;
     }
 
     public static function getSubscribedEvents()
     {
         return [
-            CmsEvents::MODULE_LOAD => 'loadModules',
+            KernelEvents::REQUEST => 'loadModules',
         ];
     }
 
-    public function loadModules(GenericEvent $event): void
+    public function loadModules(KernelEvent $event): void
     {
-        $this->moduleManager->load();
+        $this->moduleManager->load($event->getRequest());
     }
 }

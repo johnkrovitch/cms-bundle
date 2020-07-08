@@ -1,3 +1,22 @@
+jk_cms:
+    application:
+        comments:
+            show_route: test.show-comment
+            show_route_parameters:
+                year: article.year
+                month: article.month
+                slug: article.slug
+                commentId: id
+        articles:
+            show_route: test.article.show
+            show_route_parameters:
+                year: ~
+                month: ~
+                slug: ~
+            preview_route: test.article.preview
+            preview_route_parameters:
+                id: ~
+
 framework:
     secret: 'yes'
     default_locale: fr

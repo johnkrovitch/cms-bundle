@@ -1,3 +1,14 @@
 imports:
     - {resource: services/*}
     - {resource: services/modules/*}
+
+parameters:
+    jk_cms.module_directory: '%kernel.project_dir%/config/cms/modules'
+
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+        bind:
+#            $projectDirectory: '%kernel.project_dir%'
+            $moduleDirectory: '%jk_cms.module_directory%'

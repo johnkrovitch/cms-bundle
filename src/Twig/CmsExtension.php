@@ -3,10 +3,12 @@
 namespace JK\CmsBundle\Twig;
 
 use JK\CmsBundle\Assets\AssetsHelper;
+use JK\CmsBundle\DependencyInjection\Helper\ConfigurationHelper;
 use JK\CmsBundle\Entity\Article;
 use LAG\AdminBundle\Assets\Registry\ScriptRegistryInterface;
 use LAG\AdminBundle\Configuration\ApplicationConfiguration;
 use LAG\AdminBundle\Configuration\ApplicationConfigurationStorage;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -30,10 +32,16 @@ class CmsExtension extends AbstractExtension
      * @var ApplicationConfigurationStorage
      */
     private $applicationConfigurationStorage;
+
     /**
      * @var RouterInterface
      */
     private $router;
+
+    /**
+     * @var ConfigurationHelper
+     */
+    private $configurationHelper;
 
     /**
      * CmsExtension constructor.
@@ -42,12 +50,14 @@ class CmsExtension extends AbstractExtension
         AssetsHelper $assetsHelper,
         ScriptRegistryInterface $scriptRegistry,
         ApplicationConfigurationStorage $applicationConfigurationStorage,
-        RouterInterface $router
+        RouterInterface $router,
+        ConfigurationHelper $configurationHelper
     ) {
         $this->assetsHelper = $assetsHelper;
         $this->scriptRegistry = $scriptRegistry;
         $this->applicationConfigurationStorage = $applicationConfigurationStorage;
         $this->router = $router;
+        $this->configurationHelper = $configurationHelper;
     }
 
     /**
@@ -75,10 +85,18 @@ class CmsExtension extends AbstractExtension
 
     public function cmsArticlePath(Article $article): string
     {
-        return $this->router->generate('lecomptoir.article.show', [
-            'year' => $article->getYear(),
-            'month' => $article->getMonth(),
-            'slug' => $article->getSlug(),
-        ]);
+        $route = $this->configurationHelper->getShowRoute();
+        $parameters = [];
+        $accessor = new PropertyAccessor();
+        dump($route, $this->configurationHelper->getShowRouteParameters());
+
+        foreach ($this->configurationHelper->getShowRouteParameters() as $name => $property) {
+            if (!$property) {
+                $property = $name;
+            }
+            $parameters[$name] = $accessor->getValue($article, $property);
+        }
+
+        return $this->router->generate($route, $parameters);
     }
 }

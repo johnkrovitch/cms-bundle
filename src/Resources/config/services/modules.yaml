@@ -1,9 +1,27 @@
 services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+        bind:
+            #            $projectDirectory: '%kernel.project_dir%'
+            $moduleDirectory: '%jk_cms.module_directory%'
+
+    _instanceof:
+        JK\CmsBundle\Module\ModuleInterface:
+            tags: ['cms.module']
+
+    JK\CmsBundle\Module\:
+        resource: '../../../Module/{Configuration/Loader,Event/Subscriber,Manager,Registry}'
+
+    JK\CmsBundle\Module\Modules\:
+        resource: '../../../Module/Modules/*'
+        exclude: '../../../Module/Modules/*/{Event,Model}'
+
     ### Managers ###
-    JK\CmsBundle\Module\Manager\ModuleManager:
-        arguments:
-            $registry: '@JK\CmsBundle\Module\Registry\ModuleRegistryInterface'
-    JK\CmsBundle\Module\Manager\ModuleManagerInterface: '@JK\CmsBundle\Module\Manager\ModuleManager'
+#    JK\CmsBundle\Module\Manager\ModuleManager:
+#        arguments:
+#            $registry: '@JK\CmsBundle\Module\Registry\ModuleRegistryInterface'
+#    JK\CmsBundle\Module\Manager\ModuleManagerInterface: '@JK\CmsBundle\Module\Manager\ModuleManager'
 
     ### Modules ###
     JK\CmsBundle\Module\Modules\News\NewsModule:
@@ -23,8 +41,8 @@ services:
 
     ### Registry ###
     JK\CmsBundle\Module\Registry\ModuleRegistryInterface: '@JK\CmsBundle\Module\Registry\ModuleRegistry'
-
     JK\CmsBundle\Module\Registry\ModuleRegistry:
+        autowire: true
         arguments:
-            - !tagged_iterator cms.module
+            $modules: !tagged_iterator cms.module
 

@@ -1,0 +1,8 @@
+<div class="main-search">
+    {{ form_start(form, {action: path(search_route)}) }}
+    {{ form_row(form.search) }}
+    <div>
+        <button type="submit"><i class="fas fa-search"></i></button>
+    </div>
+    {{ form_end(form) }}
+</div>

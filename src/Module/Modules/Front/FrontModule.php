@@ -2,22 +2,13 @@
 
 namespace JK\CmsBundle\Module\Modules\Front;
 
-use JK\CmsBundle\Module\ModuleInterface;
+use JK\CmsBundle\Module\AbstractFrontModule;
 
-class FrontModule implements ModuleInterface
+class FrontModule extends AbstractFrontModule
 {
     public function getName(): string
     {
         return 'front';
-    }
-
-    public function load(): void
-    {
-    }
-
-    public function isEnabled(): bool
-    {
-        return true;
     }
 
     public function isLoaded(): bool

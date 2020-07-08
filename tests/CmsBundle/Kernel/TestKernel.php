@@ -10,13 +10,11 @@ use JK\NotificationBundle\JKNotificationBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use LAG\AdminBundle\LAGAdminBundle;
 use Liip\ImagineBundle\LiipImagineBundle;
-use Oneup\UploaderBundle\OneupUploaderBundle;
 use Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
-use Symfony\Component\DependencyInjection\Compiler\AutowirePass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -29,7 +27,7 @@ class TestKernel extends Kernel
 
     public function registerBundles()
     {
-        $bundles = [
+        return [
             // Dependencies
             new FrameworkBundle(),
             new SecurityBundle(),
@@ -45,8 +43,6 @@ class TestKernel extends Kernel
             new LiipImagineBundle(),
             new KnpMenuBundle(),
         ];
-
-        return $bundles;
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader)
