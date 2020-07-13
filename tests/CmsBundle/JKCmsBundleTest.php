@@ -28,7 +28,7 @@ class JKCmsBundleTest extends TestCase
         }
 
         foreach ($services as $id => $service) {
-            if ('_defaults' === $id) {
+            if (strpos($id, '_') === 0 || strpos($id, '\\', -1)) {
                 continue;
             }
             $this->assertTrue($container->has($id), 'The service "'.$id.'" is not found');

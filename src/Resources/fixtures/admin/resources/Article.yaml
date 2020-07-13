@@ -72,5 +72,12 @@ article:
                             icon: fas fa-search
                             linkAttributes:
                                 target: _blank
+                        show:
+                            text: cms.article.show
+                            route: '%jk_cms.articles.show_route%'
+                            routeParameters: '%jk_cms.articles.show_route_parameters%'
+                            icon: fas fa-eye
+                            linkAttributes:
+                                target: _blank
 
         delete: ~

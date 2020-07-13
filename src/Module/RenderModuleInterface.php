@@ -8,5 +8,5 @@ interface RenderModuleInterface extends ModuleInterface
 {
     public function getZones(): array;
 
-    public function render(): ModuleView;
+    public function render(array $options = []): ModuleView;
 }

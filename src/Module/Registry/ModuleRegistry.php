@@ -3,7 +3,10 @@
 namespace JK\CmsBundle\Module\Registry;
 
 use JK\CmsBundle\Exception\Exception;
+use JK\CmsBundle\Module\Configuration\Loader\ConfigurationLoaderInterface;
 use JK\CmsBundle\Module\ModuleInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ModuleRegistry implements ModuleRegistryInterface
 {
@@ -17,22 +20,43 @@ class ModuleRegistry implements ModuleRegistryInterface
      */
     protected $loadedModules = [];
 
-    public function __construct(iterable $modules)
+    /**
+     * @var ConfigurationLoaderInterface
+     */
+    private $loader;
+
+    public function __construct(iterable $modules, ConfigurationLoaderInterface $loader)
     {
         foreach ($modules as $module) {
             $this->modules[$module->getName()] = $module;
         }
+        $this->loader = $loader;
     }
 
-    public function load(): void
+    public function load(Request $request): void
     {
         foreach ($this->modules as $module) {
-            $module->load();
+            if (!$module->supports($request) || $module->isLoaded()) {
+                continue;
+            }
+            $this->loadModule($module, $request);
 
-            if ($module->isEnabled()) {
+            if ($module->isLoaded()) {
                 $this->loadedModules[] = $module;
             }
         }
+    }
+
+    public function loadModule(ModuleInterface $module, Request $request, array $options = []): void
+    {
+        $options = array_merge_recursive($this->loader->load($module->getName()), $options);
+        $moduleConfiguration = $this->resolveConfiguration($module, $options);
+
+        if (!empty($moduleConfiguration['enabled']) && false === $moduleConfiguration['enabled']) {
+            return;
+        }
+        $module->load($request, $moduleConfiguration);
+        $module->setLoaded();
     }
 
     public function get(string $moduleName): ModuleInterface
@@ -52,5 +76,19 @@ class ModuleRegistry implements ModuleRegistryInterface
     public function has(string $moduleName): bool
     {
         return key_exists($moduleName, $this->modules);
+    }
+
+    private function resolveConfiguration(ModuleInterface $module, array $configuration): array
+    {
+        $resolver = new OptionsResolver();
+        $module->configureOptions($resolver);
+
+        try {
+            $configuration = $resolver->resolve($configuration);
+        } catch (\Exception $exception) {
+            throw new Exception(sprintf('An error has occurred when configuring the module "%s".', $module->getName()), $exception->getCode(), $exception);
+        }
+
+        return $configuration;
     }
 }

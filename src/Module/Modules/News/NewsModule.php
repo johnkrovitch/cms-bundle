@@ -7,6 +7,8 @@ use JK\CmsBundle\Module\Render\ModuleView;
 use JK\CmsBundle\Module\RenderModuleInterface;
 use JK\CmsBundle\Module\Zone\Zone;
 use JK\CmsBundle\Repository\ArticleRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class NewsModule extends AbstractModule implements RenderModuleInterface
 {
@@ -27,9 +29,28 @@ class NewsModule extends AbstractModule implements RenderModuleInterface
         return 'news';
     }
 
-    public function render(): ModuleView
+    public function configureOptions(OptionsResolver $resolver): void
     {
-        return new ModuleView('@JKCms/Modules/news.html.twig', [
+        $resolver
+            ->setRequired('category')
+            ->setAllowedTypes('category', 'string')
+            ->setDefaults([
+                'limit' => 5,
+            ])
+            ->setAllowedTypes('limit', 'integer')
+        ;
+    }
+
+    public function load(Request $request, array $options = []): void
+    {
+        // TODO move in configuration
+        //$this->articles = $this->articleRepository->findPublishedByCategory('breves-de-comptoir', 5);
+        $this->articles = $this->articleRepository->findPublishedByCategory($options['category'], $options['limit']);
+    }
+
+    public function render(array $options = []): ModuleView
+    {
+        return new ModuleView('@JKCms/modules/news/show.html.twig', [
             'articles' => $this->articles,
         ]);
     }
@@ -39,16 +60,5 @@ class NewsModule extends AbstractModule implements RenderModuleInterface
         return [
             Zone::LEFT_COLUMN,
         ];
-    }
-
-    public function load(): void
-    {
-        $this->articles = $this->articleRepository->findByCategory('breves-de-comptoir', 5);
-        $this->loaded = true;
-    }
-
-    public function isEnabled(): bool
-    {
-        return true;
     }
 }

@@ -6,6 +6,8 @@ use JK\CmsBundle\Exception\Exception;
 use JK\CmsBundle\Module\Registry\ModuleRegistryInterface;
 use JK\CmsBundle\Module\Render\ModuleView;
 use JK\CmsBundle\Module\RenderModuleInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class ModuleManager implements ModuleManagerInterface
 {
@@ -14,17 +16,23 @@ class ModuleManager implements ModuleManagerInterface
      */
     private $registry;
 
-    public function __construct(ModuleRegistryInterface $registry)
+    /**
+     * @var RequestStack
+     */
+    private $requestStack;
+
+    public function __construct(ModuleRegistryInterface $registry, RequestStack $requestStack)
     {
         $this->registry = $registry;
+        $this->requestStack = $requestStack;
     }
 
-    public function load(): void
+    public function load(Request $request): void
     {
-        $this->registry->load();
+        $this->registry->load($request);
     }
 
-    public function render(string $moduleName): ModuleView
+    public function render(string $moduleName, array $options = []): ModuleView
     {
         $module = $this->registry->get($moduleName);
 
@@ -33,9 +41,9 @@ class ModuleManager implements ModuleManagerInterface
         }
 
         if (!$module->isLoaded()) {
-            $module->load();
+            $this->registry->loadModule($module, $this->requestStack->getCurrentRequest(), $options);
         }
 
-        return $module->render();
+        return $module->render($options);
     }
 }

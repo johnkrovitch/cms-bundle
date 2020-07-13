@@ -26,7 +26,6 @@ class JKCmsExtension extends Extension implements PrependExtensionInterface
 
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-
         $container->setParameter('jk_cms.scripts.template', $accessor->getValue($config, '[scripts][template]'));
         $container->setParameter('jk_cms.contact_email', $accessor->getValue($config, '[email][contact_email]'));
 
@@ -43,6 +42,8 @@ class JKCmsExtension extends Extension implements PrependExtensionInterface
         $container->setParameter('jk_cms.recaptcha.secret', $siteSecret);
         $container->setParameter('jk_cms.recaptcha.site_key', $siteKey);
         $container->setParameter('jk_cms.front_base', $accessor->getValue($config, '[application][front_base]'));
+        $container->setParameter('jk_cms.articles.show_route', $config['application']['articles']['show_route']);
+        $container->setParameter('jk_cms.articles.show_route_parameters', $config['application']['articles']['show_route_parameters']);
 
         $helperDefinition = $container->getDefinition(ConfigurationHelper::class);
         $helperDefinition->setArgument(0, $config);
