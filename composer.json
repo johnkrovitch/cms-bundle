@@ -33,6 +33,7 @@
         "twig/markdown-extra": "^3.0"
     },
     "require-dev": {
+        "php-parallel-lint/php-var-dump-check": "~0.4",
         "phpstan/phpstan": "^0.12",
         "phpunit/phpunit": "^8.0",
         "symfony/webpack-encore-bundle": "^1.7"

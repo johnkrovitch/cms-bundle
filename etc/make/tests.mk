@@ -1,6 +1,6 @@
 .PHONY: tests.integration tests.phpunit phpunit.run
 
-tests: phpunit.run php-cs-fixer.run phpstan.run
+tests: phpunit.run php-cs-fixer.run phpstan.run tests.var-dump-checker
 
 tests.integration:
 	mkdir -p var/integration/
@@ -30,3 +30,6 @@ php-cs-fixer.ci:
 phpstan.run:
 	bin/phpstan analyse --level=1 src tests
 
+.PHONY: tests.var-dump-checker
+tests.var-dump-checker:
+	bin/var-dump-check --symfony --exclude vendor .

@@ -88,7 +88,6 @@ class CmsExtension extends AbstractExtension
         $route = $this->configurationHelper->getShowRoute();
         $parameters = [];
         $accessor = new PropertyAccessor();
-        dump($route, $this->configurationHelper->getShowRouteParameters());
 
         foreach ($this->configurationHelper->getShowRouteParameters() as $name => $property) {
             if (!$property) {
