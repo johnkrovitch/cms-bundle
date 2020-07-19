@@ -5,7 +5,8 @@ services:
 
     JK\CmsBundle\Form\Handler\AddCommentHandler:
         arguments:
-            $contactEmail: '%jk_cms.contact_email%'
+            $fromEmail: '%jk_cms.email.from%'
+            $toEmail: '%jk_cms.email.to%'
 
     JK\CmsBundle\Filter\Handler\RequestFilterHandlerInterface: '@JK\CmsBundle\Filter\Handler\RequestFilterHandler'
     JK\CmsBundle\Filter\Handler\RequestFilterHandler: ~

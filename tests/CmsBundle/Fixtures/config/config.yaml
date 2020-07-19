@@ -16,6 +16,9 @@ jk_cms:
             preview_route: test.article.preview
             preview_route_parameters:
                 id: ~
+    email:
+        from: admin@admin.com
+        to: admin@admin.com
 
 framework:
     secret: 'yes'

@@ -23,7 +23,7 @@ class AddCommentHandler
     /**
      * @var string
      */
-    private $contactEmail;
+    private $fromEmail;
 
     /**
      * @var TranslatorInterface
@@ -50,8 +50,14 @@ class AddCommentHandler
      */
     private $router;
 
+    /**
+     * @var string
+     */
+    private $toEmail;
+
     public function __construct(
-        string $contactEmail,
+        string $fromEmail,
+        string $toEmail,
         CommentManagerInterface $manager,
         TranslatorInterface $translator,
         MailerInterface $mailer,
@@ -60,12 +66,13 @@ class AddCommentHandler
         RouterInterface $router
     ) {
         $this->manager = $manager;
-        $this->contactEmail = $contactEmail;
+        $this->fromEmail = $fromEmail;
         $this->translator = $translator;
         $this->mailer = $mailer;
         $this->helper = $helper;
         $this->environment = $environment;
         $this->router = $router;
+        $this->toEmail = $toEmail;
     }
 
     public function handle(array $data, Article $article): void
@@ -85,11 +92,6 @@ class AddCommentHandler
 
     private function sendEmail(Comment $comment): void
     {
-        $from = $comment->getAuthorEmail();
-
-        if (!$from) {
-            $from = 'unknown-sender@lecomptoirdelecureil.fr';
-        }
         $subject = $this->translator->trans('cms.new_comment.subject', [
             ':application' => $this->helper->getApplicationName(),
             ':article' => $comment->getArticle()->getTitle(),
@@ -101,8 +103,8 @@ class AddCommentHandler
         ], 'mailing');
 
         $email = (new NotificationEmail())
-            ->from($from)
-            ->to($this->contactEmail)
+            ->from($this->toEmail)
+            ->to($this->fromEmail)
             ->subject($subject)
             ->markdown($message)
             ->importance(NotificationEmail::IMPORTANCE_MEDIUM)
@@ -122,6 +124,9 @@ class AddCommentHandler
         $parameters = [];
 
         foreach ($this->helper->getShowRouteParameters() as $name => $property) {
+            if (null === $property) {
+                $property = $name;
+            }
             $parameters[$name] = $accessor->getValue($article, $property);
         }
 
