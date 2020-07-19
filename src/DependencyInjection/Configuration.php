@@ -81,9 +81,11 @@ class Configuration implements ConfigurationInterface
         $builder
             ->arrayNode('email')
                 ->addDefaultsIfNotSet()
+                ->isRequired()
                 ->children()
                     ->scalarNode('base_template')->defaultValue('@JKCms/Mail/base.html.twig')->end()
-                    ->scalarNode('contact_email')->defaultValue('admin@admin.com')->end()
+                    ->scalarNode('from')->defaultValue('admin@admin.com')->cannotBeEmpty()->end()
+                    ->scalarNode('to')->defaultValue('admin@admin.com')->cannotBeEmpty()->end()
                 ->end()
             ->end()
         ;

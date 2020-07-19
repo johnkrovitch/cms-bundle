@@ -370,6 +370,13 @@ class Article
         return $this->comments;
     }
 
+    public function getPublishedComments(): Collection
+    {
+        return $this->comments->filter(function (Comment $comment) {
+            return $comment->getIsApproved();
+        });
+    }
+
     /**
      * @param mixed $comments
      */
