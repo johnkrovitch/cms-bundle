@@ -28,18 +28,13 @@ class RssItem implements ItemInterface
     protected $publicationDate;
 
     /**
-     * FeedItem constructor.
-     *
-     * @param $title
-     * @param $description
-     * @param $link
-     * @param $publicationDate
+     * RssItem constructor.
      */
     public function __construct(
-        $title,
-        $description,
-        $link,
-        $publicationDate
+        string $title,
+        string $description,
+        string $link,
+        DateTime $publicationDate
     ) {
         $this->title = $title;
         $this->description = $description;

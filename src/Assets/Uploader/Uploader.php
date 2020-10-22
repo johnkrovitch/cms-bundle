@@ -30,13 +30,10 @@ class Uploader
 
     /**
      * Uploader constructor.
-     *
-     * @param string $uploadDirectory
-     * @param string $cacheDirectory
      */
     public function __construct(
-        $uploadDirectory,
-        $cacheDirectory,
+        string $uploadDirectory,
+        string $cacheDirectory,
         MediaRepositoryInterface $mediaRepository
     ) {
         $this->uploadDirectory = $uploadDirectory;
@@ -44,12 +41,7 @@ class Uploader
         $this->cacheDirectory = $cacheDirectory;
     }
 
-    /**
-     * @return MediaInterface
-     *
-     * @throws Exception
-     */
-    public function upload(array $data, Article $article = null)
+    public function upload(array $data)
     {
         $media = null;
 
@@ -61,7 +53,6 @@ class Uploader
                 // upload done in ajax
                 $media = $data['upload'];
             }
-        } elseif (MediaType::UPLOAD_FROM_URL === $data['uploadType']) {
         } elseif (MediaType::CHOOSE_FROM_COLLECTION === $data['uploadType']) {
             // find from the repository with the selected id
             $media = $this
@@ -111,7 +102,7 @@ class Uploader
         file_put_contents($temporaryFile, $content);
         $size = getimagesize($temporaryFile);
 
-        if ($size <= 0) {
+        if (empty($size)) {
             throw new Exception('Cannot fetch image from url "'.$url.'"');
         }
     }
@@ -119,11 +110,9 @@ class Uploader
     /**
      * Generate an unique default file name.
      *
-     * @param string $extension
-     *
      * @return string
      */
-    protected function generateFileName($extension, Article $article = null)
+    protected function generateFileName(string $extension, Article $article = null)
     {
         $title = '';
 

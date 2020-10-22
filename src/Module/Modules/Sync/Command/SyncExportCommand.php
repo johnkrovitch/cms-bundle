@@ -37,7 +37,7 @@ class SyncExportCommand extends Command
         $this->setDescription('Export configured sync elements');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
         $io->title('Export sync elements');
@@ -57,5 +57,7 @@ class SyncExportCommand extends Command
         }
 
         $io->success('Sync elements have been exported');
+
+        return 0;
     }
 }

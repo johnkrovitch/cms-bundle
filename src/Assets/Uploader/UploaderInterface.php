@@ -2,15 +2,12 @@
 
 namespace JK\CmsBundle\Assets\Uploader;
 
-use JK\CmsBundle\Entity\Article;
 use JK\MediaBundle\Entity\MediaInterface;
 
 interface UploaderInterface
 {
     /**
-     * @param $data
-     *
-     * @return MediaInterface
+     * Upload the data from the upload from and create a media.
      */
-    public function upload(array $data, Article $article = null);
+    public function upload(array $data): MediaInterface;
 }

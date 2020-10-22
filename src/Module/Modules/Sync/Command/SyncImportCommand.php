@@ -36,7 +36,7 @@ class SyncImportCommand extends Command
         $this->setDescription('Export configured sync elements');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
         $io->title('Import sync elements');
@@ -53,5 +53,7 @@ class SyncImportCommand extends Command
         $this->eventDispatcher->dispatch($event, SyncImportEvent::NAME);
 
         $io->success('Sync elements have been imported');
+
+        return 0;
     }
 }

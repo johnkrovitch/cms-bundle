@@ -17,9 +17,6 @@ class ArticleManager extends AbstractManager implements ArticleManagerInterface
         $this->repository = $repository;
     }
 
-    /**
-     * @return Article|mixed
-     */
     public function get(int $id): Article
     {
         $article = $this->repository->find($id);
@@ -28,9 +25,6 @@ class ArticleManager extends AbstractManager implements ArticleManagerInterface
         return $article;
     }
 
-    /**
-     * @return Article|mixed
-     */
     public function getOneBy(array $criteria, array $orderBy = null): Article
     {
         $article = $this->repository->findOneBy($criteria, $orderBy);

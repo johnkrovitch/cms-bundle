@@ -6,12 +6,14 @@ use Doctrine\Common\Collections\Collection;
 use JK\CmsBundle\Entity\Article;
 use JK\CmsBundle\Entity\Category;
 use JK\CmsBundle\Entity\Tag;
+use JK\CmsBundle\Entity\User;
 use JK\CmsBundle\Repository\UserRepository;
 use JK\MediaBundle\Form\Type\MediaType;
 use LAG\AdminBundle\Assets\Registry\ScriptRegistryInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -140,8 +142,11 @@ class ArticleType extends AbstractType
                 }
                 // User should not be null as we are under the cms firewall, the user is fully authenticated
                 $user = $this->security->getUser();
-                $user = $this->userRepository->find($user->getId());
 
+                if (!$user instanceof User) {
+                    throw new UnexpectedTypeException($user, User::class);
+                }
+                $user = $this->userRepository->find($user->getId());
                 $article->setAuthor($user);
             })
             ->addModelTransformer(new CallbackTransformer(function ($value) {

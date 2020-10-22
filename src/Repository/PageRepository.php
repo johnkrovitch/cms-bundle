@@ -10,10 +10,8 @@ class PageRepository extends AbstractRepository
 {
     /**
      * Return a published page by its slug.
-     *
-     * @param $pageSlug
      */
-    public function findPublished($pageSlug): ?Page
+    public function findPublished(string $pageSlug): ?Page
     {
         return $this
             ->createQueryBuilder('page')
