@@ -20,7 +20,7 @@
                         </a>
                     </h2>
 
-                    {# Article thumbnail #}
+                    {# Article thumbnail #}
                     {% if article.thumbnail %}
                         <a href="{{ articleUrl }}" title="{{ articleLinkTitle }}">
                             <img src="{{ media_path(article.thumbnail) }}"
@@ -29,15 +29,15 @@
                         </a>
                     {% endif %}
 
-                    {# Article publication date#}
+                    {# Article publication date#}
                     <span class="title-date">{{ article.publicationDate | localizeddate('full', 'none') }}</span>
 
-                    {# Article title #}
+                    {# Article title #}
                     <h3>
                         <a href="{{ articleUrl }}" title="{{ articleLinkTitle }}">{{ article.title }}</a>
                     </h3>
-                    {# Article truncated content #}
-                    <p>{{ article.content | striptags | truncate(500) | raw }}
+                    {# Article u.truncated content #}
+                    <p>{{ article.content | striptags | u.truncate(500) | raw }}
                         <a href="{{ articleUrl }}" title="{{ articleLinkTitle }}" class="more-link">
                             {{ 'lecomptoir.interface.more_link' | trans }}
                             <i class="fa fa-plus-circle"></i>

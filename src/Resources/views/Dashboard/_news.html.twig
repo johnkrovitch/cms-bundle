@@ -17,7 +17,7 @@
     {% for comment in last_comments %}
         <a href="{{ path('cms.comment.edit', {
             id: comment.id
-        }) }}">{{ comment.content | truncate(25) }}</a>
+        }) }}">{{ comment.content | u.truncate(25) }}</a>
 
         {% if not loop.last %}, {% endif %}
     {% endfor %}.

@@ -5,7 +5,7 @@ services:
         bind:
             $projectDirectory: '%kernel.project_dir%'
             
-    # Commands
+    # Commands
     JK\CmsBundle\Module\Modules\Sync\Command\SyncExportCommand:
         tags:
             - {name: console.command}
@@ -14,6 +14,6 @@ services:
         tags:
             - {name: console.command}
 
-    # Managers
+    # Managers
     JK\CmsBundle\Module\Modules\Sync\Manager\SyncManager: ~
     JK\CmsBundle\Module\Modules\Sync\Manager\SyncManagerInterface: '@JK\CmsBundle\Module\Modules\Sync\Manager\SyncManager'

@@ -67,7 +67,7 @@
                                 le {{ comment.createdAt | localizeddate('full', 'none') }}
                                 à  {{ comment.createdAt | localizeddate('none', 'short') }}
                             </p>
-                            <p class="">{{ comment.content | truncate(500, '...') }}</p>
+                            <p class="">{{ comment.content | u.truncate(500, '...') }}</p>
                         </div>
                     {% endfor %}
 

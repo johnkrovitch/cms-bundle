@@ -1,6 +1,6 @@
 cms:
     article:
-        # Actions
+        # Actions
         save_errors: Une erreur a été rencontrée
         saved: L'article a été sauvegardé
         preview: Prévisualiser l'article
@@ -13,7 +13,7 @@ cms:
         return: Retour
         publish: Publier l'article
         search: Rechercher un article sur le site...
-        # Fields
+        # Fields
         id: Id
         title: Titre
         title_help: Titre de l'article. Ce titre s'affichera sur la page d'accueil et dans la page de l'article.

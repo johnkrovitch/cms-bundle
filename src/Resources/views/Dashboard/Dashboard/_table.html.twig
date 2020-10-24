@@ -12,7 +12,7 @@
                     <tr>
                         <td>
                             <a href="{{ editUrl }}">
-                                {{ item.content | truncate }}
+                                {{ item.content | u.u.truncate }}
                             </a>
                         </td>
                         <td>{{ item.updatedAt | localizeddate('full', 'none', app.request.locale) }}</td>

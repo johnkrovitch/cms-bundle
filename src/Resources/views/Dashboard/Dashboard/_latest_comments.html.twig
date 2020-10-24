@@ -14,7 +14,7 @@
                             <a href="{{ path('cms.comment.edit', {
                                 id: comment.id
                             }) }}">
-                                {{ comment.content | truncate }}
+                                {{ comment.content | u.truncate }}
                             </a>
                         </td>
                         <td>{{ comment.updatedAt | localizeddate('full', 'none', app.request.locale) }}</td>

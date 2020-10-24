@@ -13,7 +13,7 @@
                 <a href="{{ cms_article_path(article) }}"
                    title="{{ 'lecomptoir.news.see' | trans({'%article%': article.title}) }}">
                     <i class="fa fa-angle-double-right "></i>
-                    {{ article.title | truncate(20, true, '...') }}
+                    {{ article.title | u.truncate(20, true, '...') }}
                 </a>
             </li>
         {% endfor %}
