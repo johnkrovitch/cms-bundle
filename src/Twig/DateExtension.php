@@ -33,7 +33,7 @@ class DateExtension extends AbstractExtension
     {
         return Carbon::now($date->getTimezone())
             ->locale($this->locale)
-            ->subSeconds(time() - $date->format('U'))
+            ->subSeconds(time() - (int) $date->format('u'))
             ->diffForHumans()
         ;
     }

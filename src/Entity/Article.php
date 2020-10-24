@@ -21,12 +21,8 @@ use JK\MediaBundle\Entity\MediaInterface;
  *
  * @Assert\Publication()
  */
-class Article
+class Article implements PublishableInterface
 {
-    const PUBLICATION_STATUS_DRAFT = 0;
-    const PUBLICATION_STATUS_VALIDATION = 1;
-    const PUBLICATION_STATUS_PUBLISHED = 2;
-
     /**
      * Entity id.
      *
@@ -151,19 +147,13 @@ class Article
      */
     protected $thumbnail;
 
-    /**
-     * Article constructor.
-     */
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->tags = new ArrayCollection();
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->title;
     }
@@ -171,26 +161,27 @@ class Article
     /**
      * @ORM\PrePersist()
      */
-    public function setCreatedAt()
+    public function setCreatedAt(): self
     {
         if (!$this->createdAt) {
             $this->createdAt = new DateTime();
         }
+
+        return $this;
     }
 
     /**
      * Created at cannot be set. But in some case (like imports...), it is required to set created at. Use this method
      * in this case.
      */
-    public function forceCreatedAt(DateTime $createdAt)
+    public function forceCreatedAt(DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 
-    /**
-     * @return DateTime
-     */
-    public function getCreatedAt()
+    public function getCreatedAt(): ? DateTime
     {
         return $this->createdAt;
     }
@@ -266,18 +257,12 @@ class Article
         return $this->canonical;
     }
 
-    /**
-     * @param string $canonical
-     */
-    public function setCanonical($canonical)
+    public function setCanonical(string $canonical)
     {
         $this->canonical = $canonical;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPublicationStatus()
+    public function getPublicationStatus(): int
     {
         return $this->publicationStatus;
     }
@@ -290,10 +275,7 @@ class Article
         $this->publicationStatus = $publicationStatus;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPublicationDate()
+    public function getPublicationDate(): ?DateTime
     {
         return $this->publicationDate;
     }

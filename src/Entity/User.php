@@ -4,7 +4,6 @@ namespace JK\CmsBundle\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -131,7 +130,7 @@ class User implements UserInterface
     /**
      * User roles.
      *
-     * @var Role[]
+     * @var string[]
      * @ORM\Column(type="array", name="roles")
      */
     protected $roles = [];
@@ -233,14 +232,14 @@ class User implements UserInterface
      * and populated in any number of different ways when the user object
      * is created.
      *
-     * @return Role[] The user roles
+     * @return string[] The user roles
      */
     public function getRoles()
     {
         $roles = [];
 
         foreach ($this->roles as $role) {
-            $roles[] = new Role($role);
+            $roles[] = $role;
         }
 
         return $roles;
@@ -540,7 +539,7 @@ class User implements UserInterface
     }
 
     /**
-     * @param Role[] $roles
+     * @param string[] $roles
      */
     public function setRoles($roles)
     {

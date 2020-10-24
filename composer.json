@@ -16,19 +16,18 @@
         "eko/feedbundle": "^2.0",
         "erusev/parsedown": "^1.7",
         "google/recaptcha": "^1.2",
-        "johnkrovitch/media-bundle": "^1.0",
-        "johnkrovitch/notification-bundle": ">=0.3",
-        "johnkrovitch/orm-pack": "^1.0",
-        "lag/adminbundle": "^1.0",
+        "johnkrovitch/media-bundle": "^1.1RC1",
+        "johnkrovitch/notification-bundle": "^1.0",
+        "johnkrovitch/orm-pack": "^2.0",
+        "lag/adminbundle": "^1.1-RC2",
         "liip/imagine-bundle": "^2.2",
         "nesbot/carbon": "^2.27",
         "ps/image-optimizer": "^2.0",
         "psr/simple-cache": "^1.0",
-        "symfony/framework-bundle": "^3.4|^4.4|^5.0",
-        "symfony/mailer": "^3.0|^4.0|^5.0",
-        "symfony/routing": "^3.0|^4.0|^5.0",
-        "symfony/twig-bundle": "^3.0|^4.0|^5.0",
-        "twig/extensions": "^1.5",
+        "symfony/framework-bundle": "^3.4|^4.4|^5.1",
+        "symfony/mailer": "^3.4|^4.4|^5.1",
+        "symfony/routing": "^3.4|^4.4|^5.1",
+        "symfony/twig-bundle": "^3.4|^4.4|^5.1",
         "twig/inky-extra": "^3.0",
         "twig/markdown-extra": "^3.0"
     },
@@ -50,7 +49,6 @@
     },
     "config": {
         "bin-dir": "bin",
-        "component-dir": "components",
         "sort-packages": true
     }
 }

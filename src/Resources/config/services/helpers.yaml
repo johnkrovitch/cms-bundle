@@ -9,4 +9,4 @@ services:
             $assetsMapping: '%jk_media.mapping%'
             $router: '@Symfony\Component\Routing\RouterInterface'
             $assetsManager: '@Liip\ImagineBundle\Imagine\Cache\CacheManager'
-            $rootDirectory: '%kernel.root_dir%'
+            $rootDirectory: '%kernel.project_dir%'

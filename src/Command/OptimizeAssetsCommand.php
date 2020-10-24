@@ -51,7 +51,8 @@ class OptimizeAssetsCommand extends Command implements ContainerAwareInterface
             $style->text('Optimize '.$file->getRealPath());
             $optimizer->optimize($file->getRealPath());
         }
-
         $style->success('Assets optimized');
+
+        return self::SUCCESS;
     }
 }

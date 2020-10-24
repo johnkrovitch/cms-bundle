@@ -45,5 +45,7 @@ class InstallCommand extends Command
             $io->note('Run '.$installer->getName().' ('.$installer->getDescription().')');
             $installer->install($context);
         }
+
+        return self::SUCCESS;
     }
 }

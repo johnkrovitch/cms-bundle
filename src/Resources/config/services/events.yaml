@@ -4,5 +4,3 @@ services:
         autoconfigure: true
 
     JK\CmsBundle\Event\Subscriber\Menu\MenuSubscriber: ~
-
-    JK\CmsBundle\Event\Subscriber\ParameterGroupSubscriber\ParameterGroupSubscriber: ~

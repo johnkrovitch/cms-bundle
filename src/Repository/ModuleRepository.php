@@ -13,11 +13,9 @@ class ModuleRepository
     private $modules = [];
 
     /**
-     * @param $zone
-     *
      * @return RenderModuleInterface[]
      */
-    public function load($zone)
+    public function load(string $zone)
     {
         $modules = [];
 
@@ -39,11 +37,9 @@ class ModuleRepository
     }
 
     /**
-     * @param $name
-     *
      * @return RenderModuleInterface
      */
-    public function get($name)
+    public function get(string $name)
     {
         if (!array_key_exists($name, $this->modules)) {
             throw new LogicException('Module "'.$name.'" not found');

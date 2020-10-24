@@ -3,6 +3,7 @@
 namespace JK\CmsBundle\Controller\Dashboard;
 
 use DateTime;
+use JK\CmsBundle\Entity\User;
 use JK\CmsBundle\Repository\ArticleRepository;
 use JK\CmsBundle\Repository\CommentRepository;
 use JK\NotificationBundle\Repository\NotificationRepository;
@@ -12,7 +13,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Twig\Environment;
 
 class DashboardAction
@@ -70,7 +70,7 @@ class DashboardAction
     {
         $user = $this->tokenStorage->getToken()->getUser();
 
-        if (!$user instanceof UserInterface) {
+        if (!$user instanceof User) {
             throw new AccessDeniedException();
         }
         //$this->eventDispatcher->dispatch(Events::MENU, new BuildMenuEvent());

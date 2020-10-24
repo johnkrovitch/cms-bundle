@@ -4,6 +4,7 @@ namespace JK\CmsBundle\Entity;
 
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JK\MediaBundle\Entity\MediaInterface;
@@ -17,10 +18,9 @@ use JK\MediaBundle\Entity\MediaInterface;
  * @ORM\Entity(repositoryClass="JK\CmsBundle\Repository\CategoryRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Category
+class Category implements PublishableInterface
 {
     const PUBLICATION_NOT_PUBLISHED = 0;
-    const PUBLICATION_STATUS_PUBLISHED = 1;
 
     /**
      * Category id.
@@ -67,7 +67,7 @@ class Category
      *
      * @ORM\Column(name="publication_status", type="smallint", nullable=true)
      */
-    protected $publicationStatus;
+    protected $publicationStatus = self::PUBLICATION_STATUS_DRAFT;
 
     /**
      * Category articles.
@@ -135,50 +135,7 @@ class Category
      */
     protected $thumbnail;
 
-    /**
-     * Return the Category name.
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set the Category name.
-     *
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * Set description.
-     *
-     * @param string $description
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    }
-
-    /**
-     * Get description.
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->name;
     }
@@ -191,89 +148,98 @@ class Category
         $this->articles = new ArrayCollection();
     }
 
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
     /**
-     * @return mixed
+     * @return Article[]|Collection
      */
     public function getArticles()
     {
         return $this->articles;
     }
 
-    /**
-     * @param mixed $articles
-     */
-    public function setArticles($articles)
+    public function setArticles($articles): self
     {
         $this->articles = $articles;
+
+        return $this;
     }
 
-    public function addArticle(Article $article)
+    public function addArticle(Article $article): self
     {
         $this->articles->add($article);
+
+        return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getPublicationStatus()
+    public function getPublicationStatus(): int
     {
         return $this->publicationStatus;
     }
 
-    /**
-     * @param int $publicationStatus
-     */
-    public function setPublicationStatus($publicationStatus)
+    public function setPublicationStatus(int $publicationStatus): self
     {
         $this->publicationStatus = $publicationStatus;
+
+        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    /**
-     * @param mixed $slug
-     */
-    public function setSlug($slug)
+    public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isDisplayInHomepage()
+    public function isDisplayInHomepage(): bool
     {
         return $this->displayInHomepage;
     }
 
-    /**
-     * @param bool $displayInHomepage
-     */
-    public function setDisplayInHomepage($displayInHomepage)
+    public function setDisplayInHomepage(bool $displayInHomepage): self
     {
         $this->displayInHomepage = $displayInHomepage;
+
+        return $this;
     }
 
-    /**
-     * @return Category
-     */
-    public function getParent()
+    public function getParent(): ?self
     {
         return $this->parent;
     }
 
-    /**
-     * @param Category $parent
-     */
-    public function setParent($parent)
+    public function setParent(?Category $parent): self
     {
         $this->parent = $parent;
+
+        return $this;
     }
 
     /**
@@ -284,43 +250,37 @@ class Category
         return $this->children;
     }
 
-    /**
-     * @param Category[] $children
-     */
-    public function setChildren($children)
+    public function setChildren($children): self
     {
         $this->children = $children;
+
+        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
+    public function setId(int $id): self
     {
         $this->id = $id;
+
+        return $this;
     }
 
     /**
      * Created at cannot be set. But in some case (like imports...), it is required to set created at. Use this method
      * in this case.
      */
-    public function forceCreatedAt(DateTime $createdAt)
+    public function forceCreatedAt(DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 
-    /**
-     * @return DateTime
-     */
-    public function getCreatedAt()
+    public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt;
     }
@@ -328,12 +288,8 @@ class Category
     /**
      * @ORM\PrePersist()
      * @ORM\PreUpdate()
-     *
-     * @param null $value
-     *
-     * @return $this
      */
-    public function setUpdatedAt($value = null)
+    public function setUpdatedAt(?DateTime $value = null): self
     {
         if ($value instanceof DateTime) {
             $this->updatedAt = $value;
@@ -344,35 +300,32 @@ class Category
         return $this;
     }
 
-    /**
-     * @return DateTime
-     */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @return MediaInterface
-     */
-    public function getThumbnail()
+    public function getThumbnail(): ?MediaInterface
     {
         return $this->thumbnail;
     }
 
-    /**
-     * @param MediaInterface $thumbnail
-     */
-    public function setThumbnail(MediaInterface $thumbnail = null)
+    public function setThumbnail(?MediaInterface $thumbnail): self
     {
         $this->thumbnail = $thumbnail;
+
+        return $this;
     }
 
-    /**
-     * @param DateTime $createdAt
-     */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(?DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getPublicationDate(): ?DateTime
+    {
+        return $this->getCreatedAt();
     }
 }

@@ -1,5 +1,5 @@
-include etc/make/assets.mk
-include etc/make/tests.mk
+include .make/assets.mk
+include .make/tests.mk
 
 .PHONY: install composer.install
 
