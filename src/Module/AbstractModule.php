@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 abstract class AbstractModule implements ModuleInterface
 {
     protected $loaded = false;
+    protected $configuration;
 
     public function isLoaded(): bool
     {
@@ -29,7 +30,29 @@ abstract class AbstractModule implements ModuleInterface
         return null !== $request->get('_admin');
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
+    public function setConfiguration(array $configuration): void
+    {
+        if ($this->isConfigured()) {
+            throw new Exception('The module "'.$this->getName().'" is already configured');
+        }
+        $this->configuration = $configuration;
+    }
+
+    public function getConfiguration(): array
+    {
+        if (!$this->isConfigured()) {
+            throw new Exception('The module "'.$this->getName().'" is not configured');
+        }
+
+        return $this->configuration;
+    }
+
+    public function isConfigured(): bool
+    {
+        return $this->configuration !== null;
+    }
+
+    public function configure(OptionsResolver $resolver): void
     {
     }
 

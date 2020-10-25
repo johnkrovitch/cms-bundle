@@ -8,7 +8,7 @@
         {% block article_header %}
             <div class="article-header">
                 <div class="article-title">
-                    <span class="title-date">{{ article.publicationDate | localizeddate('full', 'none') }}</span>
+                    <span class="title-date">{{ article.publicationDate | format_datetime('full', 'none') }}</span>
 
                     {% if article.category %}
                         <a href="{{ path('lecomptoir.article.list_by_category', {
@@ -64,8 +64,8 @@
                     {% for comment in article.comments %}
                         <div class="comment">
                             <p class="title" id="comment-{{ comment.id }}">Par {{ comment.authorName }},
-                                le {{ comment.createdAt | localizeddate('full', 'none') }}
-                                à  {{ comment.createdAt | localizeddate('none', 'short') }}
+                                le {{ comment.createdAt | format_datetime('full', 'none') }}
+                                à  {{ comment.createdAt | format_datetime('none', 'short') }}
                             </p>
                             <p class="">{{ comment.content | u.truncate(500, '...') }}</p>
                         </div>

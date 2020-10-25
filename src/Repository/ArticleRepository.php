@@ -9,11 +9,12 @@ use JK\CmsBundle\Entity\Article;
 use JK\Repository\AbstractRepository;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
+use Pagerfanta\PagerfantaInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ArticleRepository extends AbstractRepository
 {
-    public function findByFilters(array $filters): Pagerfanta
+    public function findByFilters(array $filters): PagerfantaInterface
     {
         $filters = $this->resolveFilters($filters);
 
@@ -27,25 +28,25 @@ class ArticleRepository extends AbstractRepository
             ->setParameter('now', new DateTime())
         ;
 
-        if (null !== $filters['categorySlug']) {
+        if ($filters['categorySlug'] !== null) {
             $queryBuilder
                 ->addSelect('category')
                 ->innerJoin('article.category', 'category')
                 ->andWhere('category.slug = :category')
                 ->setParameter('category', $filters['categorySlug']);
         }
-        if (null !== $filters['slug']) {
+        if ($filters['slug'] !== null) {
             $queryBuilder
                 ->andWhere('article.slug = :slug')
                 ->setParameter('slug', $filters['slug']);
         }
-        if (null !== $filters['tagSlug']) {
+        if ($filters['tagSlug'] !== null) {
             $queryBuilder
                 ->innerJoin('article.tags', 'tag')
                 ->andWhere('tag.slug = :tag_slug')
                 ->setParameter('tag_slug', $filters['tagSlug']);
         }
-        if (null !== $filters['tag']) {
+        if ($filters['tag'] !== null) {
             $queryBuilder
                 ->join('article.tags', 'tag')
                 ->where('tag.name = :tag')
@@ -156,7 +157,7 @@ class ArticleRepository extends AbstractRepository
      *
      * @return Pagerfanta|Article[]
      */
-    public function findByTerms(array $terms, $usePagination = true, $page = 1)
+    public function findByTerms(array $terms, $usePagination = true, $page = 1): PagerfantaInterface
     {
         $queryBuilder = $this
             ->createQueryBuilder('article')

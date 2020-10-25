@@ -49,13 +49,12 @@ class ModuleRegistry implements ModuleRegistryInterface
 
     public function loadModule(ModuleInterface $module, Request $request, array $options = []): void
     {
-        $options = array_merge_recursive($this->loader->load($module->getName()), $options);
-        $moduleConfiguration = $this->resolveConfiguration($module, $options);
+        $this->defineModuleConfiguration($module, $this->loader->load($module->getName()));
 
         if (!empty($moduleConfiguration['enabled']) && false === $moduleConfiguration['enabled']) {
             return;
         }
-        $module->load($request, $moduleConfiguration);
+        $module->load($request, $options);
         $module->setLoaded();
     }
 
@@ -78,17 +77,19 @@ class ModuleRegistry implements ModuleRegistryInterface
         return key_exists($moduleName, $this->modules);
     }
 
-    private function resolveConfiguration(ModuleInterface $module, array $configuration): array
+    private function defineModuleConfiguration(ModuleInterface $module, array $configuration): void
     {
         $resolver = new OptionsResolver();
-        $module->configureOptions($resolver);
+        $module->configure($resolver);
 
         try {
             $configuration = $resolver->resolve($configuration);
+
+            if (!$module->isConfigured()) {
+                $module->setConfiguration($configuration);
+            }
         } catch (\Exception $exception) {
             throw new Exception(sprintf('An error has occurred when configuring the module "%s".', $module->getName()), $exception->getCode(), $exception);
         }
-
-        return $configuration;
     }
 }

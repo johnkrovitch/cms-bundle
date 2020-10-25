@@ -6,7 +6,7 @@ use Pagerfanta\PagerfantaInterface;
 
 interface ArticleFinderInterface
 {
-    public function findByTags(string $tag): PagerfantaInterface;
+    public function findByTerms(array $terms, int $page = 1): PagerfantaInterface;
 
-    public function findByTerms(array $terms): PagerfantaInterface;
+    public function findByFilter(array $filters, int $page = 1): PagerfantaInterface;
 }

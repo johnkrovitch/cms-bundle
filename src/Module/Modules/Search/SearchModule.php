@@ -2,7 +2,7 @@
 
 namespace JK\CmsBundle\Module\Modules\Search;
 
-use JK\CmsBundle\Form\Type\SearchType;
+use JK\CmsBundle\Form\Type\ArticleSearchType;
 use JK\CmsBundle\Module\AbstractFrontModule;
 use JK\CmsBundle\Module\Render\ModuleView;
 use JK\CmsBundle\Module\RenderModuleInterface;
@@ -38,11 +38,13 @@ class SearchModule extends AbstractFrontModule implements RenderModuleInterface
         return 'search';
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
+    public function configure(OptionsResolver $resolver): void
     {
         $resolver
             ->setRequired('route')
+            ->setRequired('template')
             ->setAllowedTypes('route', 'string')
+            ->setAllowedTypes('template', 'string')
             ->setDefaults([
                 'placeholder' => 'cms.article.search',
             ])
@@ -51,11 +53,11 @@ class SearchModule extends AbstractFrontModule implements RenderModuleInterface
 
     public function load(Request $request, array $options = []): void
     {
-        $this->form = $this->formFactory->create(SearchType::class, null, [
-            'placeholder' => $options['placeholder'],
+        $this->form = $this->formFactory->create(ArticleSearchType::class, null, [
+            'placeholder' => $this->configuration['placeholder'],
         ]);
         $this->form->handleRequest($request);
-        $this->route = $options['route'];
+        $this->route = $this->configuration['route'];
     }
 
     public function getZones(): array

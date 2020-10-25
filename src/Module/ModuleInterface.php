@@ -13,12 +13,34 @@ interface ModuleInterface
      */
     public function getName(): string;
 
+    /**
+     * Return true if the module supports the current request.
+     */
     public function supports(Request $request): bool;
 
     /**
-     * Configure the module options resolver to be passed to the load() method.
+     * Return the module configuration. If the module configuration is not defined, an exception will be thrown.
+     *
+     * @throws Exception
      */
-    public function configureOptions(OptionsResolver $resolver): void;
+    public function getConfiguration(): array;
+
+    /**
+     * Define the module configuration. It can be set only once.
+     *
+     * @param array $configuration
+     */
+    public function setConfiguration(array $configuration): void;
+
+    /**
+     * Configure the module options resolver to get the configuration passed to the setConfiguration() method.
+     */
+    public function configure(OptionsResolver $resolver): void;
+
+    /**
+     * Return true if the module is already configured.
+     */
+    public function isConfigured(): bool;
 
     /**
      * Load data required by the module to work.

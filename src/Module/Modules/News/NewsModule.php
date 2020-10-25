@@ -29,7 +29,7 @@ class NewsModule extends AbstractModule implements RenderModuleInterface
         return 'news';
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
+    public function configure(OptionsResolver $resolver): void
     {
         $resolver
             ->setRequired('category')
@@ -43,9 +43,10 @@ class NewsModule extends AbstractModule implements RenderModuleInterface
 
     public function load(Request $request, array $options = []): void
     {
-        // TODO move in configuration
-        //$this->articles = $this->articleRepository->findPublishedByCategory('breves-de-comptoir', 5);
-        $this->articles = $this->articleRepository->findPublishedByCategory($options['category'], $options['limit']);
+        $this->articles = $this
+            ->articleRepository
+            ->findPublishedByCategory($this->configuration['category'], $this->configuration['limit'])
+        ;
     }
 
     public function render(array $options = []): ModuleView

@@ -49,3 +49,7 @@ services:
     JK\CmsBundle\Controller\Article\UnsubscribeAction:
         tags:
             - 'controller.service_arguments'
+
+    JK\CmsBundle\Controller\Article\SearchAction:
+        tags:
+            - 'controller.service_arguments'

@@ -10,5 +10,4 @@ services:
         autoconfigure: true
         autowire: true
         bind:
-#            $projectDirectory: '%kernel.project_dir%'
             $moduleDirectory: '%jk_cms.module_directory%'

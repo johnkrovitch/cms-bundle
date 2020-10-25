@@ -17,7 +17,7 @@
                                 {{ article.title }}
                             </a>
                         </td>
-                        <td>{{ article.updatedAt | localizeddate('full', 'none', app.request.locale) }}</td>
+                        <td>{{ article.updatedAt | format_datetime('full', 'none', app.request.locale) }}</td>
                         <td>
                             {% if article.category %}
                                 <a href="{{ path('cms.category.edit', {

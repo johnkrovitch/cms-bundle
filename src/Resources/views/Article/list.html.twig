@@ -30,7 +30,7 @@
                     {% endif %}
 
                     {# Article publication date#}
-                    <span class="title-date">{{ article.publicationDate | localizeddate('full', 'none') }}</span>
+                    <span class="title-date">{{ article.publicationDate | format_datetime('full', 'none') }}</span>
 
                     {# Article title #}
                     <h3>

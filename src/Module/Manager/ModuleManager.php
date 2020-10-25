@@ -3,6 +3,7 @@
 namespace JK\CmsBundle\Module\Manager;
 
 use JK\CmsBundle\Exception\Exception;
+use JK\CmsBundle\Module\ModuleInterface;
 use JK\CmsBundle\Module\Registry\ModuleRegistryInterface;
 use JK\CmsBundle\Module\Render\ModuleView;
 use JK\CmsBundle\Module\RenderModuleInterface;
@@ -45,5 +46,10 @@ class ModuleManager implements ModuleManagerInterface
         }
 
         return $module->render($options);
+    }
+
+    public function get(string $name): ModuleInterface
+    {
+        return $this->registry->get($name);
     }
 }

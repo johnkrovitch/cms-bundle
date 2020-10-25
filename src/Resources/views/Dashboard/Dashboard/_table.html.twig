@@ -15,7 +15,7 @@
                                 {{ item.content | u.u.truncate }}
                             </a>
                         </td>
-                        <td>{{ item.updatedAt | localizeddate('full', 'none', app.request.locale) }}</td>
+                        <td>{{ item.updatedAt | format_datetime('full', 'none', app.request.locale) }}</td>
                         <td>
                             <a href="{{ path('cms.article.edit', {
                                 id: comment.article.id
