@@ -67,15 +67,19 @@ article:
                     children:
                         preview:
                             text: cms.article.preview
-                            route: app.article.preview
-                            routeParameters: {id: ~}
+                            route: cms.article.preview
+                            routeParameters:
+                                id: ~
                             icon: fas fa-search
                             linkAttributes:
                                 target: _blank
                         show:
                             text: cms.article.show
-                            route: '%jk_cms.articles.show_route%'
-                            routeParameters: '%jk_cms.articles.show_route_parameters%'
+                            route: cms.article.show
+                            routeParameters:
+                                year: ~
+                                month: ~
+                                slug: ~
                             icon: fas fa-eye
                             linkAttributes:
                                 target: _blank

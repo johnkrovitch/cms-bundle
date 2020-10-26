@@ -53,3 +53,7 @@ services:
     JK\CmsBundle\Controller\Article\SearchAction:
         tags:
             - 'controller.service_arguments'
+
+    JK\CmsBundle\Controller\Article\PreviewAction:
+        tags:
+            - 'controller.service_arguments'

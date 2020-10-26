@@ -16,3 +16,7 @@ cms.notification.mark_as_read:
 cms.tag.create_ajax:
     path: /api/tags/create
     controller: JK\CmsBundle\Controller\Tag\CreateAjax
+
+cms.article.preview:
+    path: /articles/{id}/preview
+    controller: JK\CmsBundle\Controller\Article\PreviewAction
