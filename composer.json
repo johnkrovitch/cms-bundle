@@ -9,7 +9,7 @@
             "email": "arnaudfrezet@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
         "php": "^7.2",
         "ext-json": "*",
@@ -19,7 +19,7 @@
         "johnkrovitch/media-bundle": "v1.1RC1",
         "johnkrovitch/notification-bundle": "^1.0",
         "johnkrovitch/orm-pack": "^2.0",
-        "lag/adminbundle": "1.1-RC2",
+        "lag/adminbundle": "dev-test-v2.0",
         "liip/imagine-bundle": "^2.2",
         "nesbot/carbon": "^2.27",
         "ps/image-optimizer": "^2.0",
