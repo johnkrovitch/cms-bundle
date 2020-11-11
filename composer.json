@@ -11,7 +11,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php": "^7.2",
+        "php": "^7.4",
         "ext-json": "*",
         "eko/feedbundle": "^2.0",
         "erusev/parsedown": "^1.7",

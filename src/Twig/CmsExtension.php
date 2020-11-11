@@ -7,7 +7,6 @@ use JK\CmsBundle\DependencyInjection\Helper\ConfigurationHelper;
 use JK\CmsBundle\Entity\Article;
 use LAG\AdminBundle\Assets\Registry\ScriptRegistryInterface;
 use LAG\AdminBundle\Configuration\ApplicationConfiguration;
-use LAG\AdminBundle\Configuration\ApplicationConfigurationStorage;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Extension\AbstractExtension;
@@ -18,44 +17,22 @@ use Twig\TwigFunction;
  */
 class CmsExtension extends AbstractExtension
 {
-    /**
-     * @var AssetsHelper
-     */
-    private $assetsHelper;
-
-    /**
-     * @var ScriptRegistryInterface
-     */
-    private $scriptRegistry;
-
-    /**
-     * @var ApplicationConfigurationStorage
-     */
-    private $applicationConfigurationStorage;
-
-    /**
-     * @var RouterInterface
-     */
-    private $router;
-
-    /**
-     * @var ConfigurationHelper
-     */
-    private $configurationHelper;
-
-    /**
-     * CmsExtension constructor.
-     */
+    private AssetsHelper $assetsHelper;
+    private ScriptRegistryInterface $scriptRegistry;
+    private ApplicationConfiguration $appConfig;
+    private RouterInterface $router;
+    private ConfigurationHelper $configurationHelper;
+    
     public function __construct(
         AssetsHelper $assetsHelper,
         ScriptRegistryInterface $scriptRegistry,
-        ApplicationConfigurationStorage $applicationConfigurationStorage,
+        ApplicationConfiguration $appConfig,
         RouterInterface $router,
         ConfigurationHelper $configurationHelper
     ) {
         $this->assetsHelper = $assetsHelper;
         $this->scriptRegistry = $scriptRegistry;
-        $this->applicationConfigurationStorage = $applicationConfigurationStorage;
+        $this->appConfig = $appConfig;
         $this->router = $router;
         $this->configurationHelper = $configurationHelper;
     }
@@ -65,7 +42,7 @@ class CmsExtension extends AbstractExtension
      *
      * @return array
      */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('cms_config', [$this, 'cmsConfig']),
@@ -78,9 +55,9 @@ class CmsExtension extends AbstractExtension
      *
      * @return ApplicationConfiguration
      */
-    public function cmsConfig()
+    public function cmsConfig(): ApplicationConfiguration
     {
-        return $this->applicationConfigurationStorage->getConfiguration();
+        return $this->appConfig;
     }
 
     public function cmsArticlePath(Article $article): string
