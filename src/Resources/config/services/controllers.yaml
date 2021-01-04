@@ -36,11 +36,6 @@ services:
         class: JK\CmsBundle\Controller\Article\CreateAction
         tags:
             - 'controller.service_arguments'
-        arguments:
-            - '@LAG\AdminBundle\Factory\AdminFactory'
-            - '@LAG\AdminBundle\Factory\DataProviderFactory'
-            - '@translator'
-            - '@router'
 
     JK\CmsBundle\Controller\ParameterGroup\ListAction:
         tags:

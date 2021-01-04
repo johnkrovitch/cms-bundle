@@ -5,7 +5,7 @@ namespace JK\CmsBundle\Controller\Article;
 use JK\CmsBundle\Filter\Handler\RequestFilterHandlerInterface;
 use JK\CmsBundle\Repository\ArticleRepository;
 use JK\CmsBundle\Repository\CategoryRepository;
-use LAG\AdminBundle\Factory\FormFactoryInterface;
+use LAG\AdminBundle\Factory\AdminFormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -13,34 +13,15 @@ use Twig\Environment;
 
 class ListAction
 {
-    /**
-     * @var Environment
-     */
-    private $twig;
-
-    /**
-     * @var FormFactoryInterface
-     */
-    private $formFactory;
-
-    /**
-     * @var ArticleRepository
-     */
-    private $articleRepository;
-
-    /**
-     * @var CategoryRepository
-     */
-    private $categoryRepository;
-
-    /**
-     * @var RequestFilterHandlerInterface
-     */
-    private $filterHandler;
+    private Environment $twig;
+    private AdminFormFactoryInterface $formFactory;
+    private ArticleRepository $articleRepository;
+    private CategoryRepository $categoryRepository;
+    private RequestFilterHandlerInterface $filterHandler;
 
     public function __construct(
         Environment $twig,
-        FormFactoryInterface $formFactory,
+        AdminFormFactoryInterface $formFactory,
         ArticleRepository $articleRepository,
         CategoryRepository $categoryRepository,
         RequestFilterHandlerInterface $filterHandler
@@ -52,7 +33,7 @@ class ListAction
         $this->filterHandler = $filterHandler;
     }
 
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): Response
     {
         $filters = $this->filterHandler->handle($request);
         $pager = $this->articleRepository->findByFilters($filters);
@@ -65,7 +46,7 @@ class ListAction
         return new Response($content);
     }
 
-    private function getPageTitle(Request $request)
+    private function getPageTitle(Request $request): string
     {
         $title = 'app.search';
 

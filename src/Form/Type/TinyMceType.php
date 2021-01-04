@@ -15,6 +15,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/** @deprecated  */
 class TinyMceType extends AbstractType
 {
     const ALLOWED_PLUGINS = [

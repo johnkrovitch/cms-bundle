@@ -9,7 +9,9 @@ use JK\CmsBundle\Entity\Tag;
 use JK\CmsBundle\Entity\User;
 use JK\CmsBundle\Repository\UserRepository;
 use JK\MediaBundle\Form\Type\MediaType;
+use JK\MediaBundle\Form\Type\MediaUploadType;
 use LAG\AdminBundle\Assets\Registry\ScriptRegistryInterface;
+use LAG\AdminBundle\Form\Type\Select2\Select2EntityType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
@@ -79,7 +81,7 @@ class ArticleType extends AbstractType
                 'label' => 'cms.article.category',
                 'help' => 'cms.article.category_help',
             ])
-            ->add('content', TinyMceType::class, [
+            ->add('content', \LAG\AdminBundle\Form\Type\TinyMce\TinyMceType::class, [
                 'attr' => [
                     'class' => 'tinymce sticky-menu affick affick-top',
                     'data-theme' => 'advanced',
@@ -90,11 +92,11 @@ class ArticleType extends AbstractType
                 ],
                 'label' => 'cms.article.content',
                 'required' => false,
-                'tinymce' => [
-                    'height' => 1000,
-                ],
+//                'tinymce_options' => [
+//                    'height' => 1000,
+//                ],
             ])
-            ->add('thumbnail', MediaType::class, [
+            ->add('thumbnail', MediaUploadType::class, [
                 'label' => 'cms.article.thumbnail',
                 'help' => 'cms.article.thumbnail_help',
                 'required' => false,
@@ -116,7 +118,9 @@ class ArticleType extends AbstractType
                 'date_widget' => 'single_text',
                 'time_widget' => 'choice',
             ])
-            ->add('tags', EntityType::class, [
+            ->add('tags', Select2EntityType::class, [
+                'allow_add' => true,
+                'add_endpoint' => $this->router->generate('cms.tag.create_ajax'),
                 'attr' => [
                     'class' => 'select2',
                     'multiple' => 'multiple',
@@ -149,53 +153,42 @@ class ArticleType extends AbstractType
                 $user = $this->userRepository->find($user->getId());
                 $article->setAuthor($user);
             })
-            ->addModelTransformer(new CallbackTransformer(function ($value) {
-                return $value;
-            }, function ($value) {
-                if ($value instanceof Article) {
-                    if ($value->getThumbnail() && 0 === $value->getThumbnail()->getId()) {
-                        $value->removeThumbnail();
-                    }
-                }
-
-                return $value;
-            }))
-
         ;
 
-        $builder
-            ->get('tags')
-            ->addModelTransformer(new CallbackTransformer(function ($data) {
-                // Fix a bug with Doctrine collection not updated in certain circumstances
-                if ($data instanceof Collection) {
-                    return $data->toArray();
-                }
-
-                return $data;
-            }, function ($data) {
-                return $data;
-            }))
-        ;
+//        $builder
+//            ->get('tags')
+//            ->addViewTransformer(new CallbackTransformer(function ($data) {
+//                // Fix a bug with Doctrine collection not updated in certain circumstances
+//                if ($data instanceof Collection) {
+//                    $data = $data->toArray();
+//                }
+//                dump($data);
+//                //die;
+//
+//                return $data;
+//            }, function ($data) {
+//                dump($data);
+//                die('2');
+//                return $data;
+//            }))
+//        ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $selector = uniqid('tinymce-');
+//    public function configureOptions(OptionsResolver $resolver)
+//    {
+//        $selector = uniqid('tinymce-');
+//
+//        $resolver->setDefaults([
+//            'data_class' => Article::class,
+//            'tinymce_selector' => $selector,
+//            'attr' => [
+//                'id' => $selector,
+//                'class' => 'article-form',
+//            ],
+//        ]);
+//    }
 
-        $resolver->setDefaults([
-            'data_class' => Article::class,
-            'tinymce_selector' => $selector,
-            'attr' => [
-                'id' => $selector,
-                'class' => 'article-form',
-            ],
-        ]);
-    }
-
-    /**
-     * @return string
-     */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'article';
     }

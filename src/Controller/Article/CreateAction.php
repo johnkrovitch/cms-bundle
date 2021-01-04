@@ -4,47 +4,32 @@ namespace JK\CmsBundle\Controller\Article;
 
 use JK\CmsBundle\Entity\Article;
 use JK\CmsBundle\Exception\Exception;
+use JK\CmsBundle\Repository\ArticleRepository;
+use LAG\AdminBundle\Configuration\ApplicationConfiguration;
+use LAG\AdminBundle\DataPersister\Registry\DataPersisterRegistryInterface;
 use LAG\AdminBundle\Factory\AdminFactory;
-use LAG\AdminBundle\Factory\DataProviderFactory;
 use LAG\AdminBundle\Routing\RoutingLoader;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CreateAction
 {
-    /**
-     * @var AdminFactory
-     */
-    private $adminFactory;
-
-    /**
-     * @var DataProviderFactory
-     */
-    private $dataProviderFactory;
-
-    /**
-     * @var TranslatorInterface
-     */
-    private $translator;
-
-    /**
-     * @var RouterInterface
-     */
-    private $router;
-
-    /**
-     * AdminAction constructor.
-     */
+    private RouterInterface $router;
+    private ArticleRepository $repository;
+    private ApplicationConfiguration $appConfig;
+    private TranslatorInterface $translator;
+    
     public function __construct(
-        AdminFactory $adminFactory,
-        DataProviderFactory $dataProviderFactory,
+        ArticleRepository $repository,
+        ApplicationConfiguration $appConfig,
         TranslatorInterface $translator,
         RouterInterface $router
     ) {
-        $this->adminFactory = $adminFactory;
-        $this->dataProviderFactory = $dataProviderFactory;
+        $this->repository = $repository;
+        $this->appConfig = $appConfig;
         $this->translator = $translator;
         $this->router = $router;
     }
@@ -54,43 +39,17 @@ class CreateAction
      * primary key. So we save it with a default title to avoid issues.
      *
      * @return RedirectResponse
-     *
-     * @throws Exception
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): Response
     {
-        // Handle the current request
-        $admin = $this->adminFactory->createFromRequest($request);
-        $admin->handleRequest($request);
-
-        $dataProvider = $this->dataProviderFactory->get($admin->getConfiguration()->get('data_provider'));
-
-        // Set a new title and save the article to avoid problem with missing primary key when using the media library
-        $entity = $dataProvider->create($admin);
-        $entity->setPublicationStatus(Article::PUBLICATION_STATUS_DRAFT);
-        $entity->setTitle($this->translator->trans('cms.article.default_title'));
-
-        $admin->getEntities()->add($entity);
-
-        $dataProvider->save($admin);
-
-        if (key_exists('edit', $admin->getConfiguration()->get('actions'))) {
-            $actionToRedirect = 'edit';
-        } elseif (key_exists('list', $admin->getConfiguration()->get('actions'))) {
-            $actionToRedirect = 'list';
-        } else {
-            throw new Exception("Unable to find an action to redirect to for the admin {$admin->getName()}");
-        }
-
-        $route = RoutingLoader::generateRouteName(
-            $admin->getName(),
-            $actionToRedirect,
-            $admin->getConfiguration()->get('routing_name_pattern')
-        );
-        $url = $this->router->generate($route, [
-            'id' => $entity->getId(),
-        ]);
-
-        return new RedirectResponse($url);
+        $article = new Article();
+        $article->setPublicationStatus(Article::PUBLICATION_STATUS_DRAFT);
+        $article->setTitle($this->translator->trans('cms.article.default_title'));
+        
+        $this->repository->save($article);
+    
+        $route = $this->appConfig->getRouteName('article', 'edit');
+        
+        return new RedirectResponse($this->router->generate($route, ['id' => $article->getId()]));
     }
 }

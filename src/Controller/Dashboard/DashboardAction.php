@@ -73,8 +73,6 @@ class DashboardAction
         if (!$user instanceof User) {
             throw new AccessDeniedException();
         }
-        //$this->eventDispatcher->dispatch(Events::MENU, new BuildMenuEvent());
-
         $newCommentCount = $this
             ->commentRepository
             ->findNewCommentCount($user->getCommentLastViewDate())

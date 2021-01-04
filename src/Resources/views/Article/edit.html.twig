@@ -1,5 +1,5 @@
 {# Overrides the default CRUD template for the "edit" action #}
-{% extends '@LAGAdmin/CRUD/edit.html.twig' %}
+{% extends '@LAGAdmin/crud/edit.html.twig' %}
 
 {% block form_widgets %}
     <div class="row">
@@ -21,7 +21,6 @@
             <small class="form-text text-muted">
                 {{ form.isCommentable.vars.help | trans }}
             </small>
-
         </div>
     </div>
 {% endblock %}

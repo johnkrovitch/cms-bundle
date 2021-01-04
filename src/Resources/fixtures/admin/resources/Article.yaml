@@ -38,13 +38,12 @@ article:
                 publicationDate: ~
                 updatedAt: ~
                 _delete:
-                    type: link
+                    type: action
                     options:
                         admin: article
                         action: delete
                         parameters:
                             id: ~
-                        class: btn btn-danger large
                         icon: times
             menus:
                 top:

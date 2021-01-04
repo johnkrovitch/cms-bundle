@@ -11,10 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CreateAjax
 {
-    /**
-     * @var TagRepository
-     */
-    private $repository;
+    private TagRepository $repository;
 
     public function __construct(TagRepository $repository)
     {
@@ -33,7 +30,6 @@ class CreateAjax
         }
         $tag = new Tag();
         $tag->setName(ucfirst($value));
-
         $this->repository->save($tag);
 
         return new JsonResponse([
