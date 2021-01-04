@@ -447,20 +447,18 @@ class Article implements PublishableInterface
         return $categories;
     }
 
-    public function addTag(Tag $tag)
+    public function addTag(Tag $tag): void
     {
         $this->tags->add($tag);
         $tag->addArticle($this);
     }
 
-    /**
-     * @return bool
-     */
-    public function hasTag(Tag $tag)
+    public function hasTag(Tag $tag): bool
     {
         return $this
             ->tags
-            ->contains($tag);
+            ->contains($tag)
+        ;
     }
 
     /**

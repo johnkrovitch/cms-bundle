@@ -12,6 +12,7 @@ use JK\MediaBundle\Form\Type\MediaType;
 use JK\MediaBundle\Form\Type\MediaUploadType;
 use LAG\AdminBundle\Assets\Registry\ScriptRegistryInterface;
 use LAG\AdminBundle\Form\Type\Select2\Select2EntityType;
+use LAG\AdminBundle\Form\Type\Select2\Select2Type;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
@@ -76,7 +77,7 @@ class ArticleType extends AbstractType
                 'help' => 'cms.article.title_help',
                 'label' => 'cms.article.title',
             ])
-            ->add('category', EntityType::class, [
+            ->add('category', Select2EntityType::class, [
                 'class' => Category::class,
                 'label' => 'cms.article.category',
                 'help' => 'cms.article.category_help',
@@ -102,7 +103,7 @@ class ArticleType extends AbstractType
                 'required' => false,
                 'empty_data' => null,
             ])
-            ->add('publicationStatus', ChoiceType::class, [
+            ->add('publicationStatus', Select2Type::class, [
                 'choices' => [
                     'cms.publication.draft' => Article::PUBLICATION_STATUS_DRAFT,
                     'cms.publication.validation' => Article::PUBLICATION_STATUS_VALIDATION,
@@ -120,14 +121,16 @@ class ArticleType extends AbstractType
             ])
             ->add('tags', Select2EntityType::class, [
                 'allow_add' => true,
-                'add_endpoint' => $this->router->generate('cms.tag.create_ajax'),
+                //'add_endpoint' => $this->router->generate('cms.tag.create_ajax'),
                 'attr' => [
                     'class' => 'select2',
                     'multiple' => 'multiple',
                     'data-url' => $this->router->generate('cms.tag.create_ajax'),
                 ],
+                'by_reference' => false,
                 'class' => Tag::class,
                 'choice_label' => 'name',
+                'create_property_path' => 'name',
                 'label' => 'cms.article.tags',
                 'help' => 'cms.article.tags_help',
                 'multiple' => 'multiple',
