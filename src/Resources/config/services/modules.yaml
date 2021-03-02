@@ -2,43 +2,46 @@ services:
     _defaults:
         autoconfigure: true
         autowire: true
-        bind:
-            #            $projectDirectory: '%kernel.project_dir%'
-            $moduleDirectory: '%jk_cms.module_directory%'
 
     _instanceof:
         JK\CmsBundle\Module\ModuleInterface:
             tags: ['cms.module']
 
-    JK\CmsBundle\Module\:
-        resource: '../../../Module/{Configuration/Loader,Event/Subscriber,Manager,Registry}'
-
-    JK\CmsBundle\Module\Modules\:
-        resource: '../../../Module/Modules/*'
-        exclude: '../../../Module/Modules/*/{Event,Model}'
-
     ### Managers ###
-#    JK\CmsBundle\Module\Manager\ModuleManager:
-#        arguments:
-#            $registry: '@JK\CmsBundle\Module\Registry\ModuleRegistryInterface'
-#    JK\CmsBundle\Module\Manager\ModuleManagerInterface: '@JK\CmsBundle\Module\Manager\ModuleManager'
+    JK\CmsBundle\Module\Manager\ModuleManager:
+        arguments:
+            $eventDispatcher: '@event_dispatcher'
+            $registry: '@JK\CmsBundle\Module\Registry\ModuleRegistryInterface'
+    JK\CmsBundle\Module\Manager\ModuleManagerInterface: '@JK\CmsBundle\Module\Manager\ModuleManager'
 
     ### Modules ###
     JK\CmsBundle\Module\Modules\News\NewsModule:
-        class: JK\CmsBundle\Module\Modules\News\NewsModule
         arguments:
             - '@JK\CmsBundle\Repository\ArticleRepository'
         tags:
             - {name: cms.module}
 
-    ### Events ###
-    JK\CmsBundle\Module\Event\Subscriber\ModuleEventSubscriber:
-        class: JK\CmsBundle\Module\Event\Subscriber\ModuleEventSubscriber
-        arguments:
-            - '@JK\CmsBundle\Module\Manager\ModuleManager'
+    JK\CmsBundle\Module\Modules\Search\SearchModule:
         tags:
-            - {name: kernel.event_subscriber}
+            - {name: cms.module}
 
+    ### Events ###
+    JK\CmsBundle\Module\Event\Listener\Load\RequestListener:
+        tags:
+            - {name: kernel.event_listener, event: kernel.request}
+    
+    JK\CmsBundle\Module\Event\Listener\Load\LoadListener:
+        tags:
+            - {name: kernel.event_listener, event: cms.modules.load}
+            
+    JK\CmsBundle\Module\Event\Listener\Render\LoadListener:
+        tags:
+            - {name: kernel.event_listener, event: cms.modules.render_module, priority: 255}
+    
+    JK\CmsBundle\Module\Event\Listener\Render\RenderListener:
+        tags:
+            - {name: kernel.event_listener, event: cms.modules.render_module, priority: 0}
+    
     ### Registry ###
     JK\CmsBundle\Module\Registry\ModuleRegistryInterface: '@JK\CmsBundle\Module\Registry\ModuleRegistry'
     JK\CmsBundle\Module\Registry\ModuleRegistry:
@@ -46,3 +49,28 @@ services:
         arguments:
             $modules: !tagged_iterator cms.module
 
+    ### Renderer ###
+    JK\CmsBundle\Module\Render\ModuleRendererInterface: '@JK\CmsBundle\Module\Render\ModuleRenderer'
+    JK\CmsBundle\Module\Render\ModuleRenderer: ~
+
+    ### Supporters ###
+    JK\CmsBundle\Module\Resolver\ModuleResolverInterface: '@JK\CmsBundle\Module\Resolver\CompositeModuleResolver'
+    JK\CmsBundle\Module\Resolver\CompositeModuleResolver:
+        arguments:
+            $resolvers: !tagged_iterator cms.module_resolver
+    
+    JK\CmsBundle\Module\Resolver\LoadStrategyModuleResolver:
+        tags:
+            - {name: cms.module_resolver}
+
+    JK\CmsBundle\Module\Resolver\RequestModuleResolver:
+        tags:
+            - {name: cms.module_resolver}
+        
+    ### Configurators ###
+    JK\CmsBundle\Module\Configuration\Configurator\ModuleConfiguratorInterface: '@JK\CmsBundle\Module\Configuration\Configurator\ModuleConfigurator'
+    JK\CmsBundle\Module\Configuration\Configurator\ModuleConfigurator: ~
+
+    ### Loaders ###
+    JK\CmsBundle\Module\Loader\ModuleLoaderInterface: '@JK\CmsBundle\Module\Loader\ModuleLoader'
+    JK\CmsBundle\Module\Loader\ModuleLoader: ~

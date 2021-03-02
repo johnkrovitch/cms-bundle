@@ -18,20 +18,17 @@ use Twig\TwigFunction;
 class CmsExtension extends AbstractExtension
 {
     private AssetsHelper $assetsHelper;
-    private ScriptRegistryInterface $scriptRegistry;
     private ApplicationConfiguration $appConfig;
     private RouterInterface $router;
     private ConfigurationHelper $configurationHelper;
     
     public function __construct(
         AssetsHelper $assetsHelper,
-        ScriptRegistryInterface $scriptRegistry,
         ApplicationConfiguration $appConfig,
         RouterInterface $router,
         ConfigurationHelper $configurationHelper
     ) {
         $this->assetsHelper = $assetsHelper;
-        $this->scriptRegistry = $scriptRegistry;
         $this->appConfig = $appConfig;
         $this->router = $router;
         $this->configurationHelper = $configurationHelper;

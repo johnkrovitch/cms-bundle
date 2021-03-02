@@ -2,11 +2,12 @@
 
 namespace JK\CmsBundle\Module\Modules\Search\Finder\Request;
 
+use JK\CmsBundle\Module\Modules\Search\Finder\Model\Search;
 use Symfony\Component\HttpFoundation\Request;
 
 class RequestParameterExtractor implements RequestParameterExtractorInterface
 {
-    public function extract(Request $request): array
+    public function extract(Request $request): Search
     {
         $filters = [
             'categorySlug',
@@ -29,6 +30,6 @@ class RequestParameterExtractor implements RequestParameterExtractorInterface
             }
         }
 
-        return $values;
+        return new Search($values, $request->get('search'));
     }
 }

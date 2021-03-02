@@ -2,18 +2,19 @@
 
 namespace JK\CmsBundle\Repository;
 
-use JK\CmsBundle\Module\RenderModuleInterface;
+use JK\CmsBundle\Module\ModuleInterface;
+use JK\CmsBundle\Module\ViewModuleInterface;
 use LogicException;
 
 class ModuleRepository
 {
     /**
-     * @var RenderModuleInterface[]
+     * @var ModuleInterface[]
      */
     private $modules = [];
 
     /**
-     * @return RenderModuleInterface[]
+     * @return ModuleInterface[]
      */
     public function load(string $zone)
     {
@@ -28,7 +29,7 @@ class ModuleRepository
         return $modules;
     }
 
-    public function addModule(RenderModuleInterface $module)
+    public function addModule(ModuleInterface $module)
     {
         if (array_key_exists($module->getName(), $this->modules)) {
             throw new LogicException('Trying to add the module "'.$module->getName().'" twice.');
@@ -37,7 +38,7 @@ class ModuleRepository
     }
 
     /**
-     * @return RenderModuleInterface
+     * @return ModuleInterface
      */
     public function get(string $name)
     {

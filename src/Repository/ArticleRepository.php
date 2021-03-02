@@ -3,6 +3,7 @@
 namespace JK\CmsBundle\Repository;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Internal\Hydration\IterableResult;
 use JK\CmsBundle\Entity\Article;
@@ -85,11 +86,11 @@ class ArticleRepository extends AbstractRepository
     /**
      * Find all articles in a given category.
      *
-     * @return Article[]|IterableResult
+     * @return Article[]|Collection
      */
-    public function findPublishedByCategory(string $categorySlug, int $count = 6)
+    public function findPublishedByCategory(string $categorySlug, int $count = 6): Collection
     {
-        return $this
+        $results = $this
             ->createQueryBuilder('article')
             ->orderBy('article.publicationDate', 'desc')
             ->innerJoin('article.category', 'category')
@@ -101,8 +102,10 @@ class ArticleRepository extends AbstractRepository
             ->setParameter('now', new DateTime())
             ->setMaxResults($count)
             ->getQuery()
-            ->iterate()
+            ->getResult()
         ;
+    
+        return new ArrayCollection($results);
     }
 
     /**

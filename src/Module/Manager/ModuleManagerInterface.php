@@ -3,7 +3,6 @@
 namespace JK\CmsBundle\Module\Manager;
 
 use JK\CmsBundle\Module\ModuleInterface;
-use JK\CmsBundle\Module\Render\ModuleView;
 use Symfony\Component\HttpFoundation\Request;
 
 interface ModuleManagerInterface
@@ -17,7 +16,9 @@ interface ModuleManagerInterface
      */
     public function get(string $name): ModuleInterface;
 
-    public function load(Request $request): void;
+    public function load(Request $request, array $options = []): void;
+    
+    public function loadModule(Request $request, ModuleInterface $module, array $options = []): void;
 
-    public function render(string $moduleName): ModuleView;
+    public function render(string $moduleName, array $options = []): string;
 }

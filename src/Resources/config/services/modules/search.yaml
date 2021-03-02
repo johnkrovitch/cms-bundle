@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        
+    JK\CmsBundle\Module\Modules\Search\Finder\ArticleFinderInterface: ~
+    
+    JK\CmsBundle\Module\Modules\Search\Finder\Request\RequestParameterExtractorInterface: ~

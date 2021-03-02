@@ -3,30 +3,18 @@
 namespace JK\CmsBundle\Module\Modules\Search;
 
 use JK\CmsBundle\Form\Type\ArticleSearchType;
-use JK\CmsBundle\Module\AbstractFrontModule;
-use JK\CmsBundle\Module\Render\ModuleView;
-use JK\CmsBundle\Module\RenderModuleInterface;
+use JK\CmsBundle\Module\AbstractModule;
+use JK\CmsBundle\Module\View\ModuleView;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SearchModule extends AbstractFrontModule implements RenderModuleInterface
+class SearchModule extends AbstractModule
 {
-    /**
-     * @var FormFactoryInterface
-     */
-    private $formFactory;
-
-    /**
-     * @var FormInterface
-     */
-    private $form;
-
-    /**
-     * @var string
-     */
-    private $route;
+    private FormFactoryInterface $formFactory;
+    private FormInterface $form;
+    private string $route;
 
     public function __construct(FormFactoryInterface $formFactory)
     {
@@ -54,10 +42,10 @@ class SearchModule extends AbstractFrontModule implements RenderModuleInterface
     public function load(Request $request, array $options = []): void
     {
         $this->form = $this->formFactory->create(ArticleSearchType::class, null, [
-            'placeholder' => $this->configuration['placeholder'],
+            'placeholder' => $this->options['placeholder'],
         ]);
         $this->form->handleRequest($request);
-        $this->route = $this->configuration['route'];
+        $this->route = $this->options['route'];
     }
 
     public function getZones(): array

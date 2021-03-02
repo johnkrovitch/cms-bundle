@@ -3,26 +3,16 @@
 namespace JK\CmsBundle\Twig;
 
 use JK\CmsBundle\Module\Manager\ModuleManagerInterface;
-use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class ModuleExtension extends AbstractExtension
 {
-    /**
-     * @var ModuleManagerInterface
-     */
-    private $moduleManager;
+    private ModuleManagerInterface $moduleManager;
 
-    /**
-     * @var Environment
-     */
-    private $environment;
-
-    public function __construct(ModuleManagerInterface $moduleManager, Environment $environment)
+    public function __construct(ModuleManagerInterface $moduleManager)
     {
         $this->moduleManager = $moduleManager;
-        $this->environment = $environment;
     }
 
     public function getFunctions(): array
@@ -34,7 +24,7 @@ class ModuleExtension extends AbstractExtension
 
     public function renderModule(string $moduleName): string
     {
-        $view = $this
+        return $this
             ->moduleManager
             ->render($moduleName)
         ;

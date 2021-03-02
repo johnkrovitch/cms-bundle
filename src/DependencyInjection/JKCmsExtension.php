@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
-class JKCmsExtension extends Extension implements PrependExtensionInterface
+class JKCmsExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -50,42 +50,42 @@ class JKCmsExtension extends Extension implements PrependExtensionInterface
         $helperDefinition->setArgument(0, $config);
     }
 
-    public function prepend(ContainerBuilder $container)
-    {
-        $configs = $container->getExtensionConfig($this->getAlias());
-
-        if (0 === count($configs)) {
-            return;
-        }
-        $this->load($configs, $container);
-        $config = $configs[0];
-
-        if (null === $config) {
-            $config = [];
-        }
-
-        if (!key_exists('menus', $config)) {
-            $config['menus'] = [];
-        }
-
-        $container->setParameter('jk_cms.config', $config);
-
-        if (key_exists('admin', $config)) {
-            $admin = $config['admin'];
-            $container
-                ->prependExtensionConfig('lag_admin', [
-                    'application' => $admin,
-                    'menus' => $config['menus'],
-                ])
-            ;
-        }
-
-        $container->prependExtensionConfig('twig', [
-            'globals' => [
-                'cms_front_base' => $container->getParameter('jk_cms.front_base'),
-            ],
-        ]);
-    }
+//    public function prepend(ContainerBuilder $container)
+//    {
+//        $configs = $container->getExtensionConfig($this->getAlias());
+//
+//        if (0 === count($configs)) {
+//            return;
+//        }
+//        $this->load($configs, $container);
+//        $config = $configs[0];
+//
+//        if (null === $config) {
+//            $config = [];
+//        }
+//
+//        if (!key_exists('menus', $config)) {
+//            $config['menus'] = [];
+//        }
+//
+//        $container->setParameter('jk_cms.config', $config);
+//
+//        if (key_exists('admin', $config)) {
+//            $admin = $config['admin'];
+//            $container
+//                ->prependExtensionConfig('lag_admin', [
+//                    'application' => $admin,
+//                    'menus' => $config['menus'],
+//                ])
+//            ;
+//        }
+//
+//        $container->prependExtensionConfig('twig', [
+//            'globals' => [
+//                'cms_front_base' => $container->getParameter('jk_cms.front_base'),
+//            ],
+//        ]);
+//    }
 
     public function getAlias()
     {

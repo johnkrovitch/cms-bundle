@@ -3,13 +3,14 @@
 namespace JK\CmsBundle\Module;
 
 use JK\CmsBundle\Exception\Exception;
+use JK\CmsBundle\Module\Exception\MissingOptionsException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractModule implements ModuleInterface
 {
-    protected $loaded = false;
-    protected $configuration;
+    protected bool $loaded = false;
+    protected array $options;
 
     public function isLoaded(): bool
     {
@@ -24,32 +25,42 @@ abstract class AbstractModule implements ModuleInterface
         $this->loaded = true;
     }
 
-    public function supports(Request $request): bool
-    {
-        // By default module are enabled only on back-office pages
-        return null !== $request->get('_admin');
-    }
-
-    public function setConfiguration(array $configuration): void
+    public function setOptions(array $options): void
     {
         if ($this->isConfigured()) {
             throw new Exception('The module "'.$this->getName().'" is already configured');
         }
-        $this->configuration = $configuration;
+        $this->options = $options;
     }
 
-    public function getConfiguration(): array
+    public function getOptions(): array
     {
-        if (!$this->isConfigured()) {
-            throw new Exception('The module "'.$this->getName().'" is not configured');
-        }
+        $this->assertIsConfigured();
 
-        return $this->configuration;
+        return $this->options;
     }
-
+    
+    public function hasOption(string $option): bool
+    {
+        $this->assertIsConfigured();
+    
+        return key_exists($option, $this->options);
+    }
+    
+    public function getOption(string $option)
+    {
+        $this->assertIsConfigured();
+    
+        if (!$this->hasOption($option)) {
+            throw new MissingOptionsException($option, $this->getName());
+        }
+    
+        return $this->options[$option];
+    }
+    
     public function isConfigured(): bool
     {
-        return $this->configuration !== null;
+        return isset($this->options);
     }
 
     public function configure(OptionsResolver $resolver): void
@@ -58,5 +69,19 @@ abstract class AbstractModule implements ModuleInterface
 
     public function load(Request $request, array $options = []): void
     {
+    }
+    
+    protected function assertIsConfigured(): void
+    {
+        if (!$this->isConfigured()) {
+            throw new Exception('The module "'.$this->getName().'" is not configured');
+        }
+    }
+    
+    protected function configureViews(array $views, OptionsResolver $resolver): void
+    {
+        foreach ($views as $view) {
+        
+        }
     }
 }

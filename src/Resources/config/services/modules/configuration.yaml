@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        
+    JK\CmsBundle\Module\Configuration\Loader\ConfigurationLoaderInterface: '@JK\CmsBundle\Module\Configuration\Loader\ConfigurationLoader'
+    JK\CmsBundle\Module\Configuration\Loader\ConfigurationLoader:
+        arguments:
+            $moduleDirectory: '%jk_cms.module_directory%'

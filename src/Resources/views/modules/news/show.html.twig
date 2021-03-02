@@ -7,8 +7,7 @@
     </h2>
 
     <ul>
-        {% for data in articles %}
-            {% set article = data[0] %}
+        {% for article in articles %}
             <li>
                 <a href="{{ cms_article_path(article) }}"
                    title="{{ 'lecomptoir.news.see' | trans({'%article%': article.title}) }}">

@@ -40,7 +40,7 @@ class PageType extends AbstractType
                 'label' => 'cms.page.edit.publication_status',
             ])
             ->add('publicationDate', DateTimeType::class)
-            ->add('content', TinyMceType::class)
+            ->add('content', \LAG\AdminBundle\Form\Type\TinyMce\TinyMceType::class)
         ;
     }
 

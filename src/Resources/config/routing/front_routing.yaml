@@ -7,6 +7,13 @@ cms.front.article.list:
     path: /articles
     controller: JK\CmsBundle\Controller\Article\ListAction
 
+cms.article.preview:
+    path: /articles/{id}/preview
+    controller: JK\CmsBundle\Controller\Article\PreviewAction
+    defaults:
+        modules: article
+
 cms.front.article.show:
     path: /article/{slug}
     controller: JK\CmsBundle\Controller\Article\ShowAction
+

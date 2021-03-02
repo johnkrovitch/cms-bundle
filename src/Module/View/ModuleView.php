@@ -1,18 +1,11 @@
 <?php
 
-namespace JK\CmsBundle\Module\Render;
+namespace JK\CmsBundle\Module\View;
 
 class ModuleView
 {
-    /**
-     * @var string
-     */
-    private $template;
-
-    /**
-     * @var array
-     */
-    private $parameters;
+    private string $template;
+    private array $parameters;
 
     public function __construct(string $template, array $parameters = [])
     {

@@ -44,11 +44,6 @@ class ArticleType extends AbstractType
     private $security;
 
     /**
-     * @var ScriptRegistryInterface
-     */
-    private $scriptRegistry;
-
-    /**
      * @var UserRepository
      */
     private $userRepository;
@@ -56,12 +51,10 @@ class ArticleType extends AbstractType
     public function __construct(
         RouterInterface $router,
         Security $security,
-        ScriptRegistryInterface $scriptRegistry,
         UserRepository $userRepository
     ) {
         $this->router = $router;
         $this->security = $security;
-        $this->scriptRegistry = $scriptRegistry;
         $this->userRepository = $userRepository;
     }
 

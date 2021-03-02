@@ -17,15 +17,15 @@ services:
         tags:
             - {name: form.type}
 
-    JK\CmsBundle\Form\Type\TinyMceType:
-        class: JK\CmsBundle\Form\Type\TinyMceType
-        arguments:
-            - '@LAG\AdminBundle\Assets\Registry\ScriptRegistryInterface'
-            - '@router'
-            - '@translator'
-            - '@assets.packages'
-        tags:
-            - {name: form.type}
+#    JK\CmsBundle\Form\Type\TinyMceType:
+#        class: JK\CmsBundle\Form\Type\TinyMceType
+#        arguments:
+#            - '@LAG\AdminBundle\Assets\Registry\ScriptRegistryInterface'
+#            - '@router'
+#            - '@translator'
+#            - '@assets.packages'
+#        tags:
+#            - {name: form.type}
 
     JK\CmsBundle\Form\Type\AddCommentType:
         class: JK\CmsBundle\Form\Type\AddCommentType

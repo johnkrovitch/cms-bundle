@@ -4,6 +4,7 @@ namespace JK\CmsBundle\Filter\Handler;
 
 use Symfony\Component\HttpFoundation\Request;
 
+/** @deprecated  */
 class RequestFilterHandler implements RequestFilterHandlerInterface
 {
     public function handle(Request $request): array

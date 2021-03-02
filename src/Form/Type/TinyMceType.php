@@ -71,20 +71,20 @@ class TinyMceType extends AbstractType
      */
     private $packages;
 
-    /**
-     * TinyMceType constructor.
-     */
-    public function __construct(
-        ScriptRegistryInterface $scriptRegistry,
-        RouterInterface $router,
-        TranslatorInterface $translator,
-        Packages $packages
-    ) {
-        $this->scriptRegistry = $scriptRegistry;
-        $this->router = $router;
-        $this->translator = $translator;
-        $this->packages = $packages;
-    }
+//    /**
+//     * TinyMceType constructor.
+//     */
+//    public function __construct(
+//        ScriptRegistryInterface $scriptRegistry,
+//        RouterInterface $router,
+//        TranslatorInterface $translator,
+//        Packages $packages
+//    ) {
+//        $this->scriptRegistry = $scriptRegistry;
+//        $this->router = $router;
+//        $this->translator = $translator;
+//        $this->packages = $packages;
+//    }
 
     /**
      * @return string

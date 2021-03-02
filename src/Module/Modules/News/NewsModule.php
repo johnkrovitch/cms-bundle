@@ -3,21 +3,16 @@
 namespace JK\CmsBundle\Module\Modules\News;
 
 use JK\CmsBundle\Module\AbstractModule;
-use JK\CmsBundle\Module\Render\ModuleView;
-use JK\CmsBundle\Module\RenderModuleInterface;
+use JK\CmsBundle\Module\View\ModuleView;
 use JK\CmsBundle\Module\Zone\Zone;
 use JK\CmsBundle\Repository\ArticleRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class NewsModule extends AbstractModule implements RenderModuleInterface
+class NewsModule extends AbstractModule
 {
-    /**
-     * @var ArticleRepository
-     */
-    private $articleRepository;
-
-    private $articles = [];
+    private ArticleRepository $articleRepository;
+    private array$articles = [];
 
     public function __construct(ArticleRepository $articleRepository)
     {
@@ -45,11 +40,12 @@ class NewsModule extends AbstractModule implements RenderModuleInterface
     {
         $this->articles = $this
             ->articleRepository
-            ->findPublishedByCategory($this->configuration['category'], $this->configuration['limit'])
+            ->findPublishedByCategory($this->options['category'], $this->options['limit'])
+            ->toArray()
         ;
     }
 
-    public function render(array $options = []): ModuleView
+    public function createView(array $options = []): ModuleView
     {
         return new ModuleView('@JKCms/modules/news/show.html.twig', [
             'articles' => $this->articles,

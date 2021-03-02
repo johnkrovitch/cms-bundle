@@ -13,30 +13,11 @@ use Twig\Environment;
 
 class SearchAction
 {
-    /**
-     * @var Environment
-     */
-    private $environment;
-
-    /**
-     * @var ModuleManagerInterface
-     */
-    private $moduleManager;
-
-    /**
-     * @var FormFactoryInterface
-     */
-    private $formFactory;
-
-    /**
-     * @var ArticleFinderInterface
-     */
-    private $finder;
-
-    /**
-     * @var RequestParameterExtractorInterface
-     */
-    private $extractor;
+    private Environment $environment;
+    private ModuleManagerInterface $moduleManager;
+    private FormFactoryInterface $formFactory;
+    private ArticleFinderInterface $finder;
+    private RequestParameterExtractorInterface $extractor;
 
     public function __construct(
         Environment $environment,
@@ -54,7 +35,7 @@ class SearchAction
 
     public function __invoke(Request $request): Response
     {
-        $configuration = $this->moduleManager->get('search')->getConfiguration();
+        $configuration = $this->moduleManager->get('search')->getOptions();
         $page = $request->query->getInt('page', 1);
         $form = $this->formFactory->create(ArticleSearchType::class);
         $form->handleRequest($request);

@@ -4,6 +4,7 @@ namespace JK\CmsBundle\Filter\Handler;
 
 use Symfony\Component\HttpFoundation\Request;
 
+/** @deprecated  */
 interface RequestFilterHandlerInterface
 {
     /**
