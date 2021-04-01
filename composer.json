@@ -16,7 +16,7 @@
         "eko/feedbundle": "^2.0",
         "erusev/parsedown": "^1.7",
         "google/recaptcha": "^1.2",
-        "johnkrovitch/media-bundle": "v1.1RC1",
+        "johnkrovitch/media-bundle": "dev-master",
         "johnkrovitch/notification-bundle": "^1.0",
         "johnkrovitch/orm-pack": "^2.0",
         "lag/adminbundle": "dev-test-v2.0",
