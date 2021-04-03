@@ -1,0 +1,19 @@
+{% extends '@LAGAdmin/security/login.html.twig' %}
+
+{% block login_form %}{% endblock %}
+
+{% block social_login %}
+    <form action=""
+          class="user">
+        {% if error is defined and error %}
+            <div class="error">{{ error | trans({}, 'security') }}</div>
+        {% endif %}
+        {% for owner in hwi_oauth_resource_owners() %}
+            <a href="{{ hwi_oauth_login_url(owner) }}" class="btn btn-google btn-user btn-block">
+                <i class="fab fa-google fa-fw"></i>
+                Se connecter avec Google
+            </a>
+            <br />
+        {% endfor %}
+    </form>
+{% endblock %}

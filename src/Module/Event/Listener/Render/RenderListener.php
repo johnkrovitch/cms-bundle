@@ -22,7 +22,7 @@ class RenderListener
         if (!$module->isLoaded()) {
             throw new NotLoadedException($module->getName());
         }
-        $content = $this->renderer->render($module, $event->getOptions());
+        $content = $this->renderer->render($module, 'default', $event->getOptions());
         $event->setContent($content);
     }
 }

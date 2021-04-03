@@ -5,12 +5,13 @@ namespace JK\CmsBundle\Module\Modules\Search;
 use JK\CmsBundle\Form\Type\ArticleSearchType;
 use JK\CmsBundle\Module\AbstractModule;
 use JK\CmsBundle\Module\View\ModuleView;
+use JK\CmsBundle\Module\ViewableModuleInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SearchModule extends AbstractModule
+class SearchModule extends AbstractModule implements ViewableModuleInterface
 {
     private FormFactoryInterface $formFactory;
     private FormInterface $form;
@@ -53,7 +54,7 @@ class SearchModule extends AbstractModule
         return [];
     }
 
-    public function render(array $options = []): ModuleView
+    public function createView(string $view = null, array $options = []): ModuleView
     {
         return new ModuleView('@JKCms/modules/search/show.html.twig', [
             'form' => $this->form->createView(),

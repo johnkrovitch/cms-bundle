@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
-class JKCmsExtension extends Extension
+class JKCmsExtension extends Extension implements PrependExtensionInterface
 {
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -48,6 +48,13 @@ class JKCmsExtension extends Extension
 
         $helperDefinition = $container->getDefinition(ConfigurationHelper::class);
         $helperDefinition->setArgument(0, $config);
+    }
+
+    public function prepend(ContainerBuilder $container): void
+    {
+        $container->loadFromExtension('lag_admin', [
+            'routes_pattern' => 'cms.{admin}.{action}',
+        ]);
     }
 
 //    public function prepend(ContainerBuilder $container)

@@ -6,6 +6,12 @@ cms.dashboard:
     path: /dashboard
     controller: JK\CmsBundle\Controller\Dashboard\DashboardAction
 
+cms.login:
+    path: /login
+    controller: LAG\AdminBundle\Controller\LoginAction
+    defaults:
+        template: '@JKCms/security/login.html.twig'
+
 cms.logout:
     path: /logout
 
@@ -16,3 +22,7 @@ cms.notification.mark_as_read:
 cms.tag.create_ajax:
     path: /api/tags/create
     controller: JK\CmsBundle\Controller\Tag\CreateAjax
+
+jk_admin:
+    resource: '@LAGAdminBundle/Resources/config/routing.yaml'
+    prefix: /

@@ -18,7 +18,7 @@ class ModuleRenderer implements ModuleRendererInterface
     
     public function render(ModuleInterface $module, string $view = null, array $options = []): string
     {
-        if ($module instanceof ViewableModuleInterface) {
+        if (!$module instanceof ViewableModuleInterface) {
             throw new NotViewableModuleException($module->getName());
         }
         $view = $module->createView($view, $options);

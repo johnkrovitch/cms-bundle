@@ -29,9 +29,7 @@ class ArticleModule extends AbstractModule implements ViewableModuleInterface
     public function configure(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('views', function (OptionsResolver $viewResolver) {
-                $viewResolver
-                    ->setDefault('preview', function (OptionsResolver $preview))
+            ->setDefault('preview', function (OptionsResolver $previewResolver) {
                 $previewResolver
                     ->setRequired('template')
                     ->setAllowedTypes('template', 'string')
