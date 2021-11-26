@@ -1,4 +1,61 @@
 cms:
+    ui:
+        save: Sauvegarder
+        save_errors: Une erreur s'est produite durant la sauvegarde
+        create: Ajouter
+        save_and_return_to_list: Sauvegarder et retourner à la liste
+        cancel: Annuler
+        saved: Les modifications ont été sauvegardées
+        welcome_message: 'Bienvenue %username%'
+        return: Retour
+
+        login: Se connecter
+        login_form:
+            login: Email
+            password: Mot de passe
+        logout: Se déconnecter
+
+        # List
+        'true': Oui
+        'false': Non
+        batch_action: Exécuter
+        batch_empty: Choisissez une action
+        edit: Editer
+        element_count: '%page_count% éléments sur %total_count%'
+
+        # Delete
+        add: Ajouter
+        delete: Supprimer
+        deleting: 'Vous allez supprimer cette entité (identifiant: %id%). Etes-vous sûr(e) ?'
+        deleted: 'Entity "%entity%" has been succesfully removed'
+        deleted_errors: Une erreur a été rencontrée durant la suppression
+
+        # Batch
+        warning: Attention !
+        batch_action_title: Action de masse
+        batch_action_messages: Vous êtes sur le point de %action% les actions suivantes, êtes-vous sûr ?
+
+        mass_action: Exécuter
+
+        search_by: 'Recherche par %field%'
+        no_record: Aucun élément n'a été trouvé
+        delete_confirmation_title: Attention
+        delete_confirmation_warning: Vous allez supprimer un élément. Cette action n'est pas réversible
+        no_notifications: Pas de nouvelles notifications !
+
+        # Filters
+        reset_filters: Effacer les filtres
+        show_filters: Montrer les filtres
+        hide_filters: Cacher les filtres
+        filter: Filtrer
+        start_date: Depuis le
+        end_date: Jusqu'au
+
+        yes: Oui
+        no: Non
+
+        loading: Chargement...
+
     article:
         # Actions
         save_errors: Une erreur a été rencontrée
@@ -6,7 +63,7 @@ cms:
         preview: Prévisualiser l'article
         list: Articles
         create: Ajouter un article
-        edit: Editer un article
+        edit: Éditer un article
         delete: Supprimer
         deleted: L'article a été supprimé
         see: Voir
@@ -49,10 +106,11 @@ cms:
         default_title: Un nouvel article...
         add_thumbnail: Ajouter une miniature à l'article
         add_other: Ajouter un autre article
+        slug: Slug
 
     category:
         list: Catégories
-        edit: Editer une catégorie
+        edit: Éditer une catégorie
         delete: Supprimer
         deleted: La catégorie a été supprimé
         create: Ajouter une catégorie
@@ -82,9 +140,10 @@ cms:
     comment:
         create: Ajouter un commentaire
         list: Commentaires
-        edit: Editer
+        edit: Éditer
         delete: Supprimer
         delete_success: Le commentaire a été supprimé
+        no_result: Aucun commentaire n'a encore été posté
         content: Contenu
         id: '#'
         article: Article
@@ -127,7 +186,7 @@ cms:
         create: Ajouter un partenaire
         list: Partenaires
         delete: Supprimer
-        edit: Editer
+        edit: Éditer
         saved: Le partenaire a été sauvegardé
         deleted: Le partenaire a été supprimé
         return: Retour
@@ -197,7 +256,7 @@ cms:
         open_gallery: Ouvrir la médiathèque
         choose: Choisir
         insert_tinymce: Insérer l'image à l'article
-        edit_properties: Editer les propriétés du média
+        edit_properties: Éditer les propriétés du média
         height: Hauteur
         width: Largeur
         alignment: Alignement
@@ -211,7 +270,7 @@ cms:
         updated_at: Mis à jour le
     menu:
         list: Menus
-        edit: Editer
+        edit: Éditer
         delete: Supprimer
         articles: Articles
         categories: Catégories
@@ -224,7 +283,7 @@ cms:
 
     tag:
         list: Tags
-        edit: Editer
+        edit: Éditer
         create: Ajouter un tag
         saved: Le tag a été sauvegardée
         delete: Supprimer
@@ -244,6 +303,7 @@ cms:
         username: Nom d'utilisateur
         email: Email
         enabled: Activé
+        edit: Éditer un utilisateur
 
     import:
         list: Imports

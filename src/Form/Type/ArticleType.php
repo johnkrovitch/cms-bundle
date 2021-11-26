@@ -33,20 +33,9 @@ use Symfony\Component\Security\Core\Security;
  */
 class ArticleType extends AbstractType
 {
-    /**
-     * @var RouterInterface
-     */
-    private $router;
-
-    /**
-     * @var Security
-     */
-    private $security;
-
-    /**
-     * @var UserRepository
-     */
-    private $userRepository;
+    private RouterInterface $router;
+    private Security $security;
+    private UserRepository $userRepository;
 
     public function __construct(
         RouterInterface $router,
@@ -90,7 +79,7 @@ class ArticleType extends AbstractType
 //                    'height' => 1000,
 //                ],
             ])
-            ->add('thumbnail', MediaUploadType::class, [
+            ->add('thumbnail', \JK\MediaBundle\Form\Type\MediaType::class, [
                 'label' => 'cms.article.thumbnail',
                 'help' => 'cms.article.thumbnail_help',
                 'required' => false,
